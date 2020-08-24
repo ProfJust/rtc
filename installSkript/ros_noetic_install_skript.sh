@@ -35,7 +35,7 @@ rosdep update
 echo -e "\033[34m ---------- Erstelle catkin_ws  ------------ \033[0m "
 mkdir -p ~/catkin_ws/src
 cd ~/catkin_ws/src
-git clone https://github.com/ProfJust/emr.git
+git clone https://github.com/ProfJust/rtc.git
 
 cd ~/catkin_ws/
 catkin_make
