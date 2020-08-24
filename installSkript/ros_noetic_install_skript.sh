@@ -1,3 +1,4 @@
+# ros_noetic_install_skript.sh
 # ROS Noetic auf einem Rechner mit Ubuntu 20.04 Focal Fossa  installieren
 # OJ fuer robotik.bocholt@w-hs.de
 # WS2020
@@ -27,7 +28,7 @@ echo "export ROS_HOSTNAME=127.0.0.1" >> ~/.bashrc
 source ~/.bashrc
 
 echo -e "\033[34m ---------- Dependencies for building packages ------------ \033[0m "
-sudo apt install python-rosdep python-rosinstall python-rosinstall-generator python-wstool build-essential
+sudo apt install python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool build-essential
 sudo rosdep init
 rosdep update
 
@@ -35,7 +36,7 @@ rosdep update
 echo -e "\033[34m ---------- Erstelle catkin_ws  ------------ \033[0m "
 mkdir -p ~/catkin_ws/src
 cd ~/catkin_ws/src
-git clone https://github.com/ProfJust/rtc.git
+git clone https://github.com/ProfJust/emr.git
 
 cd ~/catkin_ws/
 catkin_make
