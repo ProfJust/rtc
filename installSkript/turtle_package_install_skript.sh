@@ -33,12 +33,17 @@ sudo apt-get install ros-noetic-urdf -y
 sudo apt-get install ros-noetic-xacro -y
 sudo apt-get install ros-noetic-compressed-image-transport -y
 sudo apt-get install ros-noetic-rqt-image-view -y
-sudo apt-get install ros-noetic-gmapping -y
+# sudo apt-get install ros-noetic-gmapping -y 
+# install from github, see below
 sudo apt-get install ros-noetic-navigation -y
 sudo apt-get install ros-noetic-interactive-markers -y
 
 echo -e "\033[34m Installiere die TurtleBot3-Pakete \033[0m"
 cd ~/catkin_ws/src/
+#gmapping noch nicht als ROS-Noetic Paket erhältlich
+git clone https://github.com/ros-perception/slam_gmapping.git
+git clone https://github.com/ros-perception/openslam_gmapping.git
+
 git clone https://github.com/ROBOTIS-GIT/turtlebot3_msgs.git
 git clone -b melodic-devel https://github.com/ROBOTIS-GIT/turtlebot3.git
 git clone https://github.com/ROBOTIS-GIT/turtlebot3_simulations.git
@@ -55,6 +60,5 @@ cd ~/catkin_ws/
 catkin_make
 
 echo -e "\033[34m RTC - WS20 - Workspace is installed - have fun!  \033[0m"
-echo -e "\033[32m $ roslaunch turtlebot3_fake turtlebot3_fake.launch  roslaunch turtlebot3_gazebo turtlebot3_house.launch \033[0m"
-
+echo -e "\033[32m $ roslaunch turtlebot3_fake turtlebot3_fake.launch \033[0m"
 
