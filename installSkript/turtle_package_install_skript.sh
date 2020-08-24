@@ -60,5 +60,7 @@ cd ~/catkin_ws/
 catkin_make
 
 echo -e "\033[34m RTC - WS20 - Workspace is installed - have fun!  \033[0m"
-echo -e "\033[32m $ roslaunch turtlebot3_fake turtlebot3_fake.launch \033[0m"
+echo -e "\033[32m $ Gazebo:  roslaunch turtlebot3_gazebo turtlebot3_house.launch \033[0m"
+echo -e "\033[32m $ SLAM: roslaunch turtlebot3_slam turtlebot3_slam.launch slam_methods:=gmapping \033[0m"
+
 
