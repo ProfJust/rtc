@@ -36,9 +36,11 @@ rosdep update
 echo -e "\033[34m ---------- Erstelle catkin_ws  ------------ \033[0m "
 mkdir -p ~/catkin_ws/src
 cd ~/catkin_ws/src
-git clone https://github.com/ProfJust/emr.git
+git clone https://github.com/ProfJust/rtc.git
 
+source devel/setup.bash
 cd ~/catkin_ws/
 catkin_make
+# echo -e "\033[34m  Falls Fehlermeldung nach Erstinstallation von ROS, bitte einmal das Terminal schliessen und wieder öffnen  \033[0m"
 
 echo -e "\033[34m  catkin_ws is installed - now install your packages  \033[0m"
