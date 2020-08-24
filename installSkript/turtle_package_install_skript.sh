@@ -43,7 +43,7 @@ git clone https://github.com/ROBOTIS-GIT/turtlebot3_msgs.git
 git clone -b melodic-devel https://github.com/ROBOTIS-GIT/turtlebot3.git
 git clone https://github.com/ROBOTIS-GIT/turtlebot3_simulations.git
 echo -e "\033[34m Setze den TurtleBot3-Typ auf Burger \033[0m"
-export TURTLEBOT3_MODEL=burger
+echo "export TURTLEBOT3_MODEL=burger" >> ~/.bashrc
 source devel/setup.bash
 
 echo -e "\033[34m Aktualisiere alle Abhaengigkeiten der ROS-Pakete \033[0m"
