@@ -6,7 +6,9 @@
 ### PC mit Ubuntu 20.4 - Focal Fossa  notwendig
 # -----------------------------------------------------------------
 Installation von ROS Noetic und Konfiguration der .bashrc mit dem Shellskript  "ros_noetic_install_skript.sh"
-use: $ chmod +x ros_noetic_install_skript.sh
+use: 
+'''bash
+$ chmod +x ros_noetic_install_skript.sh
      $ ./ros_noetic_install_skript.sh
 
 Installation der TurtleBot3 - Pakete => turtle_package_install_skript.sh
