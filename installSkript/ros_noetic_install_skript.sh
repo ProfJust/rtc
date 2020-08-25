@@ -30,6 +30,9 @@ source ~/.bashrc
 
 echo -e "\033[34m ---------- Dependencies for building packages ------------ \033[0m "
 sudo apt install python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool build-essential
+# for Python 3
+sudo apt-get install python3-pip python3-yaml
+sudo pip3 install rospkg catkin_pkg
 sudo rosdep init
 rosdep update
 
