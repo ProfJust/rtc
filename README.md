@@ -1,4 +1,4 @@
-## Ruhr Master School -RMS:
+## Ruhr Master School - RMS:
 ### Ruhr-TurtleBot-Competition-RTC -  `README.md`
 #### ---------------------------------------------------------------
 #### Hochschulübergreifender Roboterwettbewerb für den TurtleBot3
