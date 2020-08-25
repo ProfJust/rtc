@@ -7,7 +7,7 @@
 # -----------------------------------------------------------------
 Installation von ROS Noetic und Konfiguration der .bashrc mit dem Shellskript  "ros_noetic_install_skript.sh"
 use: 
-'''bash
+``bash
 $ chmod +x ros_noetic_install_skript.sh
      $ ./ros_noetic_install_skript.sh
 
