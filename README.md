@@ -1,9 +1,9 @@
 # Ruhr-TurtleBot-Competition-RTC
 # README.md
 # ---------------------------------------------------------------
-# Ruhr Master School -RMS:
-# Hochschulübergreifender Roboterwettbewerb für den TurtleBot3
-# PC mit Ubuntu 20.4 - Focal Fossa  notwendig
+## Ruhr Master School -RMS:
+## Hochschulübergreifender Roboterwettbewerb für den TurtleBot3
+### PC mit Ubuntu 20.4 - Focal Fossa  notwendig
 # -----------------------------------------------------------------
 Installation von ROS Noetic und Konfiguration der .bashrc mit dem Shellskript  "ros_noetic_install_skript.sh"
 use: $ chmod +x ros_noetic_install_skript.sh
