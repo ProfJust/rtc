@@ -1,8 +1,9 @@
 # ros_noetic_install_skript.sh
 # ROS Noetic auf einem Rechner mit Ubuntu 20.04 Focal Fossa  installieren
 # OJ fuer robotik.bocholt@w-hs.de
-# WS2020 25.8.2020 mit Änderung
-
+# WS2020
+# geaendert am 2.11.2020 source devel/setup.bash
+# erst nach catkin_make, da es sonst den Ordner noch nicht gibt
 
 #!/bin/bash
 # script to setup your catkin_ws-Workspace
@@ -30,9 +31,6 @@ source ~/.bashrc
 
 echo -e "\033[34m ---------- Dependencies for building packages ------------ \033[0m "
 sudo apt install python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool build-essential
-# for Python 3
-sudo apt-get install python3-pip python3-yaml
-sudo pip3 install rospkg catkin_pkg
 sudo rosdep init
 rosdep update
 
@@ -42,9 +40,10 @@ mkdir -p ~/catkin_ws/src
 cd ~/catkin_ws/src
 git clone https://github.com/ProfJust/rtc.git
 
-source devel/setup.bash
 cd ~/catkin_ws/
 catkin_make
+source devel/setup.bash
+
 # echo -e "\033[34m  Falls Fehlermeldung nach Erstinstallation von ROS, bitte einmal das Terminal schliessen und wieder öffnen  \033[0m"
 
 echo -e "\033[34m  catkin_ws is installed - now install your packages  \033[0m"
