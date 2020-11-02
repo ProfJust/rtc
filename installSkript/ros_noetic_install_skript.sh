@@ -12,7 +12,7 @@ echo -e "\033[34m ---------- robotik.bocholt@w-hs.de -- WS20 - ROS installieren 
 
 sudo apt-get dist-upgrade
 
-echo -e "\033[34m ---------- Installiere ROS-Melodic  http://wiki.ros.org/noeticic/Installation/Ubuntu  ------------ \033[0m "
+echo -e "\033[34m ---------- Installiere ROS-Noetic  http://wiki.ros.org/noeticic/Installation/Ubuntu  ------------ \033[0m "
 sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
 sudo apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
 sudo apt update
