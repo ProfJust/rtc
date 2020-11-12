@@ -22,5 +22,7 @@ Installation der TurtleBot3 - Pakete =>     `turtle_package_install_skript.sh`
     >$ rosrun map_server map_saver -f /home/oj/catkin_ws/src/rtc/rtc_maps/gazebo_house_map
 ##### Navigation zum Goal:
     >$ roslaunch turtlebot3_navigation turtlebot3_navigation.launch map_file:=$HOME/catkin_ws/src/rtc/rtc_maps/gazebo_house_map.yaml    
-                                !!  Navigation und Slammen funktioniert bislang nicht gleichzeitig
+!!  Navigation und Slammen funktioniert bislang nicht gleichzeitig
+
+
 
