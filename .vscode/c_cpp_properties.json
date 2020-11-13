@@ -1,0 +1,42 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "",
+        "limitSymbolsToIncludedHeaders": true
+      },
+      "includePath": [
+        "/home/oj/catkin_ws/devel/include/**",
+        "/opt/ros/noetic/include/**",
+        "/home/oj/catkin_ws/src/moveit/moveit_planners/chomp/chomp_motion_planner/include/**",
+        "/home/oj/catkin_ws/src/Universal_Robots_ROS_Driver/controller_stopper/include/**",
+        "/home/oj/catkin_ws/src/eigen_stl_containers/include/**",
+        "/home/oj/catkin_ws/src/geometric_shapes/include/**",
+        "/home/oj/catkin_ws/src/moveit/moveit_planners/chomp/chomp_interface/include/**",
+        "/home/oj/catkin_ws/src/moveit/moveit_ros/benchmarks/include/**",
+        "/home/oj/catkin_ws/src/moveit/moveit_plugins/moveit_ros_control_interface/include/**",
+        "/home/oj/catkin_ws/src/moveit/moveit_ros/move_group/include/**",
+        "/home/oj/catkin_ws/src/moveit/moveit_ros/occupancy_map_monitor/include/**",
+        "/home/oj/catkin_ws/src/moveit/moveit_ros/robot_interaction/include/**",
+        "/home/oj/catkin_ws/src/moveit/moveit_ros/moveit_servo/include/**",
+        "/home/oj/catkin_ws/src/moveit/moveit_setup_assistant/include/**",
+        "/home/oj/catkin_ws/src/moveit/moveit_plugins/moveit_simple_controller_manager/include/**",
+        "/home/oj/catkin_ws/src/openslam_gmapping/include/**",
+        "/home/oj/catkin_ws/src/random_numbers/include/**",
+        "/home/oj/catkin_ws/src/moveit/moveit_planners/sbpl/core/sbpl_interface/include/**",
+        "/home/oj/catkin_ws/src/srdfdom/include/**",
+        "/home/oj/catkin_ws/src/turtlebot3_simulations/turtlebot3_fake/include/**",
+        "/home/oj/catkin_ws/src/turtlebot3_simulations/turtlebot3_gazebo/include/**",
+        "/home/oj/catkin_ws/src/turtlebot3/turtlebot3_slam/include/**",
+        "/home/oj/catkin_ws/src/Universal_Robots_ROS_Driver/ur_calibration/include/**",
+        "/home/oj/catkin_ws/src/Universal_Robots_ROS_Driver/ur_controllers/include/**",
+        "/home/oj/catkin_ws/src/fmauch_universal_robot/ur_kinematics/include/**",
+        "/home/oj/catkin_ws/src/Universal_Robots_ROS_Driver/ur_robot_driver/include/**",
+        "/home/oj/catkin_ws/src/youbot_driver/include/**",
+        "/home/oj/catkin_ws/src/youbot_driver_ros_interface/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS"
+    }
+  ]
+}
