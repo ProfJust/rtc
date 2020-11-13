@@ -16,8 +16,9 @@ from math import pow, atan2, sqrt
 from geometry_msgs.msg import Twist
 from turtlesim.msg import Pose
 
-
-# --- globale Variable ---
+# --- Instanzierung einer globale pose - Variable ---
+# Wird benoetigt um die pose aus der callback-Funktion
+# (ohne Aufruf bzw. return) heraus zu bekommen,
 pose = Pose()
 
 
@@ -68,9 +69,9 @@ def move():
     while (abs(pose.theta - sollTheta) > tolerance):
         # theta auf Bereich [-pi...pi] begrenzen
         if pose.theta > math.pi:
-            pose.theta = pose.theta-2 * math.pi
+            pose.theta = pose.theta - 2 * math.pi
         elif pose.theta < -math.pi:
-            pose.theta = pose.theta+2 * math.pi
+            pose.theta = pose.theta + 2 * math.pi
 
         # set Angular velocity in the z-axis.
         if pose.theta - sollTheta > 0:
