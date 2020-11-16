@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # --- moveTurtle_distance.py ------
-# Version vom 12.11.2030 by OJ
+# Version vom 12.11.2020 by OJ
 # ohne OOP und Klasse
 # ----------------------------------
 # Starten von ROS und der TurtleSim
