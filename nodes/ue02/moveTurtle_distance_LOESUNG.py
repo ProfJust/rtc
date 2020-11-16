@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
-# --- moveTurtle_distance.py ------
+# --- moveTurtle_distance_LOESUNG.py ------
 # Version vom 16.11.2020 by OJ
 # ohne OOP und Klasse
 # ----------------------------------
 # Starten von ROS und der TurtleSim
 # $1 roscore
-# $2 rosrun turtlesim turtlesim_node
-# $3 python moveTurtle_distance.py   (vorher ausführbar machen mit chmod +x)
+# $2 roslaunch turtlebot3_gazebo turtlebot3_house.launch
+# $3 rosrun rtc moveTurtle_distance_gazebo.py
+# (vorher catkin_make und  ausführbar machen mit chmod +x)
 # ------------------------------------------
 
 import rospy
@@ -75,14 +76,13 @@ def move():
 
         # set Angular velocity in the z-axis.
         if pose.theta - sollTheta > 0:
-            vel_msg.angular.z = -0.2
+            vel_msg.angular.z = -0.1
         else:
-            vel_msg.angular.z = 0.2
+            vel_msg.angular.z = 0.1
         # Debug ausgabe
         rospy.loginfo("Pose is %s", pose.theta)
         rospy.loginfo("Goal angle is %s", sollTheta)
         rospy.loginfo("Still to turn %s ", abs(pose.theta - sollTheta))
-
         velocity_publisher.publish(vel_msg)  # Publishing our vel_msg
         rate.sleep()  # Publish at the desired rate
 
@@ -96,16 +96,13 @@ def move():
                + pow((start_y - pose.y), 2)) < abs(dist):
 
         # Linear velocity in the x-axis.
-        vel_msg.linear.x = 0.1
-
-        # Publishing our vel_msg
-
-        velocity_publisher.publish(vel_msg)  # Publishing our vel_msg
-
+        vel_msg.linear.x = 0.2
         rospy.loginfo("Pose is %s %s", pose.x, pose.y)
         rospy.loginfo("Still to Go %s ",
                       dist-sqrt(pow((start_x - pose.x), 2)
                                 + pow((start_y - pose.y), 2)))
+        # Publishing our vel_msg
+        velocity_publisher.publish(vel_msg)
 
         # Publish at the desired rate.
         rate.sleep()
@@ -113,10 +110,7 @@ def move():
     # Stopping our robot after the movement is over.
     rospy.loginfo("Reached aim - now stopping ")
 
-    # Stopping our robot after the movement is over
-    vel_msg.linear.x = 0
-    vel_msg.angular.z = 0
-    velocity_publisher.publish(vel_msg)
+    # ----- hier Code einfügen ------
 
     exit()
     # If we press control + C, the node will stop.
