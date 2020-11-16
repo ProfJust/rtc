@@ -64,7 +64,7 @@ include_directories(
 #   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 # )
 
-catkin_install_python(PROGRAMS nodes/listener.py scripts/HelloWorld.py
+catkin_install_python(PROGRAMS nodes/kap06/listener.py scripts/HelloWorld.py nodes/ue02/moveTurtle_distance.py
                       DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 
 
