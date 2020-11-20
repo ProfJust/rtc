@@ -1,18 +1,27 @@
-# oop01.py
+#!/usr/bin/env python3
+# oop01.py  Version vpm 20.11.20
+# -------------------------
 class Person:
-    name = "Florian"
-    alter = 17
+    _name = " leer "
+    _alter = 17
     _txt = "  "
-    def __init__(self, text): 
+
+    # Konstruktor mit Parametern
+    def __init__(self, name, alter, text):
+        self._name = name
+        self._alter = alter
         self._txt = text
-        
+
     def reden(self):
-        print(str(self._txt))
-        
+        print(str(self._name) + ", " + str(self._alter) +
+              "  Jahre, spricht: " + str(self._txt))
+
+
 if __name__ == '__main__':
-    Heinz = Person("Moin Moin ! ") # Instanzzierung mit Parametern
-    Karl  = Person("Keine Lust") 
-    
-    Heinz.reden()    # Aufruf der Methode
-    Karl.reden()
-    
+    # Instanzzierung mit Parametern
+    Obj1 = Person("Heinz", 68, "Moin Moin ! ")
+    Obj2 = Person("Kevin", 17, "Null Bock Alter")
+
+    Obj1.reden()    # Aufruf der Methode
+    Obj2.reden()
+
