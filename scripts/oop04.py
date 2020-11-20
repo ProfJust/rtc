@@ -10,6 +10,7 @@ class Schokofigur:
     def __init__(self, name, gewicht):  # Konstruktor
         # Name der Klasse. Name der stat. Var
         Schokofigur.schoko_gesamt += gewicht
+        self._gewicht = gewicht
 
         # Normale Variable
         self._bez = name
@@ -19,7 +20,7 @@ class Schokofigur:
 
     def __str__(self):  # String-Ausgabe überladen
         myStr = (self._bez + " ist " +
-                 str(Schokofigur.schoko_gesamt) + " g schwer")
+                 str(self._gewicht) + " g schwer")
         return myStr
 
 
@@ -29,4 +30,5 @@ if __name__ == '__main__':
 
     print(objekt2)
     print(objekt1.getBez())
-    print("Geamstgewicht Schokolade: " + str(Schokofigur.schoko_gesamt))
+    print(objekt1)
+    print("Gesamtgewicht Schokolade: " + str(Schokofigur.schoko_gesamt))
