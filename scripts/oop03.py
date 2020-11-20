@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-#oop03.py.py
-#-----------------------------
+# oop03.py.py
+# -----------------------------
 class Kiste:
-    anzahl = 0;   # Statische Klassenvariable 
+    anzahl = 0   # Statische Klassenvariable Anzahl der Instanzen
+
     def __init__(self):
         self._breite = 0    # hier jetzt privat=> _breite
         self._hoehe = 0
@@ -10,9 +11,9 @@ class Kiste:
         self._vol = -1
         Kiste.anzahl += 1  # Wert der Klassenvariable erhoehen
 
-    def zeigeAnzahl(): # statische Methode
-        print("Die Instanzanzahl ist", Kiste.anzahl)
- 
+    def zeigeAnzahl():  # statische Methode
+        print("Die Instanzanzahl ist jetzt :" + str(Kiste.anzahl))
+
     zeigeAnzahl = staticmethod(zeigeAnzahl)
 
     def setBreite(self, breite):
@@ -38,10 +39,9 @@ class Kiste:
 
     def getVolumen(self):
         if (self._vol == -1):
-            print("calc") 
+            print("calc")
             self._vol = self._breite * self._hoehe * self._tiefe
         return self._vol
-
 
 
 if __name__ == '__main__':
@@ -49,8 +49,8 @@ if __name__ == '__main__':
     kiste = Kiste()
 
     Kiste.anzahl = 5  # setzen der Klassenvariable
-    print("---", Kiste.anzahl) # get ueber Klassen-Bezeichner
-    print(kiste.anzahl) # get ueber Objekt-Bezeichner
+    print("---", Kiste.anzahl)  # get ueber Klassen-Bezeichner
+    print(kiste.anzahl)  # get ueber Objekt-Bezeichner
 
     # Instantzierung zweite Kiste => Anzahl +=1
     kiste2 = Kiste()
@@ -64,19 +64,9 @@ if __name__ == '__main__':
     # kiste.breite = 5  # setter
     # print(kiste.breite)  # getter
 
-
     # Setter fuer die privaten Attribute
     # kiste.setBreite(2)
     # kiste.setHoehe(3)
     # kiste.setTiefe(4)
 
     print(kiste.getVolumen())
-
-
-
-class Kiste:
-    ...
-    _vol = 0
-    def getVolumen(self):
-        self._vol = self._breite * self._hoehe * self._tiefe
-        return self._vol

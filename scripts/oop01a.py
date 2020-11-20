@@ -8,16 +8,17 @@ class Person:
     def reden(self):
         print("RTC ist super!")
 
-     def reden2(self, text):
-           print(str(text))
+    def reden2(self, text):
+        print(str(text))
+
+
+class nochKeineLust:
+    pass
 
 
 if __name__ == '__main__':
-    # Instanzzierung 
+    # Instanzzierung
     Obj1 = Person()
     # Aufruf der Methode
-    Obj1.reden()   
-    Obj1.reden( "Moin Moin ! ")
-    
-class nochKeineLust:
-    pass
+    Obj1.reden()
+    Obj1.reden2("Moin Moin ! ")

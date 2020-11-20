@@ -15,9 +15,9 @@ class Person:
     def reden(self):
         print(str(self._name) + ", " + str(self._alter) +
               "  Jahre, spricht: " + str(self._txt))
-    
+
     def reden2(self, text):
-           print(str(text))
+        print(str(text))
 
 
 if __name__ == '__main__':
@@ -27,4 +27,3 @@ if __name__ == '__main__':
 
     Obj1.reden()    # Aufruf der Methode
     Obj2.reden()
-

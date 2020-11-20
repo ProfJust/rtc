@@ -20,12 +20,12 @@ class PersonKl:  #Basisklasse
 class AngestellterKl(PersonKl): #von PersonKl Abgeleitete Klasse    
 
     def __init__(self, vorname, nachname, geburtsdatum, personalnummer):
-        #Aufruf des Konstruktors der Basisklasse
+        # Aufruf des Konstruktors der Basisklasse
         PersonKl.__init__(self, vorname, nachname, geburtsdatum)
         # alternativ:
-        #super().__init__(vorname, nachname, geburtsdatum)
+        # super().__init__(vorname, nachname, geburtsdatum)
         
-        #zusaetzliches Attribut der abgel. Klasse
+        # zusaetzliches Attribut der abgel. Klasse
         self.__personalnummer = personalnummer
     
     # Ueberschreiben der Funnktion __str__ der Basisklasse 
