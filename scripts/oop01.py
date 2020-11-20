@@ -16,11 +16,8 @@ class Person:
         print(str(self._name) + ", " + str(self._alter) +
               "  Jahre, spricht: " + str(self._txt))
     
-     def reden2(self, text):
+    def reden2(self, text):
            print(str(text))
-        
-class nochKeineLust
-    pass
 
 
 if __name__ == '__main__':

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Willemer_Kiste.py
+#oop03.py.py
 #-----------------------------
 class Kiste:
     anzahl = 0;   # Statische Klassenvariable 
@@ -14,8 +14,6 @@ class Kiste:
         print("Die Instanzanzahl ist", Kiste.anzahl)
  
     zeigeAnzahl = staticmethod(zeigeAnzahl)
-
-
 
     def setBreite(self, breite):
         if self._breite != breite:
@@ -40,14 +38,14 @@ class Kiste:
 
     def getVolumen(self):
         if (self._vol == -1):
-            print("calc")
-            self._vol = self._breite*self._hoehe*self._tiefe
+            print("calc") 
+            self._vol = self._breite * self._hoehe * self._tiefe
         return self._vol
 
 
 
 if __name__ == '__main__':
-    # Instantzierung
+    # Instantziierung
     kiste = Kiste()
 
     Kiste.anzahl = 5  # setzen der Klassenvariable
@@ -68,11 +66,17 @@ if __name__ == '__main__':
 
 
     # Setter fuer die privaten Attribute
-    kiste.setBreite(2)
-    kiste.setHoehe(3)
-    kiste.setTiefe(4)
+    # kiste.setBreite(2)
+    # kiste.setHoehe(3)
+    # kiste.setTiefe(4)
 
     print(kiste.getVolumen())
 
 
 
+class Kiste:
+    ...
+    _vol = 0
+    def getVolumen(self):
+        self._vol = self._breite * self._hoehe * self._tiefe
+        return self._vol
