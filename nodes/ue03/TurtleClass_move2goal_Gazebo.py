@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# --- TurtleClass_move2Goal.py ------
+# --- TurtleClass_move2Goal_Gazebo.py ------
 # Version vom 23.11.2020 by OJ
 # ----------------------------
 # from
@@ -11,6 +11,7 @@
 import rospy
 from geometry_msgs.msg import Twist
 from turtlesim.msg import Pose
+from nav_msgs.msg import Odometry
 from math import pow, atan2, sqrt
 
 
@@ -24,37 +25,60 @@ class TurtleBotClass:
         rospy.init_node('turtlebot_controller', anonymous=True)
 
         # Publisher which will publish to the topic '/turtle1/cmd_vel'.
-        self.velocity_publisher = rospy.Publisher('/turtle1/cmd_vel',
+        self.velocity_publisher = rospy.Publisher('/cmd_vel',
                                                   Twist, queue_size=10)
 
-        # A subscriber to the topic '/turtle1/pose'. self.update_pose is called
+        # A subscriber to the topic '/odpm. self.update_pose is called
         # when a message of type Pose is received.
-        self.pose_subscriber = rospy.Subscriber('/turtle1/pose',
-                                                Pose, self.update_pose)
+        self.pose_subscriber = rospy.Subscriber('odom',
+                                                Odometry, self.update_pose)
 
         # globale Variablen instanzieren
         self.pose = Pose()
         self.rate = rospy.Rate(10)
 
+    def quaternion_to_euler(self, x, y, z, w):
+        # https://computergraphics.stackexchange.com/questions/8195/how-to-convert-euler-angles-to-quaternions-and-get-the-same-euler-angles-back-fr
+        """t0 = 2.0 * (w * x + y * z)
+        t1 = +1.0 - 2.0 * (x * x + y * y)
+        X = atan2(t0, t1)
+
+        t2 = +2.0 * (w * y - z * x)
+        t2 = +1.0 if t2 > +1.0 else t2
+        t2 = -1.0 if t2 < -1.0 else t2
+        Y = asin(t2)) """
+
+        t3 = +2.0 * (w * z + x * y)
+        t4 = +1.0 - 2.0 * (y * y + z * z)
+        Z = atan2(t3, t4)  # in rad
+
+        return Z
+
     def update_pose(self, data):
-        """Callback function which is called when a new message of type Pose is
-        received by the subscriber."""
-        self.pose = data
-        self.pose.x = round(self.pose.x, 4)
-        self.pose.y = round(self.pose.y, 4)
+        # Callback function which is called when a new message
+        # of type Pose is received by the subscriber.
+        self.pose.x = round(data.pose.pose.position.x, 4)
+        self.pose.y = round(data.pose.pose.position.y, 4)
+        # rospy.loginfo(rospy.get_caller_id() + "x %s  y %s ", pose.x, pose.x)
+        # orientation als Quaternion
+        x = data.pose.pose.orientation.x
+        y = data.pose.pose.orientation.y
+        z = data.pose.pose.orientation.z
+        w = data.pose.pose.orientation.w
+        self.pose.theta = self.quaternion_to_euler(x, y, z, w)
 
     def euclidean_distance(self, goal_pose):
         """Euclidean distance between current pose and the goal."""
         return sqrt(pow((goal_pose.x - self.pose.x), 2) +
                     pow((goal_pose.y - self.pose.y), 2))
 
-    def linear_vel(self, goal_pose, constant=1.5):
+    def linear_vel(self, goal_pose, constant=0.5):
         return constant * self.euclidean_distance(goal_pose)
 
     def steering_angle(self, goal_pose):
         return atan2(goal_pose.y - self.pose.y, goal_pose.x - self.pose.x)
 
-    def angular_vel(self, goal_pose, constant=6):
+    def angular_vel(self, goal_pose, constant=1.0):
         return constant * (self.steering_angle(goal_pose) - self.pose.theta)
 
     def getGoalFromUser(self):
@@ -63,9 +87,8 @@ class TurtleBotClass:
         goal_pose.y = eval(input("Set your y goal: "))
         return goal_pose
 
-    def move2goal(self):
+    def move2goal(self, distance_tolerance=0.05, maxSpeedX=0.3, maxSpeedZ=0.5):
         """Moves the turtle to the goal."""
-        distance_tolerance = 0.1
         # fuer die Funktion lokale Objekte instanzieren => kein self notwendig
         vel_msg = Twist()
 
@@ -84,14 +107,20 @@ class TurtleBotClass:
             # https://en.wikipedia.org/wiki/Proportional_control
 
             # Linear velocity in the x-axis.
-            vel_msg.linear.x = self.linear_vel(self.goal)
+            speedX = self.linear_vel(self.goal)
+            if speedX > maxSpeedX:
+                speedX = maxSpeedX  # Maximum begrenzen
+            vel_msg.linear.x = speedX
             vel_msg.linear.y = 0
             vel_msg.linear.z = 0
 
             # Angular velocity in the z-axis.
+            speedZ = self.angular_vel(self.goal)
+            if speedZ > maxSpeedZ:
+                speedZ = maxSpeedZ  # Maximum begrenzen
             vel_msg.angular.x = 0
             vel_msg.angular.y = 0
-            vel_msg.angular.z = self.angular_vel(self.goal)
+            vel_msg.angular.z = speedZ
 
             # Publishing our vel_msg
             self.velocity_publisher.publish(vel_msg)
@@ -117,3 +146,4 @@ if __name__ == '__main__':
         turtle1.move2goal()
     except rospy.ROSInterruptException:
         pass
+

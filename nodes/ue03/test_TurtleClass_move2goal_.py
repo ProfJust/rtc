@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-# --- test_TurtleClass_move2Goal.py ------
-# Version vom 23.11.2020 by OJ
+# --- move.py ------
+# Version vom 20.11.2020 by OJ
 # ----------------------------
 import rospy
 import math
