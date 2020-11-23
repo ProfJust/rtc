@@ -23,7 +23,7 @@ from turtlesim.msg import Pose
 pose = Pose()
 
 
-def quaternion_to_euler(self, x, y, z, w):
+def quaternion_to_euler(x, y, z, w):
     # https://computergraphics.stackexchange.com/questions/8195/how-to-convert-euler-angles-to-quaternions-and-get-the-same-euler-angles-back-fr
     """t0 = 2.0 * (w * x + y * z)
     t1 = +1.0 - 2.0 * (x * x + y * y)
@@ -48,11 +48,11 @@ def update_pose(data):
     pose.y = round(data.pose.pose.position.y, 4)
     # rospy.loginfo(rospy.get_caller_id() + "x %s  y %s ", pose.x, pose.x)
     # orientation als Quaternion
-    x = data.pose.pose.orientation.x
-    y = data.pose.pose.orientation.y
-    z = data.pose.pose.orientation.z
-    w = data.pose.pose.orientation.w
-    pose.theta = quaternion_to_euler(x, y, z, w)
+    _x = data.pose.pose.orientation.x
+    _y = data.pose.pose.orientation.y
+    _z = data.pose.pose.orientation.z
+    _w = data.pose.pose.orientation.w
+    pose.theta = quaternion_to_euler(_x, _y, _z, _w)
 
 
 def move():
