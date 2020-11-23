@@ -23,22 +23,22 @@ from turtlesim.msg import Pose
 pose = Pose()
 
 
-def quaternion_to_euler(x, y, z, w):
+def quaternion_to_euler(self, x, y, z, w):
     # https://computergraphics.stackexchange.com/questions/8195/how-to-convert-euler-angles-to-quaternions-and-get-the-same-euler-angles-back-fr
     """t0 = 2.0 * (w * x + y * z)
     t1 = +1.0 - 2.0 * (x * x + y * y)
-    X = degrees(atan2(t0, t1))
+    roll = atan2(t0, t1) # Drehung um X-Achse
 
     t2 = +2.0 * (w * y - z * x)
     t2 = +1.0 if t2 > +1.0 else t2
     t2 = -1.0 if t2 < -1.0 else t2
-    Y = degrees(asin(t2)) """
+    pitch = asin(t2))  # Drehung um Y-Achse"""
 
     t3 = +2.0 * (w * z + x * y)
     t4 = +1.0 - 2.0 * (y * y + z * z)
-    Z = atan2(t3, t4)
+    yaw = atan2(t3, t4)  # Drehung um Z-Achse in rad
 
-    return Z
+    return yaw
 
 
 def update_pose(data):
