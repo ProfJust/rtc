@@ -20,6 +20,11 @@ class TurtleBotClass:
     goal = Pose()
 
     def __init__(self):
+        # globale Klassen-Variablen instanzieren
+        self.pose = Pose()
+        self.goal = Pose()
+        self.vel_msg = Twist()
+
         # Creates a node with name 'turtlebot_controller' and make sure it is a
         # unique node (using anonymous=True).
         rospy.init_node('turtlebot_controller', anonymous=True)
@@ -32,9 +37,6 @@ class TurtleBotClass:
         # when a message of type Pose is received.
         self.pose_subscriber = rospy.Subscriber('odom',
                                                 Odometry, self.update_pose)
-
-        # globale Variablen instanzieren
-        self.pose = Pose()
         self.rate = rospy.Rate(10)
 
     def quaternion_to_euler(self, x, y, z, w):
@@ -72,78 +74,86 @@ class TurtleBotClass:
         return sqrt(pow((goal_pose.x - self.pose.x), 2) +
                     pow((goal_pose.y - self.pose.y), 2))
 
-    def linear_vel(self, goal_pose, constant=0.5):
-        return constant * self.euclidean_distance(goal_pose)
+    def set_linear_vel(self, goal_pose, constant=0.5, lin_max=0.5):
+        lin_vel = constant * self.euclidean_distance(goal_pose)
+        if lin_vel > lin_max:
+            lin_vel = lin_max  # Maximum begrenzen
+        self.vel_msg.linear.x = lin_vel
+        self.vel_msg.linear.y = 0
+        self.vel_msg.linear.z = 0
 
     def steering_angle(self, goal_pose):
         return atan2(goal_pose.y - self.pose.y, goal_pose.x - self.pose.x)
 
-    def angular_vel(self, goal_pose, constant=1.0):
-        return constant * (self.steering_angle(goal_pose) - self.pose.theta)
+    def set_angular_vel(self, goal_pose, constant=1.0, ang_max=1.5):
+        ang_vel = constant * (self.steering_angle(goal_pose) - self.pose.theta)
+        if(ang_vel > ang_max):
+            ang_vel = ang_max
+        self.vel_msg.angular.z = ang_vel
+        self.vel_msg.angular.x = 0
+        self.vel_msg.angular.y = 0
 
     def getGoalFromUser(self):
-        goal_pose = Pose()  # lokal
-        goal_pose.x = eval(input("Set your x goal: "))
-        goal_pose.y = eval(input("Set your y goal: "))
-        return goal_pose
+        self.stop_robot()
+        self.goal.x = eval(input("Set your x goal: "))
+        self.goal.y = eval(input("Set your y goal: "))
 
-    def move2goal(self, distance_tolerance=0.01, maxSpeedX=0.3, maxSpeedZ=0.5):
-        """Moves the turtle to the goal."""
-        # fuer die Funktion lokale Objekte instanzieren => kein self notwendig
-        vel_msg = Twist()
-
+    def start_info(self):
         # Debug Info
-        rospy.loginfo("Start Pose is %s %s", self.pose.x, self.pose.y)
-        rospy.loginfo("Goal is       %s %s", self.goal.x, self.goal.y)
+        rospy.loginfo("Start Pose is %f %f", self.pose.x, self.pose.y)
+        rospy.loginfo("Goal is       %f %f", self.goal.x, self.goal.y)
         rospy.loginfo("Distannce to Goal is  %f ",
                       self.euclidean_distance(self.goal))
         rospy.loginfo("SteeringAngle to Goal is  %f ",
                       self.steering_angle(self.goal))
-        # python V2 raw_input("Hit any Key to start")
         input("Hit any Key to start")
 
-        while self.euclidean_distance(self.goal) >= distance_tolerance:
-            # Porportional controller.
-            # https://en.wikipedia.org/wiki/Proportional_control
+    def pose_speed_info(self):
+        rospy.loginfo("Pose is %s %s",
+                      round(self.pose.x, 4),
+                      round(self.pose.y, 4))
+        rospy.loginfo("Speed is x: %s  theta: %s",
+                      round(self.vel_msg.linear.x, 4),
+                      round(self.vel_msg.angular.z, 4))
 
+    def stop_robot(self):
+        # Stopping our robot after the movement is over.
+        rospy.loginfo(" ######  Goal reached, Stop Robot #######")
+        self.vel_msg.linear.x = 0
+        self.vel_msg.angular.z = 0
+        self.velocity_publisher.publish(self.vel_msg)
+
+    def goal_reached(self, distance_tolerance=0.1):
+        if self.euclidean_distance(self.goal) < distance_tolerance:
+            return True
+        else:
+            return False
+
+    def move2goal(self):
+        # Moves the turtle to the goal
+        
+        while not self.goal_reached():
             # Linear velocity in the x-axis.
-            speedX = self.linear_vel(self.goal)
-            if speedX > maxSpeedX:
-                speedX = maxSpeedX  # Maximum begrenzen
-            vel_msg.linear.x = speedX
-            vel_msg.linear.y = 0
-            vel_msg.linear.z = 0
-
+            self.set_linear_vel(self.goal)
             # Angular velocity in the z-axis.
-            speedZ = self.angular_vel(self.goal)
-            if speedZ > maxSpeedZ:
-                speedZ = maxSpeedZ  # Maximum begrenzen
-            vel_msg.angular.x = 0
-            vel_msg.angular.y = 0
-            vel_msg.angular.z = speedZ
+            self.set_angular_vel(self.goal)
 
             # Publishing our vel_msg
-            self.velocity_publisher.publish(vel_msg)
-
+            self.velocity_publisher.publish(self.vel_msg)
             # Publish at the desired rate.
             self.rate.sleep()
-            rospy.loginfo("Pose is %s %s", self.pose.x, self.pose.y)
-            rospy.loginfo("Speed is x: %s  theta: %s",
-                          vel_msg.linear.x, vel_msg.angular.z)
+            # debug Info
+            self.pose_speed_info()
 
-        # Stopping our robot after the movement is over.
-        rospy.loginfo(" ######  Goal reached #######")
-        vel_msg.linear.x = 0
-        vel_msg.angular.z = 0
-        self.velocity_publisher.publish(vel_msg)
+        self.stop_robot()  # when goal is reached
         exit()
 
 
 if __name__ == '__main__':
     try:
         turtle1 = TurtleBotClass()
-        turtle1.goal = turtle1.getGoalFromUser()
+        turtle1.getGoalFromUser()
+        turtle1.start_info()
         turtle1.move2goal()
     except rospy.ROSInterruptException:
         pass
-
