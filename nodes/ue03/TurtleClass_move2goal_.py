@@ -15,7 +15,7 @@ from math import pow, atan2, sqrt
 
 
 class TurtleBotClass:
-    # globale Variablen
+    # Attribut der Klasse
     goal = Pose()
 
     def __init__(self):
@@ -54,7 +54,7 @@ class TurtleBotClass:
     def steering_angle(self, goal_pose):
         return atan2(goal_pose.y - self.pose.y, goal_pose.x - self.pose.x)
 
-    def angular_vel(self, goal_pose, constant=6):
+    def angular_vel(self, goal_pose, constant=1):
         return constant * (self.steering_angle(goal_pose) - self.pose.theta)
 
     def getGoalFromUser(self):
@@ -63,12 +63,7 @@ class TurtleBotClass:
         goal_pose.y = eval(input("Set your y goal: "))
         return goal_pose
 
-    def move2goal(self):
-        """Moves the turtle to the goal."""
-        distance_tolerance = 0.1
-        # fuer die Funktion lokale Objekte instanzieren => kein self notwendig
-        vel_msg = Twist()
-
+    def debug_info(self):
         # Debug Info
         rospy.loginfo("Start Pose is %s %s", self.pose.x, self.pose.y)
         rospy.loginfo("Goal is       %s %s", self.goal.x, self.goal.y)
@@ -76,13 +71,18 @@ class TurtleBotClass:
                       self.euclidean_distance(self.goal))
         rospy.loginfo("SteeringAngle to Goal is  %f ",
                       self.steering_angle(self.goal))
+
+    def move2goal(self, distance_tolerance=0.1):
+        """Moves the turtle to the goal."""
+        # fuer die Funktion lokale Objekte instanzieren => kein self notwendig
+        vel_msg = Twist()
+
+        self.debug_info()
+
         # python V2 raw_input("Hit any Key to start")
         input("Hit any Key to start")
 
         while self.euclidean_distance(self.goal) >= distance_tolerance:
-            # Porportional controller.
-            # https://en.wikipedia.org/wiki/Proportional_control
-
             # Linear velocity in the x-axis.
             vel_msg.linear.x = self.linear_vel(self.goal)
             vel_msg.linear.y = 0

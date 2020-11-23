@@ -87,7 +87,7 @@ class TurtleBotClass:
         goal_pose.y = eval(input("Set your y goal: "))
         return goal_pose
 
-    def move2goal(self, distance_tolerance=0.05, maxSpeedX=0.3, maxSpeedZ=0.5):
+    def move2goal(self, distance_tolerance=0.01, maxSpeedX=0.3, maxSpeedZ=0.5):
         """Moves the turtle to the goal."""
         # fuer die Funktion lokale Objekte instanzieren => kein self notwendig
         vel_msg = Twist()
