@@ -125,7 +125,7 @@ class TurtleBotClass:
 
     def move2goal(self):
         # Moves the turtle to the goal
-        while not self.goal_reached():
+        if not self.goal_reached():
             # Linear velocity in the x-axis.
             self.set_linear_vel(self.goal)
             # Angular velocity in the z-axis.
@@ -137,6 +137,8 @@ class TurtleBotClass:
             self.rate.sleep()
             # debug Info
             self.pose_speed_info()
+            return False
 
         self.stop_robot()  # when goal is reached
+        return True
         # exit()
