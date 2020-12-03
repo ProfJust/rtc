@@ -1,0 +1,72 @@
+#!/usr/bin/env python3
+# ################################################################################
+# edited WHS, OJ , 3.12.2020 #
+# usage
+#    $1 roslaunch turtlebot3_gazebo turtlebot3_empty_world.launch
+#    $2 rosrun rtc turtlebot3_server_path
+#    $3 rosrun rtc turtlebot3_client_path
+
+import rospy
+import actionlib
+import turtlebot3_example.msg
+import sys
+# from yaml import load
+
+msg = """
+TurtleBot3 patrols along path
+-----------------------------
+"""
+
+
+class Client():
+    def __init__(self):
+        rospy.loginfo("Reading Path from path.txt")
+        self.client()
+
+    def read_path_from_file(self, filename='path.txt'):
+        # Den vorgegebenen Pfad einlesen
+        self.path = [[1.0, 2.0], [4.0, 2.0], [0.5, 0.5]]
+        # aus einer Datei funktioniert es leider nicht
+        # beim lesen erfolgt Abbruch des Programms
+        rospy.loginfo(str(self.path))
+
+    def getkey(self):
+        count = eval(input("Number of Patrols?  <to close, insert 'x'> \n"))
+        return count
+
+    def client(self):
+        client = actionlib.SimpleActionClient(
+                'turtlebot3',
+                turtlebot3_example.msg.Turtlebot3Action)
+        numbOfPatrols = self.getkey()
+        client.wait_for_server()
+        # Instanzierung goal
+        goal = turtlebot3_example.msg.Turtlebot3Goal()
+        self.read_path_from_file()
+        runde_nr = 1
+        while runde_nr <= numbOfPatrols and not rospy.is_shutdown():
+            rospy.loginfo("Patrol Round Nr %d of %d ", runde_nr, numbOfPatrols)
+            for koord in self.path:
+                goal.goal.x = koord[0]
+                goal.goal.y = koord[1]
+                goal.goal.z = runde_nr
+                req_str = 'Working on client request: send TurtleBot to point '
+                req_str = req_str + str(goal.goal.x) + " " + str(goal.goal.y)
+                rospy.loginfo(req_str)
+                client.send_goal(goal)
+                client.wait_for_result()
+                rospy.loginfo(client.get_result())
+            # Runde beendet
+            runde_nr = runde_nr + 1
+        exit()
+
+
+if __name__ == '__main__':
+    rospy.init_node('turtlebot3_client')
+    try:
+        while not rospy.is_shutdown():
+            print(msg)
+            result = Client()
+    except:
+        print("something went wrong - program close.", file=sys.stderr)
+
