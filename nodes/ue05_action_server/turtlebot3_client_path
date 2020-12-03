@@ -34,7 +34,7 @@ class Client():
         client.wait_for_server()
         # Instanzierung
         goal = turtlebot3_example.msg.Turtlebot3Goal()
-        path = [[1.0, 2.0], [4.0, 2.0], [0.0, 0.0]]
+        path = [[2.0, 0.0], [2.0, 2.0], [0.0, 2.0], [0.0, 0.0]]
         runde_nr = 1
         while runde_nr <= numbOfPatrols and not rospy.is_shutdown():
             rospy.loginfo("Patrol Round Nr %d of %d ", runde_nr, numbOfPatrols)

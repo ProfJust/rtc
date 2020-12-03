@@ -81,7 +81,7 @@ class TurtleBotClass:
     def steering_angle(self, goal_pose):
         return atan2(goal_pose.y - self.pose.y, goal_pose.x - self.pose.x)
 
-    def set_angular_vel(self, goal_pose, constant=1.0, ang_max=0.5:
+    def set_angular_vel(self, goal_pose, constant=1.0, ang_max=0.5):
         angle_to_goal = self.steering_angle(goal_pose)
         if angle_to_goal > pi:
             angle_to_goal = angle_to_goal - 2 * pi
