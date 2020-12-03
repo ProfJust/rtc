@@ -2,7 +2,7 @@
 <!-- turtlesim_demo.launch   
   Launcht mehrere Turtlesim Programme 
   Usage:
-    $ turtlesim_demo.launch
+    $ roslaunch rtc turtlesim_demo.launch
 -->
 
 <launch>
