@@ -6,7 +6,7 @@ import rospy
 from geometry_msgs.msg import Twist
 from turtlesim.msg import Pose
 from nav_msgs.msg import Odometry
-from math import pow, atan2, sqrt
+from math import pow, atan2, sqrt, pi
 
 
 class TurtleBotClass:
@@ -81,11 +81,23 @@ class TurtleBotClass:
     def steering_angle(self, goal_pose):
         return atan2(goal_pose.y - self.pose.y, goal_pose.x - self.pose.x)
 
-    def set_angular_vel(self, goal_pose, constant=1.0, ang_max=0.5):
-        ang_vel = constant * (self.steering_angle(goal_pose) - self.pose.theta)
+    def set_angular_vel(self, goal_pose, constant=1.0, ang_max=0.5:
+        angle_to_goal = self.steering_angle(goal_pose)
+        if angle_to_goal > pi:
+            angle_to_goal = angle_to_goal - 2 * pi
+        if angle_to_goal < -pi:
+            angle_to_goal = angle_to_goal + 2 * pi
+
+        ang_vel = constant * (angle_to_goal - self.pose.theta)
         if(ang_vel > ang_max):
             ang_vel = ang_max
-        self.vel_msg.angular.z = ang_vel
+        if(ang_vel < -ang_max):
+            ang_vel = -ang_max
+        # Drehrichtung berechnen
+        if self.pose.theta - angle_to_goal > 0:
+            self.vel_msg.angular.z = -ang_vel
+        else:
+            self.vel_msg.angular.z = ang_vel
         self.vel_msg.angular.x = 0
         self.vel_msg.angular.y = 0
 
@@ -120,7 +132,7 @@ class TurtleBotClass:
         self.vel_msg.angular.z = 0
         self.velocity_publisher.publish(self.vel_msg)
 
-    def goal_reached(self, distance_tolerance=0.2):
+    def goal_reached(self, distance_tolerance=0.1):
         if self.euclidean_distance(self.goal) < distance_tolerance:
             return True
         else:
@@ -129,10 +141,10 @@ class TurtleBotClass:
     def move2goal(self, debug_info=False):
         # Moves the turtle to the goal
         if not self.goal_reached():
-            # Linear velocity in the x-axis.
-            self.set_linear_vel(self.goal)
             # Angular velocity in the z-axis.
             self.set_angular_vel(self.goal)
+            # Linear velocity in the x-axis.
+            self.set_linear_vel(self.goal)
 
             # Publishing our vel_msg
             self.velocity_publisher.publish(self.vel_msg)
