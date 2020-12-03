@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!-- turtlesim_demo.launch   
+  Launcht mehrere Turtlesim Programme 
+  Usage:
+    $ turtlesim_demo.launch
+-->
+
+<launch>
+  <!--	ROS Master startet automatisch -->
+
+  <!-- pkg  = Verzeichnis/Package in dem der Code des Knoten liegt
+    name = Name des Knotens, der beim ROS-Master angemeldet wird
+    type = Name des Code-Files 
+  -->
+
+  <!-- Turtlesim-Node starten-->
+  <node pkg="turtlesim" name="sim" type="turtlesim_node"/> -->
+
+  <!-- Turtle Tastatursteuerung starten-->
+  <!-- dabei keine neue Konsole oeffnen
+  <node pkg="turtlesim" name="teleop_node" type="turtle_teleop_key" output="screen" /> 
+  -->
+
+  <!-- Besser: Shell Skript starten -->
+  <node pkg="rtc" type="my_first_shell_script.sh" name="teleop_node" output="screen" />
+  <node pkg="rtc" type="rqt_script.sh" name="rqt_node" output="screen" />  <!-- rqt -->
+
+</launch>
