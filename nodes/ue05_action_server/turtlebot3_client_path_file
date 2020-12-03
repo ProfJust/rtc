@@ -68,5 +68,5 @@ if __name__ == '__main__':
             print(msg)
             result = Client()
     except:
-        print("something went wrong - program close.", file=sys.stderr)
+        print("program close.", file=sys.stderr)
 
