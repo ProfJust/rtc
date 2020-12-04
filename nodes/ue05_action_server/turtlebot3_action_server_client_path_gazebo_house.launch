@@ -16,6 +16,6 @@
     <!-- rosrun rtc turtlebot3_client_path_from_file -->
     <node pkg="rtc" type="turtlebot3_client_path_from_file" 
           name="turtlebot3_client_path_from_file" output="screen"
-          launch-prefix="gnome-terminal -e" >
+          launch-prefix="gnome-terminal --geometry 20x20+75+14 -e" >
     </node>
 </launch>
