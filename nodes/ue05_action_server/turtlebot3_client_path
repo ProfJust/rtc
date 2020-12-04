@@ -42,12 +42,18 @@ class Client():
                 goal.goal.x = koord[0]
                 goal.goal.y = koord[1]
                 goal.goal.z = runde_nr
-                req_str = 'Working on client request: send TurtleBot to point '
+                req_str = 'Server is sending TurtleBot to point '
                 req_str = req_str + str(goal.goal.x) + " " + str(goal.goal.y)
                 rospy.loginfo(req_str)
                 client.send_goal(goal)
-                client.wait_for_result()
-                rospy.loginfo(client.get_result())
+                # wait for the action to return
+                finished_before_timeout = client.wait_for_result(
+                                           rospy.Duration(40.0))
+                if finished_before_timeout is True:
+                    # state_str = "Timeout: "  # + client.get_state()
+                    rospy.loginfo(" Done before Timeout ")
+                else:
+                    rospy.loginfo(" Timeout ")   # client.get_result())
             # Runde beendet
             runde_nr = runde_nr + 1
         exit()
@@ -57,7 +63,7 @@ if __name__ == '__main__':
     rospy.init_node('turtlebot3_client')
     try:
         while not rospy.is_shutdown():
-            print (msg)
+            print(msg)
             result = Client()
     except:
         print("program close.", file=sys.stderr)

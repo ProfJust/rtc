@@ -81,7 +81,7 @@ class TurtleBotClass:
     def steering_angle(self, goal_pose):
         return atan2(goal_pose.y - self.pose.y, goal_pose.x - self.pose.x)
 
-    def set_angular_vel(self, goal_pose, constant=1.0, ang_max=0.5):
+    def set_angular_vel(self, goal_pose, constant=1.0, ang_max=1.0):
         angle_to_goal = self.steering_angle(goal_pose)
         if angle_to_goal > pi:
             angle_to_goal = angle_to_goal - 2 * pi
@@ -126,7 +126,7 @@ class TurtleBotClass:
 
     def stop_robot(self):
         # Stopping our robot after the movement is over.
-        rospy.loginfo("Goal reached %f %f", round(self.pose.x, 2), round(self.pose.y, 2))
+        rospy.loginfo("TurtleBot Class> Goal reached %2.2f %2.2f", round(self.pose.x, 2), round(self.pose.y, 2))
         # rospy.loginfo(" --- Goal reached, Stop Robot ---")
         self.vel_msg.linear.x = 0
         self.vel_msg.angular.z = 0

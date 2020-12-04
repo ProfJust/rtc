@@ -20,14 +20,21 @@ TurtleBot3 patrols along path
 
 class Client():
     def __init__(self):
-        rospy.loginfo("Reading Path from path.txt")
         self.client()
 
-    def read_path_from_file(self, filename='path.txt'):
+    def read_path_from_file(self, filename="/home/oj/catkin_ws/src/rtc/nodes/ue05_action_server/path.txt"):
+        rospy.loginfo("Reading Path from path.txt : ")
         # Den vorgegebenen Pfad einlesen
-        self.path = [[2.0, 0.0], [2.0, 2.0], [0.0, 2.0], [0.0, 0.0]]
+        # self.path = [[0.0, 0.0],[2.0, 0.0], [2.0, 2.0], [0.0, 2.0]]
         # aus einer Datei funktioniert es leider nicht
         # beim lesen erfolgt Abbruch des Programms
+        # Doch, Lag am relativen Datei-Pfad
+        # muss absolut sein, vom root-Verzeichnis an
+        # nicht ~/ verwenden!!!
+        self.path = [[0.0, 0.0]]  # Initial Koordinaten
+        with open(filename, 'r') as fin:
+            for line in fin:
+                self.path.append(eval(line))
         rospy.loginfo(str(self.path))
 
     def getkey(self):
@@ -50,12 +57,18 @@ class Client():
                 goal.goal.x = koord[0]
                 goal.goal.y = koord[1]
                 goal.goal.z = runde_nr
-                req_str = 'Working on client request: send TurtleBot to point '
+                req_str = 'Server is sending TurtleBot to point '
                 req_str = req_str + str(goal.goal.x) + " " + str(goal.goal.y)
                 rospy.loginfo(req_str)
                 client.send_goal(goal)
-                client.wait_for_result()
-                rospy.loginfo(client.get_result())
+                # wait for the action to return
+                finished_before_timeout = client.wait_for_result(
+                                           rospy.Duration(40.0))
+                if finished_before_timeout is True:
+                    # state_str = "Timeout: "  # + client.get_state()
+                    rospy.loginfo(" Done before Timeout ")
+                else:
+                    rospy.loginfo(" Timeout ")   # client.get_result())
             # Runde beendet
             runde_nr = runde_nr + 1
         exit()
@@ -66,7 +79,7 @@ if __name__ == '__main__':
     try:
         while not rospy.is_shutdown():
             print(msg)
-            result = Client()
+            client = Client()  # Instanziierung
     except:
         print("program close.", file=sys.stderr)
 
