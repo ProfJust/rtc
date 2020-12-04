@@ -35,6 +35,7 @@ class Client():
         with open(filename, 'r') as fin:
             for line in fin:
                 self.path.append(eval(line))
+            del self.path[0]  # [0, 0] entfernen
         rospy.loginfo(str(self.path))
 
     def getkey(self):
