@@ -1,0 +1,17 @@
+<launch>
+    <!-- roslaunch turtlebot3_gazebo turtlebot3_empty_world.launch  -->
+    <include file="$(find turtlebot3_gazebo)/launch/turtlebot3_empty_world.launch">
+    </include> 
+  
+    <!--rosrun rtc turtlebot3_server_path -->
+    <node pkg="rtc" type="turtlebot3_server_path" 
+          name="turtlebot3_server_path" output="screen"
+          launch-prefix="gnome-terminal -e" >
+    </node>
+  
+    <!-- rosrun rtc turtlebot3_client_path_from_file -->
+    <node pkg="rtc" type="turtlebot3_client_path_from_file" 
+          name="turtlebot3_client_path_from_file" output="screen"
+          launch-prefix="gnome-terminal -e" >
+    </node>
+</launch>
