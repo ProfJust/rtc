@@ -11,8 +11,9 @@ import actionlib
 import turtlebot3_example.msg
 from TurtleBotClassFile import TurtleBotClass
 
+
 class Turtlebot3Action(object):
-    # Funktionen fuer Feedback und Result verbinden
+    # Daten fuer Feedback und Result instanziieren
     _feedback = turtlebot3_example.msg.Turtlebot3ActionFeedback()
     _result = turtlebot3_example.msg.Turtlebot3ActionResult()
 
@@ -32,14 +33,22 @@ class Turtlebot3Action(object):
     def execute_cb(self, goal):
         self.myTurtle.goal.x = goal.goal.x
         self.myTurtle.goal.y = goal.goal.y
-        req_str = 'Server is sending TurtleBot to point ' + str(goal.goal.x) + " " + str(goal.goal.y)
+        req_str = 'Server is sending TurtleBot to point '\
+                  + str(goal.goal.x) + " " + str(goal.goal.y)
         rospy.loginfo(req_str)
         # Ziel erreicht => True
         while not self.myTurtle.move2goal() and not rospy.is_shutdown():
+            # feedback not working yet
+            # feedback_str = 'Server: Turtlebot ist auf dem Weg '\
+            # + str(goal.goal.x) + " " + str(goal.goal.y)
+            # self._feedback.feedback = feedback_str
+            # self._as.publish_feedback(self._feedback)
             pass
 
-        # publish result
-        result_str = 'Server: Turtlebot reached point ' + str(goal.goal.x) + " " + str(goal.goal.y)
+        # ---- SET RESULT -----
+        # publish result, Umbruch zu lange codezeile mit \
+        result_str = 'Server: Turtlebot reached point '\
+                     + str(goal.goal.x) + " " + str(goal.goal.y)
         self._result.result = result_str
         self._as.set_succeeded(self._result)
         # rospy.loginfo(result_str)

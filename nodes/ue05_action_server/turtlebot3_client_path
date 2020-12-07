@@ -27,33 +27,37 @@ class Client():
         return count
 
     def client(self):
+        # Instanziierung des Clients
         client = actionlib.SimpleActionClient(
                 'turtlebot3',
                 turtlebot3_example.msg.Turtlebot3Action)
-        numbOfPatrols = self.getkey()
         client.wait_for_server()
-        # Instanzierung
+        # goal instanziieren
         goal = turtlebot3_example.msg.Turtlebot3Goal()
+        # Pfad festlegen
         path = [[2.0, 0.0], [2.0, 2.0], [0.0, 2.0], [0.0, 0.0]]
+        # Runden?
+        numbOfPatrols = self.getkey()
         runde_nr = 1
         while runde_nr <= numbOfPatrols and not rospy.is_shutdown():
             rospy.loginfo("Patrol Round Nr %d of %d ", runde_nr, numbOfPatrols)
             for koord in path:
+                # set goal
                 goal.goal.x = koord[0]
                 goal.goal.y = koord[1]
                 goal.goal.z = runde_nr
                 req_str = 'Server is sending TurtleBot to point '
                 req_str = req_str + str(goal.goal.x) + " " + str(goal.goal.y)
                 rospy.loginfo(req_str)
+                # send goal
                 client.send_goal(goal)
-                # wait for the action to return
+                # wait for the action to return with timeout 40sec
                 finished_before_timeout = client.wait_for_result(
                                            rospy.Duration(40.0))
                 if finished_before_timeout is True:
-                    # state_str = "Timeout: "  # + client.get_state()
                     rospy.loginfo(" Done before Timeout ")
                 else:
-                    rospy.loginfo(" Timeout ")   # client.get_result())
+                    rospy.loginfo(" Timeout ")
             # Runde beendet
             runde_nr = runde_nr + 1
         exit()
