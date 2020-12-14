@@ -4,7 +4,7 @@
 # edited WHS, OJ , 3.12.2020 #
 # usage
 #   $1 roslaunch rtc turtlebot3_action_server_client_path_gazebo_house.launch
-#   $2 rosrun rtc publish_point_2_file
+#   $2 rosrun rtc publish_pose_2_file.py
 #   click at point at RViz-Map  => save in  File
 
 import rospy
@@ -13,7 +13,8 @@ filename = "/home/oj/catkin_ws/src/rtc/nodes/ue07_navigation_amcl/path.txt"
 
 
 def clickCB(data):
-    rospy.loginfo("clicked at " + str(data.pose.position.x) + " " + str(data.pose.position.y))
+    rospy.loginfo("clicked at " + str(data.pose.position.x)
+                  + " " + str(data.pose.position.y))
     fobj = open(filename, 'a')
     write_str = "[" + str(data.pose.position.x) + ","\
                     + str(data.pose.position.y) + ","\
@@ -29,7 +30,8 @@ def clickCB(data):
 if __name__ == '__main__':
     try:
         rospy.init_node('goal_listener', anonymous=True)
-        rospy.loginfo("Auf der RVIZ- Karte ein 2D Nav Goal ankllicken, /move_base_simple/goal2")
+        rospy.loginfo("Auf der RVIZ- Karte ein 2D Nav Goal ankllicken,\
+                      /move_base_simple/goal2")
         click_sub = rospy.Subscriber('/move_base_simple/goal2',
                                      PoseStamped,
                                      clickCB)
@@ -38,8 +40,5 @@ if __name__ == '__main__':
         while not rospy.is_shutdown():
             pass
 
-
-
-
-    except:
-        print("program close.", file=sys.stderr)
+    except rospy.ROSInterruptException:
+        print("program close.")
