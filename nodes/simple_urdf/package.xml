@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>simple_example_description</name>
+  <name>simple_urdf</name>
   <version>0.0.0</version>
   <description>The simple_example_description package</description>
 
