@@ -1,4 +1,4 @@
-image: /home/oj/catkin_ws/src/rtc/rtc_maps/gazebo_house_map_2020_12_07.pgm
+image: ~/catkin_ws/src/rtc/rtc_maps/gazebo_house_map_2020_12_07.pgm
 resolution: 0.050000
 origin: [-10.000000, -10.000000, 0.000000]
 negate: 0
