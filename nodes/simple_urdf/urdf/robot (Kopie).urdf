@@ -1,13 +1,14 @@
 <?xml version="1.0"?>
 <robot name="simple_example">
-
   <link name="world" />
-
-  <joint name="world_to_base_link=" type="fixed">
+ 
+  <joint name="world_to_base_joint" type="fixed">
     <parent link="world"/>
     <child link="base_link"/>
+    <axis xyz="0 0 1"/>
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/> 
   </joint>
-
+  
   <link name="base_link">
     <inertial>
         <mass value="10" />
@@ -50,12 +51,12 @@
     <origin xyz="0.0 0.0 0.2" rpy="0.0 0.0 0.0"/> 
   </joint>
 
-  
-  <!--       GAZEBO RELATED PART     -->
+  <!--                GAZEBO RELATED PART                             -->
+
   <!-- ROS Control plugin for Gazebo -->
   <gazebo>
     <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
-      <robotNamespace>/simple_model</robotNamespace>
+      <robotNamespace>/nodes/simple_model</robotNamespace>
     </plugin>
   </gazebo>
 

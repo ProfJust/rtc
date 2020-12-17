@@ -1,0 +1,15 @@
+<launch>
+  <arg name="sonar_vel_in"  default="/sonar_cmd_vel"/>
+  <arg name="move_base_vel_in" default="/move_base_cmd_vel"/>
+  <arg name="cmd_vel_out" default="/cmd_vel"/>
+  <arg name="config_mux" default="$(find rtc)/nodes/ue08_sonar_gazebo/config/twist_mux.yaml"/>
+
+  
+  <node pkg="twist_mux" type="twist_mux" name="twist_mux" output="screen">
+    <remap from="cmd_vel_out" to="$(arg cmd_vel_out)"/>
+    <remap from="sonar_vel_in" to="$(arg sonar_vel_in)"/>
+    <remap from="move_base_vel_in" to="$(arg move_base_vel_in)"/>
+
+    <rosparam file="$(arg config_mux)" command="load"/>
+  </node>
+</launch>
