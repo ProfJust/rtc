@@ -105,13 +105,12 @@ class TurtleBotClass:
 
     def move2goal(self):
         # Moves the turtle to the goal
-        
+
         while not self.goal_reached():
             # Linear velocity in the x-axis.
             self.set_linear_vel(self.goal)
             # Angular velocity in the z-axis.
             self.set_angular_vel(self.goal)
-
             # Publishing our vel_msg
             self.velocity_publisher.publish(self.vel_msg)
             # Publish at the desired rate.
