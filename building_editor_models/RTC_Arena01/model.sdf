@@ -9,10 +9,10 @@
             <size>6 0.15 0.5</size>
           </box>
         </geometry>
-        <pose>0 0 1.25 0 -0 0</pose>
+        <pose>0 0 0.250 -0 0</pose>
       </collision>
       <visual name='Wall_1_Visual'>
-        <pose>0 0 1.25 0 -0 0</pose>
+        <pose>0 0 0.25 0 -0 0</pose>
         <geometry>
           <box>
             <size>6 0.15 0.5</size>
@@ -38,10 +38,10 @@
             <size>1.47992 0.15 0.5</size>
           </box>
         </geometry>
-        <pose>0 0 1.25 0 -0 0</pose>
+        <pose>0 0 0.25 0 -0 0</pose>
       </collision>
       <visual name='Wall_11_Visual'>
-        <pose>0 0 1.25 0 -0 0</pose>
+        <pose>0 0 0.25 0 -0 0</pose>
         <geometry>
           <box>
             <size>1.47992 0.15 0.5</size>
@@ -67,10 +67,10 @@
             <size>1.50927 0.15 0.5</size>
           </box>
         </geometry>
-        <pose>0 0 1.25 0 -0 0</pose>
+        <pose>0 0 0.25 0 -0 0</pose>
       </collision>
       <visual name='Wall_13_Visual'>
-        <pose>0 0 1.25 0 -0 0</pose>
+        <pose>0 0 0.25 0 -0 0</pose>
         <geometry>
           <box>
             <size>1.50927 0.15 0.5</size>
@@ -96,10 +96,10 @@
             <size>2.25 0.15 0.5</size>
           </box>
         </geometry>
-        <pose>0 0 1.25 0 -0 0</pose>
+        <pose>0 0 0.25 0 -0 0</pose>
       </collision>
       <visual name='Wall_15_Visual'>
-        <pose>0 0 1.25 0 -0 0</pose>
+        <pose>0 0 0.25 0 -0 0</pose>
         <geometry>
           <box>
             <size>2.25 0.15 0.5</size>
@@ -125,10 +125,10 @@
             <size>0.731313 0.15 0.5</size>
           </box>
         </geometry>
-        <pose>0 0 1.25 0 -0 0</pose>
+        <pose>0 0 0.25 0 -0 0</pose>
       </collision>
       <visual name='Wall_17_Visual'>
-        <pose>0 0 1.25 0 -0 0</pose>
+        <pose>0 0 0.25 0 -0 0</pose>
         <geometry>
           <box>
             <size>0.731313 0.15 0.5</size>
@@ -154,10 +154,10 @@
             <size>1.52437 0.15 0.5</size>
           </box>
         </geometry>
-        <pose>0 0 1.25 0 -0 0</pose>
+        <pose>0 0 0.25 0 -0 0</pose>
       </collision>
       <visual name='Wall_19_Visual'>
-        <pose>0 0 1.25 0 -0 0</pose>
+        <pose>0 0 0.25 0 -0 0</pose>
         <geometry>
           <box>
             <size>1.52437 0.15 0.5</size>
@@ -183,10 +183,10 @@
             <size>2.25 0.15 0.5</size>
           </box>
         </geometry>
-        <pose>0 0 1.25 0 -0 0</pose>
+        <pose>0 0 0.25 0 -0 0</pose>
       </collision>
       <visual name='Wall_23_Visual'>
-        <pose>0 0 1.25 0 -0 0</pose>
+        <pose>0 0 0.25 0 -0 0</pose>
         <geometry>
           <box>
             <size>2.25 0.15 0.5</size>
@@ -212,10 +212,10 @@
             <size>2.15928 0.15 0.5</size>
           </box>
         </geometry>
-        <pose>0 0 1.25 0 -0 0</pose>
+        <pose>0 0 0.25 0 -0 0</pose>
       </collision>
       <visual name='Wall_25_Visual'>
-        <pose>0 0 1.25 0 -0 0</pose>
+        <pose>0 0 0.25 0 -0 0</pose>
         <geometry>
           <box>
             <size>2.15928 0.15 0.5</size>
@@ -241,10 +241,10 @@
             <size>2.5 0.15 0.5</size>
           </box>
         </geometry>
-        <pose>0 0 1.25 0 -0 0</pose>
+        <pose>0 0 0.25 0 -0 0</pose>
       </collision>
       <visual name='Wall_27_Visual'>
-        <pose>0 0 1.25 0 -0 0</pose>
+        <pose>0 0 0.25 0 -0 0</pose>
         <geometry>
           <box>
             <size>2.5 0.15 0.5</size>
@@ -270,10 +270,10 @@
             <size>4 0.15 0.5</size>
           </box>
         </geometry>
-        <pose>0 0 1.25 0 -0 0</pose>
+        <pose>0 0 0.25 0 -0 0</pose>
       </collision>
       <visual name='Wall_3_Visual'>
-        <pose>0 0 1.25 0 -0 0</pose>
+        <pose>0 0 0.25 0 -0 0</pose>
         <geometry>
           <box>
             <size>4 0.15 0.5</size>
@@ -299,10 +299,10 @@
             <size>1.5 0.15 0.5</size>
           </box>
         </geometry>
-        <pose>0 0 1.25 0 -0 0</pose>
+        <pose>0 0 0.25 0 -0 0</pose>
       </collision>
       <visual name='Wall_30_Visual'>
-        <pose>0 0 1.25 0 -0 0</pose>
+        <pose>0 0 0.25 0 -0 0</pose>
         <geometry>
           <box>
             <size>1.5 0.15 0.5</size>
@@ -328,10 +328,10 @@
             <size>0.240996 0.15 0.5</size>
           </box>
         </geometry>
-        <pose>0 0 1.25 0 -0 0</pose>
+        <pose>0 0 0.25 0 -0 0</pose>
       </collision>
       <visual name='Wall_32_Visual'>
-        <pose>0 0 1.25 0 -0 0</pose>
+        <pose>0 0 0.25 0 -0 0</pose>
         <geometry>
           <box>
             <size>0.240996 0.15 0.5</size>
@@ -357,10 +357,10 @@
             <size>6 0.15 0.5</size>
           </box>
         </geometry>
-        <pose>0 0 1.25 0 -0 0</pose>
+        <pose>0 0 0.25 0 -0 0</pose>
       </collision>
       <visual name='Wall_4_Visual'>
-        <pose>0 0 1.25 0 -0 0</pose>
+        <pose>0 0 0.25 0 -0 0</pose>
         <geometry>
           <box>
             <size>6 0.15 0.5</size>
@@ -386,10 +386,10 @@
             <size>4 0.15 0.5</size>
           </box>
         </geometry>
-        <pose>0 0 1.25 0 -0 0</pose>
+        <pose>0 0 0.25 0 -0 0</pose>
       </collision>
       <visual name='Wall_5_Visual'>
-        <pose>0 0 1.25 0 -0 0</pose>
+        <pose>0 0 0.25 0 -0 0</pose>
         <geometry>
           <box>
             <size>4 0.15 0.5</size>
@@ -415,10 +415,10 @@
             <size>1 0.15 0.5</size>
           </box>
         </geometry>
-        <pose>0 0 1.25 0 -0 0</pose>
+        <pose>0 0 0.25 0 -0 0</pose>
       </collision>
       <visual name='Wall_7_Visual'>
-        <pose>0 0 1.25 0 -0 0</pose>
+        <pose>0 0 0.25 0 -0 0</pose>
         <geometry>
           <box>
             <size>1 0.15 0.5</size>
