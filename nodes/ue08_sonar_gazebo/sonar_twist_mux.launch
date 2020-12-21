@@ -8,8 +8,9 @@
 
 
 <launch>
-  <!-- Input -->-->
-  <arg name="sonar_vel_in"  default="/sonar/cmd_vel"/>
+  <!-- Input -->
+  <arg name="sonar_obstacle_avoidance_left"  default="/sonar_left/cmd_vel"/>
+  <arg name="sonar_obstacle_avoidance_right"  default="/sonar_right/cmd_vel"/> 
   <arg name="move_base_vel_in" default="/move_base/cmd_vel"/>
   <!-- Output -->
   <arg name="topic_cmd_vel_out" default="/cmd_vel"/>
