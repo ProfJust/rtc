@@ -8,7 +8,7 @@
 # copy content of turtlebot3.burger.urdf_sonar.xacro
 #              to turtlebot3.burger.urdf.xacro
 #
-#   $1 roslaunch rtc turtlebot3_action_server_client_path_gazebo_house.launch
+#   $1 roslaunch turtlebot3_gazebo turtlebot3_house.launch
 #   $2 roslaunch turtlebot3_navigation turtlebot3_navigation.launch
 #                map_file:=$HOME/catkin_ws/src/rtc/rtc_maps/gazebo_house_map_2020_12_07.yaml
 #   $4 rosrun rtc turtlebot3_sonar.py
