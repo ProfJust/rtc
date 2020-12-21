@@ -31,7 +31,7 @@ class Sonar():
                                                queue_size=10)
         self.sonar_sub_right = rospy.Subscriber('sonar_right',
                                                 Range,
-                                                self.get_sonar_right,  # ????
+                                                self.get_sonar_right,
                                                 queue_size=10)
         self.dist_left = 0.0
         self.dist_right = 0.0
