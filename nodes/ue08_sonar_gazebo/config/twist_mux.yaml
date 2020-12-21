@@ -1,12 +1,12 @@
 topics:
 -
   name    : move_base
-  topic   : move_base_cmd_vel
+  topic   : move_base/cmd_vel
   timeout : 0.5
   priority: 10
 -
   name    : sonar_obstacle_avoidance
-  topic   : sonar_cmd_vel
+  topic   : sonar/cmd_vel
   timeout : 0.5
   priority: 50
 -

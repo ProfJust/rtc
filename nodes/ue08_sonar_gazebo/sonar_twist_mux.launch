@@ -1,6 +1,15 @@
+<!-- 
+  $ roslaunch turtlebot3_gazebo turtlebot3_house.launch 
+  $ roslaunch turtlebot3_navigation turtlebot3_navigation.launch map_file:=$HOME/catkin_ws/src/rtc/rtc_maps/gazebo_house_map_2020_12_07.yaml
+  $ rosrun rtc sonar_obstacle_avoidance.py 
+  $ roslaunch rtc sonar_twist_mux.launch
+
+-->
+
+
 <launch>
   <arg name="sonar_vel_in"  default="/sonar_cmd_vel"/>
-  <arg name="move_base_vel_in" default="/move_base_cmd_vel"/>
+  <arg name="move_base_vel_in" default="/move_base/cmd_vel"/>
   <arg name="cmd_vel_out" default="/cmd_vel"/>
   <arg name="config_mux" default="$(find rtc)/nodes/ue08_sonar_gazebo/config/twist_mux.yaml"/>
 
