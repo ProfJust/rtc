@@ -1,0 +1,29 @@
+digraph G {
+node [shape=box];
+"base_footprint" [label="base_footprint"];
+"base_link" [label="base_link"];
+"caster_back_link" [label="caster_back_link"];
+"imu_link" [label="imu_link"];
+"base_scan" [label="base_scan"];
+"base_sonar_front_left" [label="base_sonar_front_left"];
+"base_sonar_front_right" [label="base_sonar_front_right"];
+"wheel_left_link" [label="wheel_left_link"];
+"wheel_right_link" [label="wheel_right_link"];
+node [shape=ellipse, color=blue, fontcolor=blue];
+"base_footprint" -> "base_joint" [label="xyz: 0 0 0.01 \nrpy: 0 -0 0"]
+"base_joint" -> "base_link"
+"base_link" -> "caster_back_joint" [label="xyz: -0.081 0 -0.004 \nrpy: -1.57 0 0"]
+"caster_back_joint" -> "caster_back_link"
+"base_link" -> "imu_joint" [label="xyz: -0.032 0 0.068 \nrpy: 0 -0 0"]
+"imu_joint" -> "imu_link"
+"base_link" -> "scan_joint" [label="xyz: -0.032 0 0.172 \nrpy: 0 -0 0"]
+"scan_joint" -> "base_scan"
+"base_link" -> "sonar_front_joint_left" [label="xyz: 0.04 0.06 0.1 \nrpy: -1.74729e-18 -0.12 0.2"]
+"sonar_front_joint_left" -> "base_sonar_front_left"
+"base_link" -> "sonar_front_joint_right" [label="xyz: 0.04 -0.06 0.1 \nrpy: 1.74729e-18 -0.12 -0.2"]
+"sonar_front_joint_right" -> "base_sonar_front_right"
+"base_link" -> "wheel_left_joint" [label="xyz: 0 0.08 0.023 \nrpy: -1.57 0 0"]
+"wheel_left_joint" -> "wheel_left_link"
+"base_link" -> "wheel_right_joint" [label="xyz: 0 -0.08 0.023 \nrpy: -1.57 0 0"]
+"wheel_right_joint" -> "wheel_right_link"
+}

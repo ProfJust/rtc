@@ -5,17 +5,12 @@ topics:
   timeout : 0.5
   priority: 10
 -
-  name    : sonar_obstacle_avoidance_left
-  topic   : sonar_left/cmd_vel
-  timeout : 0.5
-  priority: 51
--
-  name    : sonar_obstacle_avoidance_right
-  topic   : sonar_right/cmd_vel
+  name    : sonar_obstacle_avoidance
+  topic   : sonar/cmd_vel
   timeout : 0.5
   priority: 50
 -
   name    : joysticks
-  topic   : joy_vel
+  topic   : joy/cmd_vel
   timeout : 0.5
   priority: 100
