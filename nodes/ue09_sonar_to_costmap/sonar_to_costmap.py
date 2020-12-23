@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
-# sonar_obstacle_avoidance.py
+# sonar_to_costmap.py
 # ################################################################################
-# edited WHS, OJ , 17.12.2020 #
+# edited WHS, OJ , 23.12.2020 #
+#
+# brings Sonar detected Obstacles into move_base costmap
+# using point_cloud - message
+#
 # usage
 # copy content of turtlebot3.burger.gazebo_sonar.xacro
 #              to turtlebot3.burger.gazebo_sonar.xacro
@@ -15,15 +19,21 @@
 # ---------------------------------------
 
 import rospy
-from geometry_msgs.msg import Twist
+from geometry_msgs.msg import Point32
 from sensor_msgs.msg import Range
+from sensor_msgs.msg import PointCloud
 
 
-class Sonar():
+class Sonar_Point_Cloud():
     def __init__(self):
-        rospy.loginfo("Publishing sonar/cmd_vel")
-        self.cmd_pub = rospy.Publisher('sonar/cmd_vel',
-                                       Twist, queue_size=10)
+        rospy.loginfo("Publishing PointCloud")
+
+        # Instanziiere PointCloud
+        self.cloud = PointCloud()
+        self.cloud_pub = rospy.Publisher('sonar/point_cloud',
+                                         PointCloud,
+                                         queue_size=10)
+
         # receiving sonar_left and sonar_right
         self.sonar_sub_left = rospy.Subscriber('sonar_left',
                                                Range,
@@ -42,42 +52,36 @@ class Sonar():
     def get_sonar_left(self, sensor_data_left):
         # rospy.loginfo(" Sonar Data Left received ")
         self.dist_left = sensor_data_left.range
-        self.sonar_move()
+        self.cloud_build()
 
     def get_sonar_right(self, sensor_data_right):
         # rospy.loginfo(" Sonar Data Right received ")
         self.dist_right = sensor_data_right.range
-        self.sonar_move()
+        self.cloud_build()
 
-    def sonar_move(self):
-        twist = Twist()
-        if self.dist_left < 0.3:  # Hindernis links erkannt
-            if self.dist_left < self.dist_right:
-                rospy.loginfo("detects obstacle in "
-                              + str(self.dist_left)
-                              + " m distance Left")
-                # zuruecksetzen und rechts drehen
-                twist.linear.x = -0.01
-                # minus ist rechtsherun, getestet mit rqt
-                twist.angular.z = -0.5
-                self.cmd_pub.publish(twist)
-                return
+    def cloud_build(self):
+        # add sonar readings (robot-local coordinate frame) to cloud
+        p = Point32()
 
-        if self.dist_right < 0.3:  # Hindernis rechts erkannt
-            if self.dist_right < self.dist_left:
-                rospy.loginfo("detects obstacle in "
-                              + str(self.dist_right)
-                              + " m distance right")
-                # zuruecksetzen und links drehen
-                twist.linear.x = -0.01
-                twist.angular.z = 0.5
-                self.cmd_pub.publish(twist)
-        return
+        # Linke Seite
+        p.x = self.dist_left
+        p.y = -0.5
+        p.z = 0.0
+        self.cloud.points.append(p)
+
+        # Rechte Seite  punkt einfügen  (x,y,z)
+        p.x = self.dist_right
+        p.y = 0.5
+        p.z = 0.0
+        self.cloud.points.append(p)
+
+        # Senden
+        self.cloud_pub.publish(self.cloud)
 
 
 if __name__ == '__main__':
     rospy.init_node('sonar_controller', anonymous=True)
     try:
-        sonar = Sonar()
+        sonar = Sonar_Point_Cloud()
     except rospy.ROSInterruptException:
         pass
