@@ -57,7 +57,7 @@ class Sonar():
                               + str(self.dist_left)
                               + " m distance Left")
                 # zuruecksetzen und rechts drehen
-                twist.linear.x = -0.01
+                twist.linear.x = -0.1
                 # minus ist rechtsherun, getestet mit rqt
                 twist.angular.z = -0.5
                 self.cmd_pub.publish(twist)
@@ -69,7 +69,7 @@ class Sonar():
                               + str(self.dist_right)
                               + " m distance right")
                 # zuruecksetzen und links drehen
-                twist.linear.x = -0.01
+                twist.linear.x = -0.1
                 twist.angular.z = 0.5
                 self.cmd_pub.publish(twist)
         return

@@ -1,0 +1,15 @@
+obstacle_range: 3.0
+raytrace_range: 3.5
+
+footprint: [[-0.105, -0.105], [-0.105, 0.105], [0.041, 0.105], [0.041, -0.105]]
+#robot_radius: 0.105
+
+inflation_radius: 1.0
+cost_scaling_factor: 3.0
+
+map_type: costmap
+
+# OJ added Sonar 23.12.2020
+observation_sources: scan sonar
+scan: {sensor_frame: base_scan, data_type: LaserScan, topic: scan, marking: true, clearing: true}
+sonar: {sensor_frame: base_link, data_type: PointCloud, topic: /sonar/point_cloud, marking: true, clearing: true}
