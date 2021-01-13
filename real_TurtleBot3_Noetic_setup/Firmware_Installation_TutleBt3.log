@@ -1,0 +1,99 @@
+ geany update.sh 
+   81  ./update.sh $OPENCR_PORT $OPENCR_MODEL.opencr
+   82  ./update.sh $OPENCR_PORT 
+   83  ./update.sh 
+   84  wget https://github.com/ROBOTIS-GIT/OpenCR-Binaries/raw/master/turtlebot3/ROS1/1.2.5/opencr_update.tar.bz2 && tar -xvf opencr_update.tar.bz2 && cd ./opencr_update && ./update.sh $OPENCR_PORT $OPENCR_MODEL.opencr && cd ..
+   85  wget https://github.com/ROBOTIS-GIT/OpenCR-Binaries/tree/master/turtlebot3/ROS1/1.2.5 && tar -xvf opencr_update.tar.bz2 && cd ./opencr_update && ./update.sh $OPENCR_PORT $OPENCR_MODEL.opencr && cd ..
+   86  wget https://github.com/ROBOTIS-GIT/OpenCR-Binaries/tree/master/turtlebot3/ROS1/1.2.5 && tar -xvf opencr_update_1.2.5.tar.bz2 && cd ./opencr_update && ./update.sh $OPENCR_PORT $OPENCR_MODEL.opencr && cd ..
+   87  ls
+   88  roslaunch turtlebot3_bringup turtlebot3_robot.launch
+   89  cd ~/opencr_update/opencr_update
+   90  ls -al
+   91  ./opencr_ld_shell_arm
+   92  roslaunch turtlebot3_bringup turtlebot3_robot.launch
+   93  ping 192.168.1.142
+   94  sudo apt-get update
+   95  ping 192.168.1.142
+   96  roslaunch turtlebot3_bringup turtlebot3_robot.launch
+   97  ls -l /dev/ttyAMA0 
+   98  sudo usermod -a -G dialout oj
+   99  ls -l /dev/ttyAMA0 
+  100  chmod 666 /dev/ttyAMA0 
+  101  sudo chmod 666 /dev/ttyAMA0 
+  102  ls -l /dev/ttyAMA0 
+  103  roslaunch turtlebot3_bringup turtlebot3_robot.launch
+  104  cd ..
+  105  ls
+  106  cd dev
+  107  ls
+  108  ls -al
+  109  rostopic list
+  110  rosrun turtlebot3_bringup create_udev_rules 
+  111  cd /etc
+  112  ls
+  113  cd udev/
+  114  ls
+  115  pluma udev.conf 
+  116  cd rules.d/
+  117  ls
+  118  pluma 99-turtlebot3-cdc.rules 
+  119  ls
+  120  pluma roslog.txt 
+  121  pluma .bashrc
+  122  roslaunch turtlebot3_bringup turtlebot3_robot.launch >>ros_start.log
+  123  sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+  124  sudo apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
+  125  sudo apt update
+  126  sudo apt-get update
+  127  sudo apt-get dist-upgrade
+  128  sudo apt install ros-noetic-desktop
+  129  apt list --upgradable
+  130  rospack list
+  131  sudo apt install ros-noetic-desktop
+  132  sudo apt install openssh-server
+  133  sudo apt-get update
+  134  sudo apt-get install openssh-server
+  135  sudo systemctl enable ssh_service
+  136  sudo systemctl enable ssh.service
+  137  sudo systemctl start ssh.service
+  138  sudo dpkg-reconfigure openssh-server
+  139  hostnam -I
+  140  hostname -I
+  141  pwd
+  142  cd ..
+  143  ls
+  144  cd ~
+  145  rospack list
+  146  sudo apt-get dist-upgrade
+  147  cd catkin_ws/
+  148  catkin_make -j1
+  149  roslaunch turtlebot3_bringup turtlebot3_robot.launch 
+  150  catkin_make -j1
+  151  roslaunch turtlebot3_bringup turtlebot3_robot.launch 
+  152  cd src/
+  153  ls
+  154  rm-r turtlebot3
+  155  rm -r turtlebot3
+  156  rm -r turtlebot3_msgs/
+  157  ls
+  158  git clone https://github.com/ROBOTIS-GIT/turtlebot3
+  159  git clone https://github.com/ROBOTIS-GIT/turtlebot3_msgs
+  160  ls
+  161  cd turtlebot3
+  162  ls
+  163  cd ~/catkin_ws/
+  164  catkin_make
+  165  git clone https://github.com/ROBOTIS-GIT/turtlebot3_msgs
+  166  roslaunch turtlebot3_bringup turtlebot3_robot.launch 
+  167  cd ..
+  168  pluma .bashrc
+  169  pwd
+  170  roslaunch turtlebot3_bringup turtlebot3_robot.launch 
+  171  printenv |grep ROS
+  172  pluma .bashrc
+  173  roslaunch turtlebot3_bringup turtlebot3_robot.launch 
+  174  ls
+  175  roslaunch turtlebot3_bringup turtlebot3_robot.launch 
+  176  shutdown now
+  177  sudo shutdown now
+
