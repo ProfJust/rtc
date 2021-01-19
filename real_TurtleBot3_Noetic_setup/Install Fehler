@@ -1,0 +1,31 @@
+1.) git clone https://github.com/ROBOTIS-GIT/turtlebot3.git
+
+=> Fehlermeldung
+
+=> Workaround  Dateien per USB vom PC holen
+
+
+
+2.)
+catkin_make  - urdf fehlt
+
+Could not find a package configuration file provided by "urdf" with any of
+  the following names:
+
+    urdfConfig.cmake
+    urdf-config.cmake
+
+=> sudo apt-get install ros-noetic-urdf
+
+
+3.) catkin_make
+ Could not find a package configuration file provided by
+  "interactive_markers" with any of the following names:
+
+    interactive_markersConfig.cmake
+    interactive_markers-config.cmake
+
+=> sudo apt-get install ros-noetic-interactive-markers
+   source /opt/ros/noetic/setup.bash 
+
+
