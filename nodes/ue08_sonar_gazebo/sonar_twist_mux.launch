@@ -15,7 +15,7 @@
   <node pkg="twist_mux" type="twist_mux" name="twist_mux">
     <rosparam command="load" file="$(arg config_mux)" />
     <remap from="cmd_vel_out" to="$(arg topic_cmd_vel_out)" />
-    <!-- remap from="cmd_vel_out" to="cmd_vel"/ -->
+    <!--remap from="cmd_vel_out" to="cmd_vel" /-->
   </node>
 
 </launch>
