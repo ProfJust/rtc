@@ -7,13 +7,7 @@
 # using point_cloud - message
 #
 # edit
-# only Gazebo
-# copy content of turtlebot3.burger.gazebo_sonar.xacro
-#              to turtlebot3.burger.gazebo_sonar.xacro
-# copy content of turtlebot3.burger.urdf_sonar.xacro
-#              to turtlebot3.burger.urdf.xacro
-#
-# real Bot and Gazebo
+# real Bot 
 # edit costmap_common_params_burger.yaml
 #    observation_sources: scan sonar
 #    scan: ...
@@ -24,10 +18,9 @@
 #     <arg name="cmd_vel_topic" default="/move_base/cmd_vel" />
 #
 # usage
-#   $1 roslaunch turtlebot3_gazebo turtlebot3_house.launch
 #   $2 roslaunch turtlebot3_navigation turtlebot3_navigation.launch
 #                map_file:=$HOME/catkin_ws/src/rtc/rtc_maps/gazebo_house_map_2020_12_07.yaml
-#   $3 roslaunch rts sonar_twist_mux.launch
+#   $3 roslaunch rtc sonar_twist_mux.launch  ggf. sudo apt-get install ros-noetic-twist-mux*
 #   $4 rosrun rtc sonar_obstacle_avoidance.py
 #   $5 rosrun rtc sonar_to_costmap.py
 # ------------------------------------------------------------------
@@ -35,8 +28,9 @@
 import rospy
 import std_msgs.msg
 from geometry_msgs.msg import Point32
-from sensor_msgs.msg import Range
+# from sensor_msgs.msg import Range
 from sensor_msgs.msg import PointCloud
+from turtlebot3_msgs.msg import SensorState
 
 
 class Sonar_to_Point_Cloud():
@@ -48,34 +42,27 @@ class Sonar_to_Point_Cloud():
                                          queue_size=10)
 
         # receiving sonar_left and sonar_right
-        self.sonar_sub_left = rospy.Subscriber('sonar_left',
-                                               Range,
-                                               self.get_sonar_left,
-                                               queue_size=10)
-        self.sonar_sub_right = rospy.Subscriber('sonar_right',
-                                                Range,
-                                                self.get_sonar_right,
-                                                queue_size=10)
+        self.sensor_sub = rospy.Subscriber('sensor_state', SensorState, self.get_sonar, queue_size=10)
+
         self.dist_left = 0.0
         self.dist_right = 0.0
         self.rate = rospy.Rate(10)
         while not rospy.is_shutdown():
             self.rate.sleep()
 
-    def get_sonar_left(self, sensor_data_left):
-        # rospy.loginfo(" Sonar Data Left received ")
-        self.dist_left = sensor_data_left.range
-        self.cloud_build()
-
-    def get_sonar_right(self, sensor_data_right):
-        # rospy.loginfo(" Sonar Data Right received ")
-        self.dist_right = sensor_data_right.range
+    def get_sonar(self, sensor_data):
+        rospy.loginfo(" Sensor Data received ")
+        self.dist_left = sensor_data.cliff /100.0  # cm in m
+        rospy.loginfo(" Sonar Data Left %f", self.dist_left)
+        self.dist_right = sensor_data.sonar /100.0  # cm in m
+        rospy.loginfo(" Sonar Data Right %f", self.dist_right)
         self.cloud_build()
 
     def cloud_build(self):
         # add sonar readings (robot-local coordinate frame) to cloud
         pl = Point32()
         pm = Point32()
+        pn = Point32()
         pr = Point32()
         # Instanziiere leere PointCloud
         cloud = PointCloud()
@@ -86,23 +73,28 @@ class Sonar_to_Point_Cloud():
         cloud.header = header
 
         # Linke Seite
-        if(self.dist_left < 0.95 and self.dist_left > 0.05):
-            pl.x = self.dist_left + 0.05
+        if(self.dist_left < 2.00 and self.dist_left > 0.20):
+            pl.x = self.dist_left
             pl.y = 0.03
             pl.z = 0.0
             cloud.points.append(pl)
 
-            pm.x = (self.dist_left + self.dist_right)/2 + 0.05
-            pm.y = 0.0
+            pm.x = (self.dist_left + self.dist_right)/2.0
+            pm.y = 0.1
             pm.z = 0.0
             cloud.points.append(pm)
 
         # Rechte Seite  punkt einfügen  (x,y,z)
-        if(self.dist_right < 0.95 and self.dist_right > 0.05):
-            pr.x = self.dist_right + 0.05
+        if(self.dist_right < 2.95 and self.dist_right > 0.20):
+            pr.x = self.dist_right
             pr.y = -0.03
             pr.z = 0.0
             cloud.points.append(pr)
+
+            pn.x = (self.dist_left + self.dist_right)/2.0
+            pn.y = -0.1
+            pn.z = 0.0
+            cloud.points.append(pn)
 
         # Senden
         self.cloud_pub.publish(cloud)
