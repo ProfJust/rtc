@@ -15,6 +15,17 @@
 *******************************************************************************/
 
 /* Authors: Yoonseok Pyo, Leon Jung, Darby Lim, HanCheol Cho, Gilbert */
+// edited 27.01.2021 by OJ
+// Version mit 2x Sonar
+// sendet sonar im Topic /sensor_state  . sonar
+// sendet sonar2 im Topic /sensor_state . cliff
+// Problem: /hz geht auf 5Hz zurück
+//  => Timeout 50ms und update 750ms => 28Hz
+// sonar 3 ggf in illumination
+//
+// sensor_msg in diesem File definiert
+// turtleBot_core_openCr_arduino/turtlebot3/src/turtlebot3/turtlebot3_sensor.cpp
+// turtleBot_core_openCr_arduino/turtlebot3/include/turtlebot3/turtlebot3_sensor.h
 
 #include "turtlebot3_core_config.h"
 #include "sonar.h"
@@ -56,6 +67,7 @@ void setup()
   // Init diagnosis
   diagnosis.init();
   initSonar(); //OJ
+  initSonar2(); //OJ
 
   // Setting for ROBOTIS RC100 remote controller and cmd_vel
   controllers.init(MAX_LINEAR_VELOCITY, MAX_ANGULAR_VELOCITY);
@@ -148,6 +160,7 @@ void loop()
   // Update sonar data
   // OJ
   updateSonar(t); //t = millis()
+  updateSonar2(t); //t = millis()
 
   // Start Gyro Calibration after ROS connection
   updateGyroCali(nh.connected());
@@ -279,10 +292,10 @@ void publishSensorStateMsg(void)
 
   // TODO
   //#####################################################
-
-  //sensor_state_msg.sonar = 0.666; //OJ Test OK kommt an
-  //OJ Test sensor_state_msg.sonar = sensors.getSonarData();
+  // ergänze sonar2 catkin_Ws/srs/turtlebot3_msgs/msg/sensor_state.msg
+  //sensor_state_msg.sonar2 = getSonarData2(); => compiliert nicht => cliff
   sensor_state_msg.sonar = getSonarData();
+  sensor_state_msg.cliff = getSonarData2();
 
   sensor_state_msg.illumination = sensors.getIlluminationData();
   
