@@ -73,26 +73,26 @@ class Sonar_to_Point_Cloud():
         cloud.header = header
 
         # Linke Seite
-        if(self.dist_left < 2.00 and self.dist_left > 0.20):
+        if(self.dist_left < 2.95 and self.dist_left > 0.05):
             pl.x = self.dist_left
-            pl.y = 0.03
+            pl.y = 0.09
             pl.z = 0.0
             cloud.points.append(pl)
 
             pm.x = (self.dist_left + self.dist_right)/2.0
-            pm.y = 0.1
+            pm.y = 0.04
             pm.z = 0.0
             cloud.points.append(pm)
 
         # Rechte Seite  punkt einfügen  (x,y,z)
-        if(self.dist_right < 2.95 and self.dist_right > 0.20):
+        if(self.dist_right < 2.95 and self.dist_right > 0.05):
             pr.x = self.dist_right
-            pr.y = -0.03
+            pr.y = -0.09
             pr.z = 0.0
             cloud.points.append(pr)
 
             pn.x = (self.dist_left + self.dist_right)/2.0
-            pn.y = -0.1
+            pn.y = -0.04
             pn.z = 0.0
             cloud.points.append(pn)
 
