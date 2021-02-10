@@ -41,7 +41,7 @@ def start():
     # subscribed to joystick inputs on topic "joy"
     rospy.Subscriber("joy", Joy, callback)
     # starts the node
-    rospy.init_node('Joy2Turtle')
+    rospy.init_node('Joy2TurtleBot')
     rospy.spin()
 
 
