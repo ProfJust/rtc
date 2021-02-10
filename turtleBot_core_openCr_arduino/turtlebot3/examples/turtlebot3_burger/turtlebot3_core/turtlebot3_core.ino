@@ -749,7 +749,7 @@ void sendLogMsg(void)
 
   String name             = NAME;
   String firmware_version = FIRMWARE_VER;
-  String bringup_log      = "This core(v" + firmware_version + ") is compatible with TB3 " + name;
+  String bringup_log      = "This core(v" + firmware_version + ") is compatible with TB3 " + name +" two Sonars-added by OJ for RTC";
    
   const char* init_log_data = bringup_log.c_str();
 
