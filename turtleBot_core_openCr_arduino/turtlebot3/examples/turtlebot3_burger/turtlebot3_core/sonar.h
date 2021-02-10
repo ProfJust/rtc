@@ -67,6 +67,7 @@ void updateSonar(uint32_t now)
         //pulseIn mit Abbruch bei zu langer Wartezeit
         duration_uint = pulseIn(sonar_pin_.echo, HIGH, TIMEOUT);
         distance_uint = ((340 * duration_uint) / 10000) / 2;
+
         if (distance_uint <= MAX_DIST) /*mm*/
             sonar_data_ = (float) distance_uint; //to global float Var
         else 
