@@ -3,5 +3,8 @@
         "/home/oj/catkin_ws/devel/lib/python3/dist-packages",
         "/opt/ros/noetic/lib/python3/dist-packages"
     ],
-    "cornflakes.linter.run": "onType"
+    "cornflakes.linter.run": "onType",
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Enabled": true,
+    "python.linting.enabled": true
 }
