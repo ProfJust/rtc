@@ -26,6 +26,21 @@
             "compilerPath": "/usr/bin/clang",
             "cStandard": "c11",
             "cppStandard": "c++14"
+        },
+        {
+            "name": "Linux",
+            "includePath": [
+                "/home/oj/.arduino15/packages/OpenCR/tools/**",
+                "/home/oj/Arduino/libraries/**",
+                "/home/oj/arduino/arduino-1.8.13/libraries/**",
+                "/home/oj/.arduino15/packages/OpenCR/hardware/OpenCR/1.4.17/**"
+            ],
+            "forcedInclude": [
+                "/home/oj/.arduino15/packages/OpenCR/hardware/OpenCR/1.4.17/cores/arduino/Arduino.h"
+            ],
+            "defines": [
+                "USBCON"
+            ]
         }
     ],
     "version": 4

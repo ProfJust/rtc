@@ -8,22 +8,14 @@
 // auszuführen 
 #include "turtlebot3_core_config.h"
 
-<<<<<<< HEAD
 const int UPDATE_INTERVALL= 500; //ms
-=======
-const int UPDATE_INTERVALL= 750; //ms
->>>>>>> 2fc28e6d2c56207cf3e9cc6638f5369b89fe4f09
 // Schallgeschwindigkeit 343,2 m/s 
   // 58ms pro m hin und zurück
   // Sonar < 2m => Timeout 11600 us
   // Sonar < 3m => Timeout 17400 us
-<<<<<<< HEAD
 const uint32_t TIMEOUT=17500; //us
 // ...dazu passend der maximale Weg
 const uint16_t  MAX_DIST=3000; //mm
-=======
-const unsigned long int TIMEOUT=50000;
->>>>>>> 2fc28e6d2c56207cf3e9cc6638f5369b89fe4f09
 
   //-- Abstands-Messung mit 2x SR04-Sonar durchfuehren --
   //so KLAPPTS => rostopic hz /tf ~28 Hz bei 35cm
@@ -75,11 +67,7 @@ void updateSonar(uint32_t now)
         //pulseIn mit Abbruch bei zu langer Wartezeit
         duration_uint = pulseIn(sonar_pin_.echo, HIGH, TIMEOUT);
         distance_uint = ((340 * duration_uint) / 10000) / 2;
-<<<<<<< HEAD
         if (distance_uint <= MAX_DIST) /*mm*/
-=======
-        if (distance_uint < 300) /*mm*/
->>>>>>> 2fc28e6d2c56207cf3e9cc6638f5369b89fe4f09
             sonar_data_ = (float) distance_uint; //to global float Var
         else 
             sonar_data_ = 0.0;
@@ -103,13 +91,8 @@ void updateSonar2(uint32_t now)
 
         //pulseIn mit Abbruch bei zu langer Wartezeit
         duration_uint = pulseIn(sonar_pin2_.echo, HIGH, TIMEOUT);
-<<<<<<< HEAD
         distance_uint = ((340 * duration_uint) / 10000) / 2;
         if (distance_uint <= MAX_DIST) /*mm*/
-=======
-        distance_uint = ((float)(340 * duration_uint) / 10000) / 2;
-        if (distance_uint < 300) /*mm*/
->>>>>>> 2fc28e6d2c56207cf3e9cc6638f5369b89fe4f09
             sonar_data2_ = (float) distance_uint; //to global float Var
         else 
             sonar_data2_ = 0.0;

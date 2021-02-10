@@ -1,0 +1,5 @@
+{
+    "board": "OpenCR:OpenCR:OpenCR",
+    "configuration": "upload_method=UploadMethod",
+    "sketch": "turtleBot_core_openCr_arduino/turtlebot3/examples/turtlebot3_burger/turtlebot3_core/turtlebot3_core.ino"
+}
