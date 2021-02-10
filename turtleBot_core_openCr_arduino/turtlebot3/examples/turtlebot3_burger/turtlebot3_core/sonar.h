@@ -51,7 +51,7 @@ void initSonar2(void)
 // Funktion in der Loop aufrufen
 void updateSonar(uint32_t now)
 {
-  static uint32_t last_time = 0;
+  static uint32_t last_time = 0;     
   uint16_t duration_uint,distance_uint;
     if(now - last_time > UPDATE_INTERVALL)
     { // update nur alle xxx ms
@@ -71,7 +71,7 @@ void updateSonar(uint32_t now)
             sonar_data_ = 0.0;
     }
 }
- 
+
 // Funktion in der Loop aufrufen
 void updateSonar2(uint32_t now)
 {
