@@ -34,7 +34,7 @@ def callback(data):
 
 def start():
     # Intializes everything
-   
+
     # publishing to "/cmd_vel" to control turtle1
     global pub
     pub = rospy.Publisher('/cmd_vel', Twist, queue_size=10)
