@@ -7,7 +7,7 @@
 # using point_cloud - message
 #
 # edit
-# real Bot 
+# real Bot
 # edit costmap_common_params_burger.yaml
 #    observation_sources: scan sonar
 #    scan: ...
@@ -20,7 +20,8 @@
 # usage
 #   $2 roslaunch turtlebot3_navigation turtlebot3_navigation.launch
 #                map_file:=$HOME/catkin_ws/src/rtc/rtc_maps/gazebo_house_map_2020_12_07.yaml
-#   $3 roslaunch rtc sonar_twist_mux.launch  ggf. sudo apt-get install ros-noetic-twist-mux*
+#   $3 roslaunch rtc sonar_twist_mux.launch
+#   ggf. sudo apt-get install ros-noetic-twist-mux*
 #   $4 rosrun rtc sonar_obstacle_avoidance.py
 #   $5 rosrun rtc sonar_to_costmap.py
 # ------------------------------------------------------------------
@@ -42,7 +43,8 @@ class Sonar_to_Point_Cloud():
                                          queue_size=10)
 
         # receiving sonar_left and sonar_right
-        self.sensor_sub = rospy.Subscriber('sensor_state', SensorState, self.get_sonar, queue_size=10)
+        self.sensor_sub = rospy.Subscriber('sensor_state', SensorState,
+                                           self.get_sonar, queue_size=10)
 
         self.dist_left = 0.0
         self.dist_right = 0.0
@@ -51,18 +53,16 @@ class Sonar_to_Point_Cloud():
             self.rate.sleep()
 
     def get_sonar(self, sensor_data):
-        rospy.loginfo(" Sensor Data received ")
-        self.dist_left = sensor_data.cliff /100.0  # cm in m
+        # rospy.loginfo(" Sensor Data received ")
+        self.dist_left = sensor_data.cliff / 100.0  # cm in m
         rospy.loginfo(" Sonar Data Left %f", self.dist_left)
-        self.dist_right = sensor_data.sonar /100.0  # cm in m
+        self.dist_right = sensor_data.sonar / 100.0  # cm in m
         rospy.loginfo(" Sonar Data Right %f", self.dist_right)
         self.cloud_build()
 
     def cloud_build(self):
         # add sonar readings (robot-local coordinate frame) to cloud
         pl = Point32()
-        pm = Point32()
-        pn = Point32()
         pr = Point32()
         # Instanziiere leere PointCloud
         cloud = PointCloud()
@@ -73,28 +73,31 @@ class Sonar_to_Point_Cloud():
         cloud.header = header
 
         # Linke Seite
-        if(self.dist_left < 2.95 and self.dist_left > 0.05):
+        if(self.dist_left < 2.00 and self.dist_left > 0.03):
             pl.x = self.dist_left
             pl.y = 0.09
             pl.z = 0.0
             cloud.points.append(pl)
 
-            pm.x = (self.dist_left + self.dist_right)/2.0
-            pm.y = 0.04
-            pm.z = 0.0
-            cloud.points.append(pm)
-
         # Rechte Seite  punkt einfügen  (x,y,z)
-        if(self.dist_right < 2.95 and self.dist_right > 0.05):
+        if(self.dist_right < 2.00 and self.dist_right > 0.03):
             pr.x = self.dist_right
             pr.y = -0.09
             pr.z = 0.0
             cloud.points.append(pr)
 
-            pn.x = (self.dist_left + self.dist_right)/2.0
-            pn.y = -0.04
-            pn.z = 0.0
-            cloud.points.append(pn)
+        # Linie aus 10 Punkten zeichnen
+        dx = (pr.x - pl.x) / 10
+        dy = (pr.y - pl.y) / 10
+        i = 0
+        # rospy.loginfo(" dx %f  dy %f ", dx, dy)
+        while i < 9:
+            i = i + 1
+            pm = Point32()
+            pm.x = pl.x + i * dx
+            pm.y = pl.y + i * dy
+            cloud.points.append(pm)
+            rospy.loginfo(" Point Nr. %d %f %f appended ", i, pm.x, pm.y)
 
         # Senden
         self.cloud_pub.publish(cloud)

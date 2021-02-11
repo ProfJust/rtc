@@ -1,0 +1,21 @@
+<launch>
+    <!-- rtc_real_turtlebot_two_sonar_twist.launch  -->
+
+     <arg name="map_file_arg" default="$(find rtc)/rtc_maps/rtc_Arena01.yaml"/>
+
+    <!-- roslaunch turtlebot3_navigation turtlebot3_navigation.launch map_file:=$HOME/map_01  -->
+    <include file="$(find turtlebot3_navigation)/launch/turtlebot3_navigation.launch">   
+        <arg name="map_file" value="$(arg map_file_arg)" />
+    </include> 
+
+    <!-- roslaunch rtc sonar_twist_mux.launch -->
+    <include file="$(find rtc)/nodes/ue08_sonar_gazebo/sonar_twist_mux.launch">
+    </include> 
+    
+    <!-- rosrun rtc sonar_to_costmap_real_bot.py  -->
+    <node pkg="rtc" type="sonar_to_costmap_real_bot" 
+          name="sonar_to_costmap_real_bot" output="screen"
+          launch-prefix="gnome-terminal --geometry 40x20+55+14 -e" >
+    </node>
+  
+</launch>
