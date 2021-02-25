@@ -23,8 +23,13 @@ def callback(data):
     rospy.loginfo(" GamePad Data - Totman-Knopf %f", data.buttons[5])
     twist = Twist()
     if data.buttons[5]:
-        twist.linear.x = 0.5 * data.axes[1]
-        twist.angular.z = 0.5 * data.axes[0]
+        # Linkes Kreuz am Gamepad
+        # twist.linear.x = 0.5 * data.axes[1]
+        # twist.angular.z = 0.5 * data.axes[0]
+
+        # Linker Joystick
+        twist.linear.x = 0.5 * data.axes[5]
+        twist.angular.z = 0.5 * data.axes[4]
     else:
         twist.linear.x = 0.0
         twist.angular.z = 0.0
