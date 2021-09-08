@@ -14,6 +14,13 @@ dann Installation der TurtleBot3 - Pakete =>
 
 >$ turtle_package_install_skript.sh
 
+Rechner neu starten, 
+dann kompilieren der TurtleBot3 - Pakete
+
+>$ cd ~/catkin_ws 
+>$ catkin_make
+
+
 #### Simulation in Gazebo mit Haus-Modell - Aufruf der Launch-Files:
 ##### Gazebo-3D-Simulation:      
     >$ roslaunch turtlebot3_gazebo turtlebot3_house.launch
