@@ -9,7 +9,10 @@ use:
  >$ chmod +x ros_noetic_install_skript.sh        
  >$ ./ros_noetic_install_skript.sh
 
-Installation der TurtleBot3 - Pakete =>     `turtle_package_install_skript.sh`
+Rechner neu starten, 
+dann Installation der TurtleBot3 - Pakete =>   
+
+>$ turtle_package_install_skript.sh
 
 #### Simulation in Gazebo mit Haus-Modell - Aufruf der Launch-Files:
 ##### Gazebo-3D-Simulation:      
