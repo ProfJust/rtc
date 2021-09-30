@@ -35,22 +35,8 @@ vel_msg.angular.y = 0
 
 
 def set_vel():
-    c = getch()
-    if c == 'w' and vel_msg.linear.x <= 1.0:
-        vel_msg.linear.x += 0.1
-    elif c == 's' and vel_msg.linear.x >= -1.0:
-        vel_msg.linear.x += -0.1
-    elif c == 'a' and vel_msg.angular.z <= 1.0:
-        vel_msg.angular.z += 0.1
-    elif c == 'd' and vel_msg.angular.z >= -1.0:
-        vel_msg.angular.z += -0.1
-    elif c == ' ':  # Stop mit Leertaste
-        vel_msg.angular.z = 0.0
-        vel_msg.linear.x = 0.0
-    elif c == 'c':  # exit mit c oder STRG+C
-        exit()
-    # print("\b")  # Zeichen löschen
-
+    vel_msg.linear.x = 0.1
+    vel_msg.angular.z = -0.1
 
 if __name__ == '__main__':
     # Node wird vereinbart
