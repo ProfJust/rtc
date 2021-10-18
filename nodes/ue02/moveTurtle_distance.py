@@ -12,8 +12,8 @@
 import rospy
 from math import pow, atan2, sqrt, pi
 
-from geometry_msgs.msg import Twist
-from turtlesim.msg import Pose
+from geometry_msgs.msg import Twist  # cmd_vel
+from turtlesim.msg import Pose       # pose
 
 # --- Instanzierung einer globale pose - Variable ---
 # Wird benoetigt um die pose aus der callback-Funktion
@@ -75,9 +75,9 @@ def move():
 
         # set Angular velocity in the z-axis.
         if pose.theta - sollTheta > 0:
-            vel_msg.angular.z = -0.2
+            vel_msg.angular.z = -0.4
         else:
-            vel_msg.angular.z = 0.2
+            vel_msg.angular.z = 0.4
         # Debug ausgabe
         rospy.loginfo("Pose is %s", pose.theta)
         rospy.loginfo("Goal angle is %s", sollTheta)
@@ -96,7 +96,7 @@ def move():
                + pow((start_y - pose.y), 2)) < abs(dist):
 
         # Linear velocity in the x-axis.
-        vel_msg.linear.x = 0.1
+        vel_msg.linear.x = 0.2
 
         # Publishing our vel_msg
 

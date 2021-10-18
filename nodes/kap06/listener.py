@@ -5,8 +5,8 @@ import rospy
 from std_msgs.msg import String
 
 
-def callback(data):
-    rospy.loginfo(rospy.get_caller_id() + "I heard %s", data.data)
+def callback(rx_data):
+    rospy.loginfo(rospy.get_caller_id() + " I heard %s", rx_data.data)
 
 
 def listener():
@@ -16,9 +16,9 @@ def listener():
     # anonymous=True flag means that rospy will choose a unique
     # name for our 'listener' node so that multiple listeners can
     # run simultaneously.
-    rospy.init_node('listener', anonymous=True)
+    rospy.init_node('rtc-listener', anonymous=True)
 
-    rospy.Subscriber("chatter", String, callback)
+    rospy.Subscriber("rtc-chatter", String, callback)
 
     # spin() simply keeps python from exiting until this node is stopped
     rospy.spin()
