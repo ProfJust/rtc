@@ -117,6 +117,13 @@ class TurtleBotClass:
         self.vel_msg.angular.z = 0
         self.velocity_publisher.publish(self.vel_msg)
 
+    def robot_wait(self):
+        # Stopping our robot after the movement is over.
+        rospy.loginfo(" ######  Waiting because of Obstacle #######")
+        self.vel_msg.linear.x = 0
+        self.vel_msg.angular.z = 0
+        self.velocity_publisher.publish(self.vel_msg)
+
     def goal_reached(self, distance_tolerance=0.1):
         if self.euclidean_distance(self.goal) < distance_tolerance:
             return True
