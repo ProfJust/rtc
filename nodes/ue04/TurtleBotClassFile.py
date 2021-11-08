@@ -6,7 +6,7 @@ import rospy
 from geometry_msgs.msg import Twist
 from turtlesim.msg import Pose
 from nav_msgs.msg import Odometry
-from math import pow, atan2, sqrt
+from math import pow, atan2, sqrt, pi
 
 
 class TurtleBotClass:
@@ -68,10 +68,13 @@ class TurtleBotClass:
         return sqrt(pow((goal_pose.x - self.pose.x), 2) +
                     pow((goal_pose.y - self.pose.y), 2))
 
-    def set_linear_vel(self, goal_pose, constant=0.2, lin_max=0.5):
+    def set_linear_vel(self, goal_pose, constant=0.15, lin_max=0.5, lin_min=0.08):
         lin_vel = constant * self.euclidean_distance(goal_pose)
         if lin_vel > lin_max:
             lin_vel = lin_max  # Maximum begrenzen
+        if lin_vel < lin_min:
+            lin_vel = lin_min  # Minimum begrenzen
+
         self.vel_msg.linear.x = lin_vel
         self.vel_msg.linear.y = 0
         self.vel_msg.linear.z = 0
@@ -79,10 +82,20 @@ class TurtleBotClass:
     def steering_angle(self, goal_pose):
         return atan2(goal_pose.y - self.pose.y, goal_pose.x - self.pose.x)
 
-    def set_angular_vel(self, goal_pose, constant=0.5, ang_max=1.5):
-        ang_vel = constant * (self.steering_angle(goal_pose) - self.pose.theta)
+    def fitPi(self, angle):  # fit to Intervall -Pi ...Pi
+        if angle > pi:
+            angle = angle - 2*pi
+        if angle < -pi:
+            angle = angle + 2*pi
+        return angle
+
+    def set_angular_vel(self, goal_pose, constant=1.5, ang_max=1.5):
+        ang_vel = constant * (self.fitPi(self.steering_angle(goal_pose))
+                              - self.fitPi(self.pose.theta))
         if(ang_vel > ang_max):
             ang_vel = ang_max
+        if(ang_vel < -ang_max):
+            ang_vel = -ang_max
         self.vel_msg.angular.z = ang_vel
         self.vel_msg.angular.x = 0
         self.vel_msg.angular.y = 0
@@ -103,6 +116,9 @@ class TurtleBotClass:
         input("Hit any Key to start")
 
     def pose_speed_info(self):
+        rospy.loginfo("Goal is %s %s",
+                      round(self.goal.x, 4),
+                      round(self.goal.y, 4))
         rospy.loginfo("Pose is %s %s",
                       round(self.pose.x, 4),
                       round(self.pose.y, 4))
