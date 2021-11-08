@@ -96,6 +96,8 @@ class TurtleBotClass:
             ang_vel = ang_max
         if(ang_vel < -ang_max):
             ang_vel = -ang_max
+        #### Problem, speed theta wechselt von +1.5 auf -1.5 => Turtle torckelt ####
+
         self.vel_msg.angular.z = ang_vel
         self.vel_msg.angular.x = 0
         self.vel_msg.angular.y = 0
