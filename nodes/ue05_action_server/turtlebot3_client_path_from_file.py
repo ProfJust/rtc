@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # ################################################################################
-# edited WHS, OJ , 3.12.2020 #
+# edited WHS, OJ , 12.11.2021 #
 # usage
 #    $1 roslaunch turtlebot3_gazebo turtlebot3_empty_world.launch
 #    $2 rosrun rtc turtlebot3_server_path
