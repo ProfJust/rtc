@@ -138,7 +138,7 @@ class TurtleUIClass(QWidget):
     def get_scan(self):
         scan = rospy.wait_for_message('scan', LaserScan)
         scan_filtered = []
-        numbOfScans = len(scan.ranges)  # NumbOfScans
+        numbOfScans = len(scan.ranges)  # 
         # This number of samples is defined in
         # turtlebot3_<model>.gazebo.xacro file,
         # the default is 360.
