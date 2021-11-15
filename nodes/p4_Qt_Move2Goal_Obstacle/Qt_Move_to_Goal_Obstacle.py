@@ -99,7 +99,6 @@ class TurtleUIClass(QWidget):
         pbStop.clicked.connect(self.timer.stop)
         pbStop.clicked.connect(self.SlotStop)
 
-
         # Fenster Konfigurieren
         self.setGeometry(300, 300, 250, 150)
         self.setWindowTitle('RTC - PyQt - TurtleSteering')
