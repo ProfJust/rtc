@@ -1,15 +1,13 @@
 #!/usr/bin/env python3
-# --- TurtleClass_move2Goal_Gazebo.py ------
-# Version vom 23.11.2021 by OJ  
-# ----------------------------
-# from
-# --- P3_V4_TurtleClass_move2goal.py ------
-# Version vom 22.10.2019 by OJ
-# Basiert auf der Loesung aus dem Turtlesim Tutorial
-# http://wiki.ros.org/turtlesim/Tutorials/Go%20to%20Goal
-#
+# --- Qt_Move_to_Goal_Obstacle.py ------
+# Version vom 28.10.2021 by OJ
+# -------------------------------------------------
+# TurtleBot fährt zum Ziel und stoppt bei Hindernis
+# rtc P4
+# -------------------------------------------------
 import sys
 import rospy
+import math
 from TurtleBotClassFile import TurtleBotClass
 # Qt -------------------------------
 from PyQt5.QtCore import Qt, QTimer
@@ -17,6 +15,7 @@ from PyQt5.QtWidgets import (QWidget, QLCDNumber, QSlider,
                              QPushButton, QVBoxLayout,
                              QHBoxLayout, QApplication,
                              QLabel)
+from sensor_msgs.msg import LaserScan
 
 
 class TurtleUIClass(QWidget):
@@ -25,7 +24,6 @@ class TurtleUIClass(QWidget):
         super(TurtleUIClass, self).__init__()
         self.timer = QTimer(self)
         self.timer.timeout.connect(self.update)
-        
         self.initUI()
 
     def initUI(self):
@@ -127,28 +125,71 @@ class TurtleUIClass(QWidget):
             wert = wert+1
             self.sldY.setValue(wert)
 
-    def SlotGo(self):
+    def SlotGo(self, timerIntervall=20):
         self.Stop = False
         """ Hier geht die Turtle ab """
         turtle1.goal.x = self.sld.value()
         turtle1.goal.y = self.sldY.value()
-        self.timer.start(20)
+        self.timer.start(timerIntervall)  # in ms
 
     def SlotStop(self):
         turtle1.stop_robot()
 
-    def update(self):
-        turtle1.move2goal()
+    def get_scan(self):
+        scan = rospy.wait_for_message('scan', LaserScan)
+        scan_filtered = []
+        numbOfScans = len(scan.ranges)  # 
+        # This number of samples is defined in
+        # turtlebot3_<model>.gazebo.xacro file,
+        # the default is 360.
+        samples_view = 1            # 1 <= samples_view <= samples
+
+        if samples_view > numbOfScans:
+            samples_view = numbOfScans
+
+        if samples_view == 1:
+            scan_filtered.append(scan.ranges[0])
+
+        else:
+            left_lidar_samples_ranges = -(samples_view//2 + samples_view % 2)
+            right_lidar_samples_ranges = samples_view//2
+            left_lidar_samples = scan.ranges[left_lidar_samples_ranges:]
+            right_lidar_samples = scan.ranges[:right_lidar_samples_ranges]
+            scan_filtered.extend(left_lidar_samples + right_lidar_samples)
+
+        for i in range(samples_view):
+            if scan_filtered[i] == float('Inf'):
+                scan_filtered[i] = 3.5
+            elif math.isnan(scan_filtered[i]):
+                scan_filtered[i] = 0
+
+        return scan_filtered
+
+    def obstacle_detected(self):
+        STOP_DISTANCE = 0.3
+        LIDAR_ERROR = 0.05
+        SAFE_STOP_DISTANCE = STOP_DISTANCE + LIDAR_ERROR
+
+        lidar_distances = self.get_scan()
+        min_distance = min(lidar_distances)
+        if min_distance < SAFE_STOP_DISTANCE:
+            rospy.loginfo(" Obstacle detected ")
+            return True
+        else:
+            rospy.loginfo(" No Obstacle detected ")
+            return False
+
+    def update(self):  # Aufruf per Timer alle 20ms
+        self.get_scan()
+        if not self.obstacle_detected():
+            turtle1.move2goal()
+        else:
+            turtle1.robot_wait()
 
 
 if __name__ == '__main__':
     try:
         turtle1 = TurtleBotClass()
-        # Konsole ---------------
-        # turtle1.getGoalFromUser()
-        # turtle1.start_info()
-        # turtle1.move2goal()
-
         # Qt ----------------------
         app = QApplication(sys.argv)
         ui = TurtleUIClass()
