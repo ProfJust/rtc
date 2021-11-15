@@ -3,8 +3,8 @@
 # edited WHS, OJ , 12.11.2021   #
 # usage
 #    $1 roslaunch turtlebot3_gazebo turtlebot3_empty_world.launch
-#    $2 rosrun rtc turtlebot3_server_path
-#    $3 rosrun rtc turtlebot3_client_path
+#    $2 rosrun rtc turtlebot3_server_path.py
+#    $3 rosrun rtc turtlebot3_client_path_from_file.py
 
 import rospy
 import actionlib
