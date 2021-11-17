@@ -1,13 +1,8 @@
 #!/usr/bin/env python3
-# --- TurtleClass_move2Goal_Gazebo.py ------
-# Version vom 23.11.2021 by OJ  
+# --- Qt_Move_to_Goal_Obstacle-py ------
+# Version vom 17.11.2021 by OJ
 # ----------------------------
-# from
-# --- P3_V4_TurtleClass_move2goal.py ------
-# Version vom 22.10.2019 by OJ
-# Basiert auf der Loesung aus dem Turtlesim Tutorial
-# http://wiki.ros.org/turtlesim/Tutorials/Go%20to%20Goal
-#
+
 import sys
 import rospy
 from TurtleBotClassFile import TurtleBotClass
@@ -17,6 +12,8 @@ from PyQt5.QtWidgets import (QWidget, QLCDNumber, QSlider,
                              QPushButton, QVBoxLayout,
                              QHBoxLayout, QApplication,
                              QLabel)
+# Obstacle Detection with Lidar ----------------------------
+from sensor_msgs.msg import LaserScan
 
 
 class TurtleUIClass(QWidget):
@@ -25,7 +22,6 @@ class TurtleUIClass(QWidget):
         super(TurtleUIClass, self).__init__()
         self.timer = QTimer(self)
         self.timer.timeout.connect(self.update)
-        
         self.initUI()
 
     def initUI(self):
@@ -137,18 +133,25 @@ class TurtleUIClass(QWidget):
     def SlotStop(self):
         turtle1.stop_robot()
 
-    def update(self):
-        turtle1.move2goal()
+    def detectObstacle(self):
+        # get Laser Data
+        scan = rospy.wait_for_message('scan', LaserScan)
+        # Mittelwert aus den beiden  Werten gerade voraus
+        self.detectedDistance = (scan.ranges[0] + scan.ranges[359]) / 2
+        rospy.loginfo("Distance to detected Obstacle is %s",
+                      round(self.detectedDistance, 2))
+
+    def update(self, STOP_DISTANCE=0.5):  # regelmäßig vom Timer aufgerufen
+        self.detectObstacle()
+        if self.detectedDistance > STOP_DISTANCE:
+            turtle1.move2goal()
+        else:
+            turtle1.stop_robot()
 
 
 if __name__ == '__main__':
     try:
         turtle1 = TurtleBotClass()
-        # Konsole ---------------
-        # turtle1.getGoalFromUser()
-        # turtle1.start_info()
-        # turtle1.move2goal()
-
         # Qt ----------------------
         app = QApplication(sys.argv)
         ui = TurtleUIClass()

@@ -59,8 +59,7 @@ rosdep install --from-paths src --ignore-src -r -y
 cd ~/catkin_ws/
 catkin_make
 # add python-path
-echo "export PYTHONPATH=$PYTHONPATH:~/catkin_ws/src/rtc/rtc_dist-packages" >> ~/.bashrc
-
+echo "export PYTHONPATH=${PYTHONPATH}:~/catkin_ws/src/rtc/rtc_dist-packages" >> ~/.bashrc
 echo -e "\033[34m RTC - WS20 - Workspace is installed - have fun!  \033[0m"
 echo -e "\033[32m $ Gazebo:  roslaunch turtlebot3_gazebo turtlebot3_house.launch \033[0m"
 echo -e "\033[32m $ SLAM: roslaunch turtlebot3_slam turtlebot3_slam.launch slam_methods:=gmapping \033[0m"
