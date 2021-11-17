@@ -8,7 +8,7 @@ import rospy
 from geometry_msgs.msg import Twist
 from turtlesim.msg import Pose
 from nav_msgs.msg import Odometry
-from math import pow, atan2, sqrt, pi
+from math import pow, atan2, sqrt
 
 
 class TurtleBotClass:

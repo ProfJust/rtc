@@ -5,7 +5,7 @@
 
 import sys
 import rospy
-from TurtleBotClassFile import TurtleBotClass
+from TurtleBotClassFile_21_11_17 import TurtleBotClass
 # Qt -------------------------------
 from PyQt5.QtCore import Qt, QTimer
 from PyQt5.QtWidgets import (QWidget, QLCDNumber, QSlider,
@@ -28,9 +28,11 @@ class TurtleUIClass(QWidget):
         # Instanziierung der Widgets
         startWert = 0
         lcd = QLCDNumber(self)
-        lcd.display(startWert)
+        lcd.display(-3)
         lcdY = QLCDNumber(self)
-        lcdY.display(startWert)
+        lcdY.display(1)
+        lcdDist = QLCDNumber(self)
+        lcdDist.display(0.5)
 
         self.sld = QSlider(Qt.Horizontal, self)
         self.sld.setMaximum(6)
@@ -40,6 +42,10 @@ class TurtleUIClass(QWidget):
         self.sldY.setMaximum(6)
         self.sldY.setMinimum(-6)
         self.sldY.setValue(startWert)
+        self.sldDist = QSlider(Qt.Horizontal, self)
+        self.sldDist.setMaximum(10)
+        self.sldDist.setMinimum(1)
+        self.sldDist.setValue(5)
 
         pbLess = QPushButton('<')
         pbMore = QPushButton('>')
@@ -50,6 +56,7 @@ class TurtleUIClass(QWidget):
         self.lblStatus = QLabel('Statuszeile')
         self.lblInfoX = QLabel('X-Goal')
         self.lblInfoY = QLabel('Y-Goal')
+        self.lblDist = QLabel('Stopp Distance in 10cm')
 
         # BOX-Layout mit Widgets füllen
         vbox = QVBoxLayout()
@@ -80,12 +87,19 @@ class TurtleUIClass(QWidget):
         hbox.addWidget(pbGo)
         hbox.addWidget(pbStop)
         vbox.addLayout(hbox)
+        # 5.Reihe
+        hbox = QHBoxLayout()
+        hbox.addWidget(self.lblDist)
+        hbox.addWidget(self.sldDist)
+        hbox.addWidget(lcdDist)
+        vbox.addLayout(hbox)
         # Alle Boxen ins Window setzen
         self.setLayout(vbox)
 
         # Signal und Slot verbinden
         self.sld.valueChanged.connect(lcd.display)
         self.sldY.valueChanged.connect(lcdY.display)
+        self.sldDist.valueChanged.connect(lcdDist.display)
 
         pbLess.clicked.connect(self.SlotKlick)
         pbMore.clicked.connect(self.SlotKlick)
@@ -96,7 +110,7 @@ class TurtleUIClass(QWidget):
         pbStop.clicked.connect(self.SlotStop)
 
         # Fenster Konfigurieren
-        self.setGeometry(300, 300, 250, 150)
+        self.setGeometry(300, 300, 800, 400)
         self.setWindowTitle('RTC - PyQt - TurtleSteering')
         self.show()
 
@@ -143,6 +157,7 @@ class TurtleUIClass(QWidget):
 
     def update(self, STOP_DISTANCE=0.5):  # regelmäßig vom Timer aufgerufen
         self.detectObstacle()
+        STOP_DISTANCE = self.sldDist.value()/10 + 0.1  # wegen Roboterlänge
         if self.detectedDistance > STOP_DISTANCE:
             turtle1.move2goal()
         else:

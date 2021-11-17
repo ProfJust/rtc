@@ -1,7 +1,12 @@
 #!/usr/bin/env python3
-# --- TurtleBotClass.py ------
-# Version vom 30.11.2020 by OJ
-# ----------------------------
+# --- TurtleBotClassOhneInitNode.py ----------
+# Version vom 17.11.2021 by OJ
+# kein Torkelbot mehr !
+# mit der Fehlerkorrektur von MU
+
+# #### Version für den turtlebot3_server ####
+# ohne rospy.imnit_node
+# --------------------------------
 import rospy
 from geometry_msgs.msg import Twist
 from turtlesim.msg import Pose
@@ -21,7 +26,9 @@ class TurtleBotClass:
 
         # Creates a node with name 'turtlebot_controller' and make sure it is a
         # unique node (using anonymous=True).
-        rospy.init_node('turtlebot_controller', anonymous=True)
+
+        #  init schon im turtlebot3_server
+        # rospy.init_node('turtlebot_controller', anonymous=True)
 
         # Publisher which will publish to the topic '/turtle1/cmd_vel'.
         self.velocity_publisher = rospy.Publisher('/cmd_vel',
@@ -68,13 +75,10 @@ class TurtleBotClass:
         return sqrt(pow((goal_pose.x - self.pose.x), 2) +
                     pow((goal_pose.y - self.pose.y), 2))
 
-    def set_linear_vel(self, goal_pose, constant=0.15, lin_max=0.5, lin_min=0.08):
+    def set_linear_vel(self, goal_pose, constant=0.2, lin_max=0.3):
         lin_vel = constant * self.euclidean_distance(goal_pose)
         if lin_vel > lin_max:
             lin_vel = lin_max  # Maximum begrenzen
-        if lin_vel < lin_min:
-            lin_vel = lin_min  # Minimum begrenzen
-
         self.vel_msg.linear.x = lin_vel
         self.vel_msg.linear.y = 0
         self.vel_msg.linear.z = 0
@@ -82,21 +86,22 @@ class TurtleBotClass:
     def steering_angle(self, goal_pose):
         return atan2(goal_pose.y - self.pose.y, goal_pose.x - self.pose.x)
 
-    def fitPi(self, angle):  # fit to Intervall -Pi ...Pi
-        if angle > pi:
-            angle = angle - 2*pi
-        if angle < -pi:
-            angle = angle + 2*pi
-        return angle
-
     def set_angular_vel(self, goal_pose, constant=1.5, ang_max=1.5):
-        ang_vel = constant * (self.fitPi(self.steering_angle(goal_pose))
-                              - self.fitPi(self.pose.theta))
+        # alte Variante Soll-Winkel und Ist-Winkel werden seperat auf
+        # den Bereich von +-pi eingeschraenkt
+        # ang_vel = constant * (self.fitPi(self.steering_angle(goal_pose))
+        # - self.fitPi(self.pose.theta))
+
+        # neue Variante Soll-Winkel und Ist-Winkel werden zuerst verrechnet und
+        # anschließend auf den Bereich von +-pi eingeschaenkt
+        ang_vel = constant * (self.fitPi(self.steering_angle(goal_pose)
+                                         - self.pose.theta))
         if(ang_vel > ang_max):
             ang_vel = ang_max
         if(ang_vel < -ang_max):
             ang_vel = -ang_max
-        #### Problem, speed theta wechselt von +1.5 auf -1.5 => Turtle torckelt ####
+        # ### Problem, speed theta wechselt von +1.5 auf -1.5
+        #         # => Turtle torckelt #### behoben !!!!!
 
         self.vel_msg.angular.z = ang_vel
         self.vel_msg.angular.x = 0
@@ -118,9 +123,6 @@ class TurtleBotClass:
         input("Hit any Key to start")
 
     def pose_speed_info(self):
-        rospy.loginfo("Goal is %s %s",
-                      round(self.goal.x, 4),
-                      round(self.goal.y, 4))
         rospy.loginfo("Pose is %s %s",
                       round(self.pose.x, 4),
                       round(self.pose.y, 4))
@@ -130,32 +132,32 @@ class TurtleBotClass:
 
     def stop_robot(self):
         # Stopping our robot after the movement is over.
-        rospy.loginfo(" ######  Stop Robot #######")
+        rospy.loginfo("TurtleBot Class> Goal reached %2.2f %2.2f", round(self.pose.x, 2), round(self.pose.y, 2))
+        # rospy.loginfo(" --- Goal reached, Stop Robot ---")
         self.vel_msg.linear.x = 0
         self.vel_msg.angular.z = 0
         self.velocity_publisher.publish(self.vel_msg)
 
-    def goal_reached(self, distance_tolerance=0.05):
+    def goal_reached(self, distance_tolerance=0.1):
         if self.euclidean_distance(self.goal) < distance_tolerance:
-            rospy.loginfo(" ######  Goal Reached #######")
             return True
         else:
             return False
 
-    def move2goal(self):
+    def move2goal(self, debug_info=False):
         # Moves the turtle to the goal
         if not self.goal_reached():
-            # Linear velocity in the x-axis.
-            self.set_linear_vel(self.goal)
             # Angular velocity in the z-axis.
             self.set_angular_vel(self.goal)
+            # Linear velocity in the x-axis.
+            self.set_linear_vel(self.goal)
 
             # Publishing our vel_msg
             self.velocity_publisher.publish(self.vel_msg)
             # Publish at the desired rate.
             self.rate.sleep()
-            # debug Info
-            self.pose_speed_info()
+            if debug_info is True:
+                self.pose_speed_info()
             return False
 
         self.stop_robot()  # when goal is reached

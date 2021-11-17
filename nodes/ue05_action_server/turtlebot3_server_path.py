@@ -9,7 +9,7 @@
 import rospy
 import actionlib
 import turtlebot3_example.msg
-from TurtleBotClassFile import TurtleBotClass
+from TurtleBotClassOhneInitNode import TurtleBotClass
 
 
 class Turtlebot3Action(object):
