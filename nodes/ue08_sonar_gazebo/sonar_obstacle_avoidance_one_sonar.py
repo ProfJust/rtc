@@ -11,7 +11,7 @@
 #   $1 roslaunch turtlebot3_gazebo turtlebot3_house.launch
 #   $2 roslaunch turtlebot3_navigation turtlebot3_navigation.launch
 #                map_file:=$HOME/catkin_ws/src/rtc/rtc_maps/gazebo_house_map_2020_12_07.yaml
-#   $4 rosrun rtc turtlebot3_sonar.py
+#   $3 rosrun rtc turtlebot3_sonar.py
 # ---------------------------------------
 
 import rospy
