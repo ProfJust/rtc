@@ -15,15 +15,20 @@ topics:
   timeout : 0.5
   priority: 100
 
-locks:
+locks:  #  inhibit one input twist topic. Topics must be of std_msgs::Bool type 
 -
-  name    : pause
-  topic   : pause_navigation
+  name    : move_base_lock
+  topic   : move_base_lock
   timeout : 0.0
   # Same priority as joystick control, so it'll not block it.
-  priority: 100
+  priority: 10
+-
+  name    : sonar_obstacle_avoidance_lock
+  topic   : sonar_lock
+  timeout : 0.0
+  priority: 50
 -
   name    : joystick 
-  topic   : joy_priority
+  topic   : joy/lock
   timeout : 0.0
   priority: 100

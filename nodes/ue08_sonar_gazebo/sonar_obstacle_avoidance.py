@@ -11,8 +11,8 @@
 #   $1 roslaunch turtlebot3_gazebo turtlebot3_house.launch
 #   $2 roslaunch turtlebot3_navigation turtlebot3_navigation.launch
 #                map_file:=$HOME/catkin_ws/src/rtc/rtc_maps/gazebo_house_map_2020_12_07.yaml
-#   $3 Nicht starten !!! roslaunch sonar_twist_mux.launch
-#   $4 rosrun rtc sonar_obstacle_avoidance.py  //turtlebot3_sonar.py
+#   $3 rosrun rtc sonar_obstacle_avoidance.py
+#   $4 roslaunch rtc sonar_twist_mux.launch	 (nur wenn twistmux konfiguriert)
 # ---------------------------------------
 
 import rospy
