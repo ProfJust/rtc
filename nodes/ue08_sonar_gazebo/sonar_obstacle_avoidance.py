@@ -22,7 +22,7 @@ from sensor_msgs.msg import Range
 
 class Sonar():
     def __init__(self):
-        rospy.loginfo("Publishing sonar/cmd_vel")
+        rospy.loginfo("Publishing cmd_vel")
         self.cmd_pub = rospy.Publisher('sonar/cmd_vel',
                                        Twist, queue_size=10)
         # receiving sonar_left and sonar_right
@@ -48,6 +48,7 @@ class Sonar():
     def get_sonar_right(self, sensor_data_right):
         # rospy.loginfo(" Sonar Data Right received ")
         self.dist_right = sensor_data_right.range
+        # rospy.loginfo("Sensor right" + str(self.dist_right))
         self.sonar_move()
 
     def sonar_move(self):
