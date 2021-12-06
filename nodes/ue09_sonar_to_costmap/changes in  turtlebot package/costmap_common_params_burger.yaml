@@ -10,4 +10,9 @@ cost_scaling_factor: 20.0   #OJ was 3.0
 map_type: costmap
 observation_sources: scan sonar
 scan: {sensor_frame: base_scan, data_type: LaserScan, topic: scan, marking: true, clearing: true}
-sonar: {sensor_frame: base_link, data_type: PointCloud, topic: sonar/point_cloud, marking: true, clearing: true} #OJ 2nd source
+# OJU added  2nd sensor-source
+sonar: {sensor_frame: base_link, data_type: PointCloud, topic: sonar/point_cloud, marking: true, clearing: false} 
+# markin means an obstacle is added by the sensor,
+# clearing means an obstacle can be removed when sensor does not see the obstacle anymore 
+# Sonar-Obstacles dissappear when the robots turns away, so make clearing: false
+# see also: https://foxypanda.me/clearing-local-costmap-in-ros-with-pointcloud2/
