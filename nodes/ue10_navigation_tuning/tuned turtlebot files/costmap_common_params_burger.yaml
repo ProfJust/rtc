@@ -1,0 +1,18 @@
+obstacle_range: 3.0
+raytrace_range: 3.5
+
+footprint: [[-0.09, -0.08], [-0.09, 0.08], [0.03, 0.08], [0.03, -0.08]]  #OJ Robot ist 18cm wide
+# OJU   was [[-0.105, -0.105], [-0.105, 0.105], [0.041, 0.105], [0.041, -0.105]]
+#robot_radius: 0.105
+
+inflation_radius: 0.5   #OJU was 1.0
+cost_scaling_factor: 10.0   #OJ was 3.0
+
+map_type: costmap
+observation_sources: scan sonar
+scan: {sensor_frame: base_scan, data_type: LaserScan, topic: scan, marking: true, clearing: false}
+sonar: {sensor_frame: base_link, data_type: PointCloud, topic: sonar/point_cloud, marking: true, clearing: false} 
+# OJU added  2nd source
+# markin means an obstacle is added, clearing means an obstacle can be remowved
+# SOnar-Obstacles dissappear when the robots turns away, so make clearing: false
+# see also: https://foxypanda.me/clearing-local-costmap-in-ros-with-pointcloud2/
