@@ -16,7 +16,7 @@ x = 50
 # gib Farbwerte auf Bildschirm aus
 print(b, g, r)
 
-# setze Farbwerte auf Rot (im BGR-Farbraum)
+# Zeichne rote Linie (im BGR-Farbraum)
 for x in range(1, 100):
     image[y, x] = (0, 0, 255)
 
