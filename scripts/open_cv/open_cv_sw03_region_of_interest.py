@@ -11,7 +11,7 @@ image = cv.imread('/home/oj/catkin_ws/src/rtc/scripts/open_cv/test.png')
 y = 100
 x = 50
 
-# waehle ein Region of Interest an Punkt:
+# waehle eine Region of Interest an Punkt:
 # (y, x) mit Dimension 50x50 Pixel
 region_of_interest = image[y:y+50, x:x+50]
 
@@ -28,5 +28,5 @@ region_of_interest[:, :] = (0, 255, 0)
 # Es enthaelt nun eine gruene Box!
 cv.imshow("Bild modifiziert", image)
 
-# warte auf Tastendruck (wichtig, sonst sieht man das Fenster nicht)
+# warte auf Tastendruck
 cv.waitKey(0)
