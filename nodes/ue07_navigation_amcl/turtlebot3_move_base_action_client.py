@@ -4,7 +4,7 @@
 # usage
 #    $1 roslaunch turtlebot3_gazebo turtlebot3_house.launch
 #    $2 roslaunch turtlebot3_navigation turtlebot3_navigation.launch /
-#         map_file:=$HOME/catkin_ws/src/rtc/rtc_maps/gazebo_house_map_2020_12_07.yaml
+#         map_file:=$HOME/catkin_ws/src/rtc/rtc_maps/gazebo_house_map_2020_12_07
 #    $3 rosrun rtc turtlebot3_move_base_action_client.py  (this file here)
 #       the Server is already started with move_base
 # based on the code from

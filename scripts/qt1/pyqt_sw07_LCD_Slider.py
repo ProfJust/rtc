@@ -1,9 +1,8 @@
+#!/usr/bin/env python3
 # ---------------------------------------------------------------------
 # pyqt_sw07_LCD_Slider.py
 # Beispiel fuer Signal Slot Konzept
 # ---------------------------------------------------------------------
-
-#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
 from PyQt5.QtWidgets import (QWidget, QSlider,

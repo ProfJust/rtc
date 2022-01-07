@@ -11,7 +11,8 @@
 #   $1 roslaunch turtlebot3_gazebo turtlebot3_house.launch
 #   $2 roslaunch turtlebot3_navigation turtlebot3_navigation.launch
 #                map_file:=$HOME/catkin_ws/src/rtc/rtc_maps/gazebo_house_map_2020_12_07.yaml
-#   $4 rosrun rtc turtlebot3_sonar.py
+#   $3 rosrun rtc sonar_obstacle_avoidance.py
+#   $4 roslaunch rtc sonar_twist_mux.launch	 (nur wenn twistmux konfiguriert)
 # ---------------------------------------
 
 import rospy
@@ -21,7 +22,7 @@ from sensor_msgs.msg import Range
 
 class Sonar():
     def __init__(self):
-        rospy.loginfo("Publishing sonar/cmd_vel")
+        rospy.loginfo("Publishing cmd_vel")
         self.cmd_pub = rospy.Publisher('sonar/cmd_vel',
                                        Twist, queue_size=10)
         # receiving sonar_left and sonar_right
@@ -47,6 +48,7 @@ class Sonar():
     def get_sonar_right(self, sensor_data_right):
         # rospy.loginfo(" Sonar Data Right received ")
         self.dist_right = sensor_data_right.range
+        # rospy.loginfo("Sensor right" + str(self.dist_right))
         self.sonar_move()
 
     def sonar_move(self):

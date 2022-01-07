@@ -36,7 +36,7 @@ import rospy
 import std_msgs.msg
 from geometry_msgs.msg import Point32
 from sensor_msgs.msg import Range
-from sensor_msgs.msg import PointCloud
+from sensor_msgs.msg import PointCloud  # Message für die Sonar-Hindernisse
 
 
 class Sonar_to_Point_Cloud():
@@ -74,21 +74,22 @@ class Sonar_to_Point_Cloud():
 
     def cloud_build(self):
         # add sonar readings (robot-local coordinate frame) to cloud
-        pl = Point32()
-        pm = Point32()
-        pr = Point32()
+        pl = Point32()  # Punkt von Sonar Left
+        pm = Point32()  # Mittelpunkt
+        pr = Point32()  # Sonar Right
         # Instanziiere leere PointCloud
         cloud = PointCloud()
         # filling pointcloud header
-        header = std_msgs.msg.Header()
-        header.stamp = rospy.Time.now()
+        header = std_msgs.msg.Header()  # Leere Instanz
+        header.stamp = rospy.Time.now()  # Fülle Zeitstempel
         header.frame_id = 'base_link'
         cloud.header = header
 
         # Linke Seite
-        if(self.dist_left < 0.95 and self.dist_left > 0.05):
-            pl.x = self.dist_left + 0.05
-            pl.y = 0.03
+        if(self.dist_left < 0.75 and self.dist_left > 0.05):
+            pl.x = self.dist_left + 0.04
+            # difference frames: base_link to base_sonar_front_left
+            pl.y = 0.06
             pl.z = 0.0
             cloud.points.append(pl)
 
@@ -98,9 +99,10 @@ class Sonar_to_Point_Cloud():
             cloud.points.append(pm)
 
         # Rechte Seite  punkt einfügen  (x,y,z)
-        if(self.dist_right < 0.95 and self.dist_right > 0.05):
-            pr.x = self.dist_right + 0.05
-            pr.y = -0.03
+        if(self.dist_right < 0.75 and self.dist_right > 0.05):
+            # difference frames: base_link to base_sonar_front_right
+            pr.x = self.dist_right + 0.04
+            pr.y = -0.06
             pr.z = 0.0
             cloud.points.append(pr)
 

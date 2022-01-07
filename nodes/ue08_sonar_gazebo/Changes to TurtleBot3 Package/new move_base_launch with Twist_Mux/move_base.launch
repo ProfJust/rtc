@@ -1,3 +1,5 @@
+ <!-- To add Twist mux to TurtleBot3, substitute this file in  ~/catkin_ws/src/turtlebot3/turtlebot3_navigation/launch -->
+
 <launch>
   <!-- Arguments -->
   <arg name="model" default="$(env TURTLEBOT3_MODEL)" doc="model type [burger, waffle, waffle_pi]"/>
