@@ -1,4 +1,6 @@
 # https://github.com/jonathanfoster/ball-tracking
+# Farben finden
+# $ python color_picker.py -i Prof_mit_Kugel.jpeg
 import argparse
 import cv2
 import imutils
