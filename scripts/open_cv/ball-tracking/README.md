@@ -1,5 +1,7 @@
 # Ball Tracking
 
+https://github.com/jonathanfoster/ball-tracking
+
 This project uses OpenCV to track ball movement. The process for tracking is as follows:
 
   * Convert color to HSV
