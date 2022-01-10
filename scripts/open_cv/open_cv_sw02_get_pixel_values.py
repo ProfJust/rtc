@@ -2,11 +2,11 @@
 # ################################################################################
 # edited WHS, OJ , 7.1.2022 #
 
-import cv2 as cv
-print(cv.__version__)
+import cv2
+print(cv2.__version__)
 
 # lese Bild von Festplatte
-image = cv.imread('/home/oj/catkin_ws/src/rtc/scripts/open_cv/test.png')
+image = cv2.imread('/home/oj/catkin_ws/src/rtc/scripts/open_cv/test.png')
 
 # lese Farbwerte an Position y, x
 y = 100
@@ -21,7 +21,7 @@ for x in range(1, 100):
     image[y, x] = (0, 0, 255)
 
 # zeige Bild in Fenster an
-cv.imshow("Bild", image)
+cv2.imshow("Bild", image)
 
 # warte auf Tastendruck (wichtig, sonst sieht man das Fenster nicht)
-cv.waitKey(0)
+cv2.waitKey(0)
