@@ -27,8 +27,8 @@ args = vars(ap.parse_args())
 # HSV-Farbraum (Farbe, Saettigung, Helligkeit)
 # greenLower = (50, 150, 50)
 # greenUpper = (180, 255, 100)
-greenLower = (2, 6, 161)
-greenUpper = (10, 232, 255)
+greenLower = (0, 230, 198)  # H, S, V
+greenUpper = (14, 255, 255)
 
 # ---- Capture / Erfassung der Camera ------
 # ohne Komandozeilenargumente => aktuelle Kamera
