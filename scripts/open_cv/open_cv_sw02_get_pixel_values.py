@@ -19,6 +19,7 @@ print(b, g, r)
 # Zeichne rote Linie (im BGR-Farbraum)
 for x in range(1, 100):
     image[y, x] = (0, 0, 255)
+    
 
 # zeige Bild in Fenster an
 cv2.imshow("Bild", image)
