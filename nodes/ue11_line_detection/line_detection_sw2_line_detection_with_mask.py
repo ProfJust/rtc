@@ -8,9 +8,6 @@
 # -------------------------------------------------------
 import rospy
 from sensor_msgs.msg import CompressedImage
-
-# raspicam_node => sensor_msgs/CompressedImage
-# hier =>  raspicam_node/image/compressed
 import cv2
 import cv_bridge
 import numpy
@@ -39,7 +36,7 @@ class PiCam:
         cv2.waitKey(3)
 
         # Threshold the gray image to get only colors in configured Range
-        mask = cv2.inRange(roi_gray_img, 200, 255)
+        mask = cv2.inRange(roi_gray_img, 230, 255)
         # Erodieren
         mask = cv2.erode(mask, None, iterations=2)
         # Dilatation
@@ -51,6 +48,7 @@ class PiCam:
         if len(cnts) > 0:
             c = max(cnts, key=cv2.contourArea)
             (x, y, w, h) = cv2.boundingRect(c)
+            # umgebendes Rechteck zeichnen
             cv2.rectangle(roi_gray_img, (x, y), (x+w, y+h), (0, 255, 0), 2)
             print("Linie erkannt an Position " + str((x+w)/2))
 

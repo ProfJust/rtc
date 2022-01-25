@@ -7,6 +7,7 @@
 import rospy
 import numpy
 from sensor_msgs.msg import CompressedImage
+# was from sensor_msgs.msg import Image
 
 # raspicam_node => sensor_msgs/CompressedImage
 # hier =>  raspicam_node/image/compressed
@@ -28,6 +29,7 @@ class PiCam:
         # converts compressed image to opencv image
         np_image_original = numpy.frombuffer(msg_img.data, numpy.uint8)
         cv2_img = cv2.imdecode(np_image_original, cv2.IMREAD_COLOR)
+
         cv2.imshow("window", cv2_img)
         cv2.waitKey(1)
         # cv2.imshow("window", cv2_img)
