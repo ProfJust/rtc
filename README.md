@@ -4,6 +4,33 @@
 #### Hochschulübergreifender Roboterwettbewerb für den TurtleBot3
 ##### (PC mit Ubuntu 20.4 - Focal Fossa  notwendig)
 ### -----------------------------------------------------------------
+
+### Lizenz ###
+MIT License is valid for all files of this rpository
+
+Copyright (c) [2022] [Olaf Just]
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+
+## Installation ##
+
 Installation von ROS Noetic und Konfiguration der `.bashrc` mit dem Shellskript  `ros_noetic_install_skript.sh`
 use: 
  >$ chmod +x ros_noetic_install_skript.sh        
