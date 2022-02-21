@@ -5,6 +5,19 @@
 ##### (PC mit Ubuntu 20.4 - Focal Fossa  notwendig)
 ### -----------------------------------------------------------------
 
+<div align="center">
+  <a href="https://www.ruhrmasterschool.de/">
+    <img src="https://www.w-hs.de/fileadmin/public/_processed_/9/8/csm_RMS-Logo_2020-Pfade_edc8abb46d.jpg" alt="Images" width="500">
+  </a>
+</div>
+
+<div align="center">
+  <a href="https://www.ruhrmasterschool.de/">
+    <img src="appendix/rtc.png" alt="Images" width="300">
+  </a>
+</div>
+
+
 ### Lizenz ###
 MIT License is valid for all my files in this repository
 
