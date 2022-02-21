@@ -19,6 +19,10 @@
 
 
 ## Lizenz 
+Für dieses Repository wird hauptsächlich die MIT-Lizenz verwendet (siehe unten)
+Ausgeschlossen hiervon ist der offizielle Code des TurtleBot3, welcher unter die Apache License 2.0 fällt (siehe https://www.turtlebot.com/opensource/) 
+
+
 MIT License is valid for all my files in this repository
 
 Copyright (c) [2022] [Olaf Just]
