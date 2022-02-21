@@ -6,7 +6,7 @@
 ### -----------------------------------------------------------------
 
 ### Lizenz ###
-MIT License is valid for all files of this rpository
+MIT License is valid for all my files in this repository
 
 Copyright (c) [2022] [Olaf Just]
 
