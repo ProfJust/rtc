@@ -82,4 +82,6 @@ roslaunch turtlebot3_gazebo turtlebot3_house.launch
 roslaunch turtlebot3_navigation turtlebot3_navigation.launch map_file:=$HOME/catkin_ws/src/rtc/rtc_maps/gazebo_house_map_2020_12_07.yaml
 
 
+## Credits
+* [ROBOTIS](https://github.com/ROBOTIS-GIT/turtlebot3)
 
