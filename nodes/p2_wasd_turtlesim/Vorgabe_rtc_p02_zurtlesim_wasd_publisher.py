@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # --- rtc_p02_turtlesim_wasd_publisher.py ------
-# Version vom 30.9.2021 by OJ
+# Version vom 14.10.2022 by OJ
 # -----------------------------
 import rospy
 from geometry_msgs.msg import Twist
