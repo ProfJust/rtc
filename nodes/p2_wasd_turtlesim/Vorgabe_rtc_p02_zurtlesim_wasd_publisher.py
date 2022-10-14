@@ -38,7 +38,7 @@ def set_vel():
     c = getch()
     if c == 'w' and vel_msg.linear.x <= 1.0:
         vel_msg.linear.x += 0.1
-    ### HIER CODE EINFUEGEN ###
+    # ## HIER CODE EINFUEGEN ###
     vel_msg.angular.z = -0.1
 
 
@@ -46,7 +46,8 @@ if __name__ == '__main__':
     # Node wird vereinbart
     rospy.init_node('wasd_node', anonymous=True)
     rate = rospy.Rate(50)  # 50hz
-    print(" wasd-Steurung für die TurtleSim - bitte Taste drücken, Exit mit 'c'")
+    print(" wasd-Steurung für die TurtleSim"
+          "- bitte Taste drücken, Exit mit 'c'")
 
     try:
         while not rospy.is_shutdown():
