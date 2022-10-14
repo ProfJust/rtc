@@ -35,9 +35,12 @@ vel_msg.angular.y = 0
 
 
 def set_vel():
-    vel_msg.linear.x = 0.1
+    c = getch()
+    if c == 'w' and vel_msg.linear.x <= 1.0:
+        vel_msg.linear.x += 0.1
+    ### HIER CODE EINFUEGEN ###
     vel_msg.angular.z = -0.1
-    
+
 
 if __name__ == '__main__':
     # Node wird vereinbart
