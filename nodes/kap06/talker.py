@@ -9,10 +9,11 @@ from std_msgs.msg import String  # vordefinierte Message
 def talker():
     # Publisher wirt vereinbart message name, typ, ..
     pub = rospy.Publisher('rtc-chatter', String, queue_size=10)
+
     # Node wird vereinbart
     rospy.init_node('rtc-talker', anonymous=True)
     rate = rospy.Rate(1)  # 1hz
-    i = 0
+    i = 1
     while not rospy.is_shutdown():
         hello_str = "WHS - Hello python world %d" % i
         i = i + 1
