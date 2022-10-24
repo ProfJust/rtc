@@ -38,7 +38,7 @@ def quaternion_to_euler(x, y, z, w):
     t4 = +1.0 - 2.0 * (y * y + z * z)
     yaw = atan2(t3, t4)
 
-    return Z
+    return yaw
 
 
 def update_pose(data):
