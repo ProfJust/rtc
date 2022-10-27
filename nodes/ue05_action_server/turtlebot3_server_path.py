@@ -6,10 +6,14 @@
 #    $2 rosrun rtc turtlebot3_server_path.py
 #    $3 rosrun rtc turtlebot3_client_path.py
 
+# oder
+# $ roslaunch rtc turtlebot3_action_server_client_path_gazebo_empty.launch
+
 import rospy
 import actionlib
 import turtlebot3_example.msg
-from TurtleBotClassFile.py import TurtleBotClass
+# from TurtleBotClassFile import TurtleBotClass
+from TurtleBotClassOhneInitNode import TurtleBotClass
 
 
 class Turtlebot3Action(object):

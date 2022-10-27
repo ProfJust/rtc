@@ -4,13 +4,13 @@
     </include> 
   
     <!--rosrun rtc turtlebot3_server_path -->
-    <node pkg="rtc" type="turtlebot3_server_path" 
+    <node pkg="rtc" type="turtlebot3_server_path.py" 
           name="turtlebot3_server_path" output="screen"
           launch-prefix="gnome-terminal -e" >
     </node>
   
     <!-- rosrun rtc turtlebot3_client_path_from_file -->
-    <node pkg="rtc" type="turtlebot3_client_path_from_file" 
+    <node pkg="rtc" type="turtlebot3_client_path_from_file.py" 
           name="turtlebot3_client_path_from_file" output="screen"
           launch-prefix="gnome-terminal -e" >
     </node>

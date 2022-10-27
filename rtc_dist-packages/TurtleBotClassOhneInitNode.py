@@ -5,8 +5,9 @@
 # mit der Fehlerkorrektur von MU
 
 # #### Version für den turtlebot3_server ####
-# ohne rospy.imnit_node
+# ohne rospy.init_node
 # --------------------------------
+
 import rospy
 from geometry_msgs.msg import Twist
 from turtlesim.msg import Pose
@@ -26,8 +27,6 @@ class TurtleBotClass:
 
         # Creates a node with name 'turtlebot_controller' and make sure it is a
         # unique node (using anonymous=True).
-
-        #  init schon im turtlebot3_server
         # rospy.init_node('turtlebot_controller', anonymous=True)
 
         # Publisher which will publish to the topic '/turtle1/cmd_vel'.
@@ -86,6 +85,13 @@ class TurtleBotClass:
     def steering_angle(self, goal_pose):
         return atan2(goal_pose.y - self.pose.y, goal_pose.x - self.pose.x)
 
+    def fitPi(self, angle):  # fit to Intervall -Pi ...Pi
+        if angle > pi:
+            angle = angle - 2*pi
+        if angle < -pi:
+            angle = angle + 2*pi
+        return angle
+
     def set_angular_vel(self, goal_pose, constant=1.5, ang_max=1.5):
         # alte Variante Soll-Winkel und Ist-Winkel werden seperat auf
         # den Bereich von +-pi eingeschraenkt
@@ -132,7 +138,8 @@ class TurtleBotClass:
 
     def stop_robot(self):
         # Stopping our robot after the movement is over.
-        rospy.loginfo("TurtleBot Class> Goal reached %2.2f %2.2f", round(self.pose.x, 2), round(self.pose.y, 2))
+        rospy.loginfo("TurtleBot Class> Goal reached %2.2f %2.2f",
+                      round(self.pose.x, 2), round(self.pose.y, 2))
         # rospy.loginfo(" --- Goal reached, Stop Robot ---")
         self.vel_msg.linear.x = 0
         self.vel_msg.angular.z = 0
