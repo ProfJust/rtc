@@ -7,7 +7,10 @@
 # Version vom 22.10.2019 by OJ
 # Basiert auf der Loesung aus dem Turtlesim Tutorial
 # http://wiki.ros.org/turtlesim/Tutorials/Go%20to%20Goal
-#
+# usage
+# $1 roscore
+# $2 roslaunch turtlebot3_gazebo turtlebot3_house.launch
+# $3 start this File
 import sys
 import rospy
 from TurtleBotClassFile import TurtleBotClass
