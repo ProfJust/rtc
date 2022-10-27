@@ -11,6 +11,10 @@
 import sys
 import rospy
 from TurtleBotClassFile import TurtleBotClass
+# Falls der Import nicht klappt, checke PYTHONPATH
+# in der .bashrc (Skript Kapitel 11.7)
+# export PYTHONPATH=$PYTHONPATH:~/catkin_ws/src/rtc/rtc_dist-packages
+
 # Qt -------------------------------
 from PyQt5.QtCore import Qt, QTimer
 from PyQt5.QtWidgets import (QWidget, QLCDNumber, QSlider,
