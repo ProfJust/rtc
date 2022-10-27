@@ -10,7 +10,9 @@
 # usage
 # $1 roscore
 # $2 roslaunch turtlebot3_gazebo turtlebot3_house.launch
-# $3 start this File
+# start this file here
+# $3 rosrun rtc Qt_TurtleClass_move2goal_Gazebo.py
+#
 import sys
 import rospy
 from TurtleBotClassFile import TurtleBotClass
