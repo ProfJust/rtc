@@ -3,7 +3,7 @@
 # Version vom 28.10.2022 by OJ
 # basiert auf dem GUI-Pojekt aus dem WS21/22
 # von L. Fuhrig, M. Heinen,
-# J. Klinker, Y. Kurniawan
+#     J. Klinker, Y. Kurniawan
 # -----------------------------
 # usage: $ rosrun rtc gui_rtc.py  ? funkt nicht, warum?
 # aber so: oj@RosePC:~/catkin_ws/src/rtc$ /usr/bin/python3 /home/oj/catkin_ws/src/rtc/nodes/gui/gui_rtc.py
