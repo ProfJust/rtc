@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # --- TurtleClass_move2Goal_Gazebo.py ------
-# Version vom 8.11.2021 by OJ
+# Version vom 31.10.2022 by OJ
 # ----------------------------
 # from
 # --- P3_V4_TurtleClass_move2goal.py ------
