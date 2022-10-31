@@ -7,10 +7,20 @@
 # Version vom 22.10.2019 by OJ
 # Basiert auf der Loesung aus dem Turtlesim Tutorial
 # http://wiki.ros.org/turtlesim/Tutorials/Go%20to%20Goal
+# usage
+# $1 roscore
+# $2 roslaunch turtlebot3_gazebo turtlebot3_house.launch
+# start this file here
+# $3 rosrun rtc Qt_TurtleClass_move2goal_Gazebo.py
 #
 import sys
 import rospy
 from TurtleBotClassFile import TurtleBotClass
+# Falls der Import nicht klappt, checke PYTHONPATH
+# in der .bashrc (Skript Kapitel 11.7)
+# export PYTHONPATH=$PYTHONPATH:~/catkin_ws/src/rtc/rtc_dist-packages
+# danach catkin_make nicht vergessen
+
 # Qt -------------------------------
 from PyQt5.QtCore import Qt, QTimer
 from PyQt5.QtWidgets import (QWidget, QLCDNumber, QSlider,

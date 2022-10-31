@@ -11,14 +11,14 @@ from TurtleClassFile import TurtleBotClass
 
 if __name__ == '__main__':
     try:
-        """ turtle2 = TurtleBotClass('turtle2')  # Name der Turtle
-        turtle2.getGoalFromUser()
-        turtle2.start_info()
-        turtle2.move2goal() """
-
         turtle1 = TurtleBotClass('turtle1')
         turtle1.getGoalFromUser()
         turtle1.start_info()
         turtle1.move2goal()
+
+        turtle2 = TurtleBotClass('turtle2')  # Name der Turtle
+        turtle2.getGoalFromUser()
+        turtle2.start_info()
+        turtle2.move2goal()
     except rospy.ROSInterruptException:
         pass

@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>621</width>
+    <height>497</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>ROS PyQT Administration</string>
+  </property>
+  <widget class="QTabWidget" name="tabWidget">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>20</y>
+     <width>591</width>
+     <height>461</height>
+    </rect>
+   </property>
+   <property name="currentIndex">
+    <number>2</number>
+   </property>
+   <widget class="QWidget" name="master_tab">
+    <attribute name="title">
+     <string>ROS Master</string>
+    </attribute>
+    <widget class="QPushButton" name="master_ntpupdate">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>171</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>NTP Update</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="master_roscore">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>50</y>
+       <width>171</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Start ROS Core</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="master_ntpUpdateLabel">
+     <property name="geometry">
+      <rect>
+       <x>200</x>
+       <y>16</y>
+       <width>371</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="master_roscoreLabel">
+     <property name="geometry">
+      <rect>
+       <x>200</x>
+       <y>50</y>
+       <width>371</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QTextEdit" name="master_log">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>210</y>
+       <width>571</width>
+       <height>211</height>
+      </rect>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="master_roscoreCheck">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>90</y>
+       <width>171</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Check ROS Core</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="client_tab">
+    <attribute name="title">
+     <string>ROS Client</string>
+    </attribute>
+    <widget class="QComboBox" name="client_wegauswahl">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>260</y>
+       <width>181</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <item>
+      <property name="text">
+       <string>kurzer Weg</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Umweg</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Plan B</string>
+      </property>
+     </item>
+    </widget>
+    <widget class="QPushButton" name="client_wegfuehrungStarten">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>260</y>
+       <width>361</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Wegführung starten</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="client_RVIZ">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>220</y>
+       <width>561</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Navigation mit RVIZ starten</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="client_ntpupdate">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>50</y>
+       <width>561</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>NTP Update</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="client_SLAM">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>140</y>
+       <width>561</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>SLAM starten</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="client_punkteSetzen">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>180</y>
+       <width>561</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Punkte setzen</string>
+     </property>
+    </widget>
+    <widget class="QTextEdit" name="client_log">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>290</y>
+       <width>571</width>
+       <height>131</height>
+      </rect>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QPlainTextEdit" name="client_rtcproject_path">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>561</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="plainText">
+      <string>/home/lennart/catkin_ws/src/rtc_project</string>
+     </property>
+    </widget>
+    <widget class="QPlainTextEdit" name="client_alternativeArena">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>90</y>
+       <width>561</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="plainText">
+      <string/>
+     </property>
+     <property name="placeholderText">
+      <string>alternative Arena</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="turtlebot_tab">
+    <attribute name="title">
+     <string>Turtlebot</string>
+    </attribute>
+    <widget class="QPushButton" name="turtlebot_ntpupdate">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>301</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>NTP Update</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="turtlebot_bringup">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>50</y>
+       <width>301</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>ROS Bringup</string>
+     </property>
+    </widget>
+    <widget class="QTextEdit" name="turtlebot_log">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>210</y>
+       <width>571</width>
+       <height>211</height>
+      </rect>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QPlainTextEdit" name="turtlebot_ip">
+     <property name="geometry">
+      <rect>
+       <x>330</x>
+       <y>10</y>
+       <width>241</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="plainText">
+      <string>192.168.1.49</string>
+     </property>
+    </widget>
+    <widget class="QPlainTextEdit" name="turtlebot_user">
+     <property name="geometry">
+      <rect>
+       <x>330</x>
+       <y>50</y>
+       <width>241</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="plainText">
+      <string>ubuntu</string>
+     </property>
+    </widget>
+    <widget class="QPlainTextEdit" name="turtlebot_password">
+     <property name="geometry">
+      <rect>
+       <x>330</x>
+       <y>90</y>
+       <width>241</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="plainText">
+      <string>turtlebot</string>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
