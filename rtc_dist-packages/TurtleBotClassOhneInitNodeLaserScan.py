@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
-# --- TurtleBotClassOhneInitNodeLaserScan.py ----------
-# Version vom 17.11.2021 by OJ
+# --- TurtleBotClassOhneInitNodeLaserScan.py ---
+# Version vom 4.11.2022 by OJ
 # kein Torkelbot mehr !
 # mit der Fehlerkorrektur von MU
 
 # #### Version für den turtlebot3_server ####
 # ohne rospy.init_node
 # mit Laserscanner
-# --------------------------------
+# Stoppt TB3 wenn Hindernis erkannt wird
+STOP_DISTANCE = 0.2  # 20cm    
+# --------------------------------------------
 
 import rospy
 from geometry_msgs.msg import Twist
@@ -166,7 +168,7 @@ class TurtleBotClass:
     def move2goal(self, debug_info=False):
         # Turtle hat Goal noch nicht erreicht?
         if not self.goal_reached():
-            STOP_DISTANCE = 0.2  # 20cm
+            # s.o. STOP_DISTANCE = 0.2  # 20cm
             self.detectObstacle(True)
             if self.detectedDistance < STOP_DISTANCE:
                 self.stop_robot()
