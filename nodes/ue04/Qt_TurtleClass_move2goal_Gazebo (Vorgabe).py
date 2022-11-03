@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # --- TurtleClass_move2Goal_Gazebo.py ------
-# Version vom 8.11.2021 by OJ
+# Version vom 31.10.2022 by OJ
 # ----------------------------
 # from
 # --- P3_V4_TurtleClass_move2goal.py ------
@@ -9,7 +9,7 @@
 # http://wiki.ros.org/turtlesim/Tutorials/Go%20to%20Goal
 # usage
 # $1 roscore
-# $2 roslaunch turtlebot3_gazebo turtlebot3_house.launch
+# $2 roslaunch turtlebot3_gazebo turtlebot3_empty_world.launch 
 # start this file here
 # $3 rosrun rtc Qt_TurtleClass_move2goal_Gazebo.py
 #
@@ -44,16 +44,17 @@ class TurtleUIClass(QWidget):
         self.lcdX.display(LCDstartWert)
         self.lcdY = QLCDNumber(self)
         self.lcdY.display(LCDstartWert)
-
+        
         self.sldX = QSlider(Qt.Horizontal, self)
         self.sldX.setMaximum(6)
         self.sldX.setMinimum(-6)
         self.sldX.setValue(LCDstartWert)
+
         self.sldY = QSlider(Qt.Horizontal, self)
         self.sldY.setMaximum(6)
         self.sldY.setMinimum(-6)
         self.sldY.setValue(LCDstartWert)
-
+        
         self.pbLessX = QPushButton('<')
         self.pbMoreX = QPushButton('>')
         self.pbLessY = QPushButton('<')
@@ -61,8 +62,8 @@ class TurtleUIClass(QWidget):
         self.pbGo = QPushButton(' Go Turtle ')
         self.pbStop = QPushButton(' Stop ')
 
-        self.lblInfoX = QLabel('X-Goal')
-        self.lblInfoY = QLabel('Y-Goal')
+        self.lblInfoX = QLabel('X-Goal (world coordinates)')
+        self.lblInfoY = QLabel('Y-Goal (world coordinates)')
         self.lblStatus = QLabel('Status - Ausgabe')
 
         # BOX-Layout mit Widgets füllen
@@ -136,7 +137,7 @@ class TurtleUIClass(QWidget):
             wert = self.sldX.value()
             wert = wert+1
             self.sldX.setValue(wert)
-
+    
     def SlotKlickY(self):
         sender = self.sender()
         self.lblStatus.setText(' Y ' + sender.text() + ' was pressed')
