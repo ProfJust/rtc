@@ -164,14 +164,15 @@ class TurtleBotClass:
                           round(self.detectedDistance, 2))
 
     def move2goal(self, debug_info=False):
-        STOP_DISTANCE = 0.2  # 20cm
-        self.detectObstacle(True)
-        if self.detectedDistance < STOP_DISTANCE:
-            rospy.loginfo("Oh, an Obstacle => Stopping!")
-            exit()
-        else:
-            # Turtle hat Goal noch nicht erreicht?
-            if not self.goal_reached():
+        # Turtle hat Goal noch nicht erreicht?
+        if not self.goal_reached():
+            STOP_DISTANCE = 0.2  # 20cm
+            self.detectObstacle(True)
+            if self.detectedDistance < STOP_DISTANCE:
+                self.stop_robot()
+                rospy.loginfo("Oh, an Obstacle => Stopping!")
+                exit()
+            else:
                 # Angular velocity in the z-axis.
                 self.set_angular_vel(self.goal)
                 # Linear velocity in the x-axis.
@@ -183,8 +184,9 @@ class TurtleBotClass:
                 self.rate.sleep()
                 if debug_info is True:
                     self.pose_speed_info()
-                return False
-        # when goal is reached
-        self.stop_robot()
-        return True
+            return False
+        else:
+            # --- when goal is reached ---
+            self.stop_robot()
+            return True
 
