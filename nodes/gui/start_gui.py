@@ -14,44 +14,44 @@ class MainWindow(QWidget):
         super(MainWindow, self).__init__(parent)
         # --- roscore ---
         self.myPb_roscore = QPushButton(self)
-        self.myPb_roscore.setText('Starte ROS-Master')
+        self.myPb_roscore.setText(' ROS-Master ')
         self.myPb_roscore.setGeometry(10, 10, 300, 40)  # x,y,w,h
         self.myPb_roscore.clicked.connect(self.slot_roscore)
 
         # --- roslaunch ---
         self.myPb_gazebo_ur5 = QPushButton(self)
-        self.myPb_gazebo_ur5.setText('Starte TB3 in Empty-Gazebo_World !')
+        self.myPb_gazebo_ur5.setText(' TB3 in Empty-Gazebo_World !')
         self.myPb_gazebo_ur5.setGeometry(10, 50, 300, 40)  # x,y,w,h
         self.myPb_gazebo_ur5.clicked.connect(self.slot_empty_world)
 
         self.myPb_depth = QPushButton(self)
-        self.myPb_depth.setText('Starte TB3 in Gazebo_House !')
+        self.myPb_depth.setText(' TB3 in Gazebo_House !')
         self.myPb_depth.setGeometry(10, 90, 300, 40)  # x,y,w,h
         self.myPb_depth.clicked.connect(self.slot_gazebo_house)
 
-        # --- Start Action Server Script ---
+        # --- Starte RViz ---
         self.myPb_pick_place = QPushButton(self)
-        self.myPb_pick_place.setText('Action Server/Client Empty-World ')
+        self.myPb_pick_place.setText(' RViz ')
         self.myPb_pick_place.setGeometry(10, 130, 300, 40)  # x,y,w,h
-        self.myPb_pick_place.clicked.connect(self.slot_action_empty)
+        self.myPb_pick_place.clicked.connect(self.slot_rviz)
 
+        # --- Starte Mapping ---
         self.myPb_pick_place_dc = QPushButton(self)
-        self.myPb_pick_place_dc.setText('Action Server/Client Gazebo-House')
+        self.myPb_pick_place_dc.setText(' Gmapping ')
         self.myPb_pick_place_dc.setGeometry(10, 170, 300, 40)  # x,y,w,h
-        self.myPb_pick_place_dc.clicked.connect(self.slot_action_house)
+        self.myPb_pick_place_dc.clicked.connect(self.slot_gmapping)
 
-        """# --- find_object_2D ---
+        # --- Start Action Server Script ---
         self.myPb_find_object_2D = QPushButton(self)
-        self.myPb_find_object_2D.setText('find_object_2D - gazebo')
+        self.myPb_find_object_2D.setText('Action Server')
         self.myPb_find_object_2D.setGeometry(10, 210, 300, 40)  # x,y,w,h
-        self.myPb_find_object_2D.clicked.connect(self.slot_find_object_2D)
+        self.myPb_find_object_2D.clicked.connect(self.slot_action_server)
 
-        # --- find_object_2D und Astra---
+        # --- Client ---
         self.myPb_astra = QPushButton(self)
-        self.myPb_astra.setText(' Astra Orbbec und find_object_2D - real')
+        self.myPb_astra.setText(' Action Client - path from file')
         self.myPb_astra.setGeometry(10, 250, 300, 40)  # x,y,w,h
-        self.myPb_astra.clicked.connect(self.slot_astra_cam)
-        """
+        self.myPb_astra.clicked.connect(self.slot_action_client)
 
         # --- Window konfigurieren und starten
         self.setGeometry(300, 300, 400, 300)
@@ -64,24 +64,37 @@ class MainWindow(QWidget):
 
     def slot_empty_world(self):
         os.system('gnome-terminal --tab -- /bin/bash -c \
-                  "roslaunch rtc turtlebot3_gazebo turtlebot3_empty_world.launch; \
+                  "roslaunch turtlebot3_gazebo\
+                  turtlebot3_empty_world.launch;\
                   exec bash"')
 
     def slot_gazebo_house(self):
         os.system('gnome-terminal --tab -- /bin/bash -c \
-                  "roslaunch rtc turtlebot3_gazebo turtlebot3_house.launch;\
+                  "roslaunch turtlebot3_gazebo turtlebot3_house.launch;\
                   exec bash"')
 
-    def slot_action_empty(self):
+    def slot_rviz(self):
         os.system('gnome-terminal --tab -- /bin/bash -c\
-                  "roslaunch rtc\
-                  turtlebot3_action_server_client_path_gazebo_empty.launch;\
+                  "roslaunch turtlebot3_gazebo\
+                   turtlebot3_gazebo_rviz.launch;\
                   exec bash"')
 
-    def slot_action_house(self):
+    def slot_gmapping(self):
         os.system('gnome-terminal --tab -- /bin/bash -c\
-                  "roslaunch rtc\
-                  turtlebot3_action_server_client_path_gazebo_house.launch;\
+                  "roslaunch turtlebot3_slam\
+                   turtlebot3_gmapping.launch ;\
+                  exec bash"')
+
+    def slot_action_server(self):
+        os.system('gnome-terminal --tab -- /bin/bash -c\
+                  "rosrun rtc\
+                  turtlebot3_server_path.py;\
+                  exec bash"')
+
+    def slot_action_client(self):
+        os.system('gnome-terminal --tab -- /bin/bash -c\
+                  "rosrun rtc\
+                  turtlebot3_client_path_from_file.py;\
                   exec bash"')
 
 
