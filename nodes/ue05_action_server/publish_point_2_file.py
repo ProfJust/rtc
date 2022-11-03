@@ -13,7 +13,7 @@ from geometry_msgs.msg import PointStamped
 
 def clickCB(data):
     rospy.loginfo("clicked at " + str(data.point.x) + " " + str(data.point.y))
-    fobj = open("/home/oj/catkin_ws/src/rtc/nodes/ue05_action_server/path3.txt", 'a')
+    fobj = open("/home/oj/catkin_ws/src/rtc/nodes/ue05_action_server/path_ws22.txt", 'a')
     write_str = "[" + str(data.point.x) + ", " + str(data.point.y) + "] \n"
     fobj.write(write_str)    
     fobj.close()
