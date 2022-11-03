@@ -13,7 +13,7 @@ import rospy
 import actionlib
 import turtlebot3_example.msg
 # from TurtleBotClassFile import TurtleBotClass
-from TurtleBotClassOhneInitNode import TurtleBotClass
+from TurtleBotClassOhneInitNodeLaserScan import TurtleBotClass
 
 
 class Turtlebot3Action(object):
@@ -62,4 +62,3 @@ if __name__ == '__main__':
     rospy.init_node('turtlebot3')
     server = Turtlebot3Action(rospy.get_name())
     rospy.spin()
-    

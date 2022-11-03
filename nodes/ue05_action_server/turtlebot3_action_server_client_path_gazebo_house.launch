@@ -11,13 +11,13 @@
   
     <!--rosrun rtc turtlebot3_server_path.py -->
     <node pkg="rtc" type="turtlebot3_server_path.py" 
-          name="turtlebot3_server_path.py" output="screen"
+          name="turtlebot3_server_path" output="screen"
           launch-prefix="gnome-terminal --tab -- /bin/bash --geometry 20x20+55+14 -e" >
     </node>
   
     <!-- rosrun rtc turtlebot3_client_path_from_file.py -->
     <node pkg="rtc" type="turtlebot3_client_path_from_file.py" 
-          name="turtlebot3_client_path_from_file.py" output="screen"
+          name="turtlebot3_client_path_from_file" output="screen"
           launch-prefix="gnome-terminal --tab -- /bin/bash --geometry 20x20+75+14 -e" >
     </node>
 </launch>
