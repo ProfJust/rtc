@@ -4,20 +4,15 @@
 # edited WHS, OJ , 04.11.2022
 # now with Tabs and more options
 
-
 from PyQt5.QtWidgets import (QWidget,
                              QApplication,
                              QPushButton,
-                             QGridLayout,
                              QHBoxLayout,
                              QVBoxLayout,
                              QLabel,
                              QTabWidget,
-                             QFormLayout,
-                             QLineEdit,
-                             QCheckBox,
-                             QRadioButton)
-from PyQt5.QtCore import *
+                             QLineEdit)
+from PyQt5.QtGui import QPixmap
 import sys
 import os
 
@@ -148,12 +143,19 @@ class MainWindow(QTabWidget):
         self.tab2.setLayout(vbox)
 
     def tab3UI(self):
-        layout = QHBoxLayout()
-        layout.addWidget(QLabel("subjects"))
-        layout.addWidget(QCheckBox("Physics"))
-        layout.addWidget(QCheckBox("Maths"))
-        self.setTabText(2, "not used yet")
-        self.tab3.setLayout(layout)
+        self.label = QLabel(" Label ")
+        self.label2 = QLabel("Pixmap?")
+        self.pixmap = QPixmap("ball.jpg")
+        self.label.setPixmap(self.pixmap)  # Funkt nicht
+
+        vbox = QVBoxLayout()
+        hbox = QHBoxLayout()
+        hbox.addWidget(self.label2)
+        hbox.addWidget(self.label)
+        vbox.addLayout(hbox)
+
+        self.setTabText(2, "Logo")
+        self.tab3.setLayout(vbox)
 
     # --- Die  Slot-Methoden ---
     def slot_roscore(self):
