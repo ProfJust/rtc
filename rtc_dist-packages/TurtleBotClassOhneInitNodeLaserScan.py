@@ -8,7 +8,7 @@
 # ohne rospy.init_node
 # mit Laserscanner
 # Stoppt TB3 wenn Hindernis erkannt wird
-STOP_DISTANCE = 0.2  # 20cm    
+STOP_DISTANCE = 0.2  # 20cm
 # --------------------------------------------
 
 import rospy
