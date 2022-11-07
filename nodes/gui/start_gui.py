@@ -27,15 +27,15 @@ class MainWindow(QTabWidget):
         self.tab2 = QWidget()
         self.tab3 = QWidget()
 
+        self.addTab(self.tab3, "Tab 3")
         self.addTab(self.tab1, "Tab 1")
         self.addTab(self.tab2, "Tab 2")
-        self.addTab(self.tab3, "Tab 3")
+        self.tab3UI()
         self.tab1UI()
         self.tab2UI()
-        self.tab3UI()
 
         # --- Window konfigurieren und starten
-        self.setGeometry(300, 300, 500, 300)
+        self.setGeometry(100, 100, 600, 300)
         self.setWindowTitle('RTC22 - Starthilfe ')
         # self.show()
 
@@ -90,7 +90,7 @@ class MainWindow(QTabWidget):
         self.myPb_client.clicked.connect(self.slot_action_client)
         layout.addWidget(self.myPb_client)
 
-        self.setTabText(0, "Simualtion")
+        self.setTabText(1, "Simulation")
         self.tab1.setLayout(layout)
 
     def tab2UI(self):  # --- real TB3 ----
@@ -139,22 +139,22 @@ class MainWindow(QTabWidget):
         hbox4.addWidget(self.myPb_navigate2)
         vbox.addLayout(hbox4)
 
-        self.setTabText(1, "real TurtleBot3 - SSH")
+        self.setTabText(2, "real TurtleBot3 - SSH")
         self.tab2.setLayout(vbox)
 
     def tab3UI(self):
         self.label = QLabel(" Label ")
-        self.label2 = QLabel("Pixmap?")
-        self.pixmap = QPixmap("ball.jpg")
+        # self.label2 = QLabel("Pixmap?")
+        self.pixmap = QPixmap("/home/oj/catkin_ws/src/rtc/nodes/gui/rtc_logo.png")
         self.label.setPixmap(self.pixmap)  # Funkt nicht
 
         vbox = QVBoxLayout()
         hbox = QHBoxLayout()
-        hbox.addWidget(self.label2)
+        # hbox.addWidget(self.label2)
         hbox.addWidget(self.label)
         vbox.addLayout(hbox)
 
-        self.setTabText(2, "Logo")
+        self.setTabText(0, "Logo")
         self.tab3.setLayout(vbox)
 
     # --- Die  Slot-Methoden ---
