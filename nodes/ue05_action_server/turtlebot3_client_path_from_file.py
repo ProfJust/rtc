@@ -23,7 +23,7 @@ class Client():
         self.client()
 
     def read_path_from_file(self,
-                            filename="/home/oj/catkin_ws/src/rtc/nodes/ue05_action_server/path_ws22.txt"):
+                            filename="/home/oj/catkin_ws/src/rtc/nodes/ue05_action_server/path_ws22a.txt"):
         rospy.loginfo("Reading Path from path.txt : ")
         # Den vorgegebenen Pfad einlesen
         # self.path = [[0.0, 0.0],[2.0, 0.0], [2.0, 2.0], [0.0, 2.0]]

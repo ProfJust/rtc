@@ -13,8 +13,7 @@ from geometry_msgs.msg import PointStamped
 
 def clickCB(data):
     rospy.loginfo("clicked at " + str(data.point.x) + " " + str(data.point.y))
-    fobj = open("/home/oj/catkin_ws/\
-                src/rtc/nodes/ue05_action_server/path_ws22.txt", 'a')
+    fobj = open("/home/oj/catkin_ws/src/rtc/nodes/ue05_action_server/path_ws22a.txt", 'a')
     write_str = "[" + str(data.point.x) + ", " + str(data.point.y) + "] \n"
     fobj.write(write_str)
     fobj.close()
@@ -22,7 +21,7 @@ def clickCB(data):
 
 if __name__ == '__main__':
     try:
-        rospy.init_node('click_listner', anonymous=True)
+        rospy.init_node('click_listener', anonymous=True)
         rospy.loginfo("Auf der RVIZ- Karte einen Publish Point ankllicken")
         rospy.loginfo("Ende mit STRG + C  => Speichert Punkte in Datei")
         click_sub = rospy.Subscriber('clicked_point',

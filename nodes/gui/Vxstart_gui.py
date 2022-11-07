@@ -3,8 +3,13 @@
 # GUI to control all the Launch Files etc. in the RTC22 course
 # edited WHS, OJ , 03.11.2022 #
 
-from PyQt5.QtWidgets import (QWidget, QApplication,  QPushButton)
-from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import (QWidget,
+                             QApplication,
+                             QPushButton,
+                             QGridLayout,
+                             QLabel,
+                             QTabWidget)
+from PyQt5.QtCore import *
 import sys
 import os
 
@@ -12,7 +17,18 @@ import os
 class MainWindow(QWidget):
     def __init__(self, parent=None):
         super(MainWindow, self).__init__(parent)
-        # --- roscore ---
+
+        layout = QGridLayout()
+        self.setLayout(layout)
+        label1 = QLabel("Widget in Tab 1.")
+        label2 = QLabel("Widget in Tab 2.")
+        
+        tabwidget = QTabWidget()
+        tabwidget.addTab(label1, "Simulation")
+        tabwidget.addTab(label2, "real World")
+        layout.addWidget(tabwidget, 0, 0)
+
+        """  # --- roscore ---
         self.myPb_roscore = QPushButton(self)
         self.myPb_roscore.setText(' ROS-Master ')
         self.myPb_roscore.setGeometry(10, 10, 300, 40)  # x,y,w,h
@@ -52,11 +68,13 @@ class MainWindow(QWidget):
         self.myPb_astra.setText(' Action Client - path from file')
         self.myPb_astra.setGeometry(10, 250, 300, 40)  # x,y,w,h
         self.myPb_astra.clicked.connect(self.slot_action_client)
+        """
 
         # --- Window konfigurieren und starten
         self.setGeometry(300, 300, 400, 300)
         self.setWindowTitle('RTC22 - Starthilfe ')
         self.show()
+        
 
     # --- Die  Slot-Methoden ---
     def slot_roscore(self):
@@ -87,7 +105,8 @@ class MainWindow(QWidget):
 
     def slot_action_server(self):
         os.system('gnome-terminal --tab -- /bin/bash -c\
-                  "rosrun rtc turtlebot3_server_path.py;\
+                  "rosrun rtc\
+                  turtlebot3_server_path.py;\
                   exec bash"')
 
     def slot_action_client(self):
@@ -101,4 +120,5 @@ if __name__ == '__main__':
 
     app = QApplication(sys.argv)
     mw = MainWindow()
+    mw.show()
     sys.exit(app.exec_())
