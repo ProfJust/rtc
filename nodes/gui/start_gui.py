@@ -4,7 +4,8 @@
 # edited WHS, OJ , 04.11.2022
 # now with Tabs and more options
 # usage
-# $rosrun rtc start_gui.py 
+# $rosrun rtc start_gui.py
+# 
 
 from PyQt5.QtWidgets import (QWidget,
                              QApplication,
@@ -96,27 +97,22 @@ class MainWindow(QTabWidget):
         self.tab1.setLayout(layout)
 
     def tab2UI(self):  # --- real TB3 ----
-        self.Line_Edit_IP = QLineEdit("192.168.1.81")
-        # --- Starte SSH Button ---
-        self.myPb_ssh = QPushButton(self)
-        self.myPb_ssh.setText('SSH - Start')
-        self.myPb_ssh.clicked.connect(self.slot_ssh)
         # --- Map Saver Button ---
         self.myPb_map_save = QPushButton(self)
         self.myPb_map_save.setText('Save Map')
         self.myPb_map_save.clicked.connect(self.slot_save_map)
         # --- Navigation Start Button ---
         self.myPb_navigate = QPushButton(self)
-        self.myPb_navigate.setText('Navigate to Goal with my_map')
+        self.myPb_navigate.setText('Navigate to RViz Goal')
         self.myPb_navigate.clicked.connect(self.slot_navigate_to_goal)
-
-        self.myPb_navigate2 = QPushButton(self)
-        self.myPb_navigate2.setText('Navigate to Goal with gmapping on')
-        self.myPb_navigate2.clicked.connect(self.slot_navigate_to_goal2)
         # --- Teleop Start Button ---
         self.myPb_teleop = QPushButton(self)
         self.myPb_teleop.setText(' Teleop Keyboard ')
         self.myPb_teleop.clicked.connect(self.slot_teleop)
+        # --- Starte SSH Button ---
+        self.myPb_ssh = QPushButton(self)
+        self.myPb_ssh.setText('SSH - Start')
+        self.myPb_ssh.clicked.connect(self.slot_ssh)
 
         # --- Grid Layout ---
         vbox = QVBoxLayout()
@@ -128,7 +124,6 @@ class MainWindow(QTabWidget):
         # --- 2. Line ---
         hbox2 = QHBoxLayout()
         hbox2.addWidget(QLabel("SSH"))
-        hbox2.addWidget(self.Line_Edit_IP)
         hbox2.addWidget(self.myPb_ssh)
         vbox.addLayout(hbox2)
         # --- 3. Line ---
@@ -138,7 +133,6 @@ class MainWindow(QTabWidget):
         # --- 4. Line ---
         hbox4 = QHBoxLayout()
         hbox4.addWidget(self.myPb_navigate)
-        hbox4.addWidget(self.myPb_navigate2)
         vbox.addLayout(hbox4)
 
         self.setTabText(2, "real TurtleBot3 - SSH")
@@ -149,15 +143,25 @@ class MainWindow(QTabWidget):
         # self.label2 = QLabel("Pixmap?")
         self.pixmap = QPixmap("/home/oj/catkin_ws/src/rtc/nodes/gui/rtc_logo.png")
         self.label.setPixmap(self.pixmap)  # Funkt bei korrektem Pfad
+        self.Line_Edit_IP = QLineEdit("192.168.1.81")
+        self.Line_Edit_IP.setFixedSize(100, 26)
+        
         # --- roscore ---
         self.myPb_roscore = QPushButton(self)
         self.myPb_roscore.setText(' starte ROS-Master ')
         self.myPb_roscore.clicked.connect(self.slot_roscore)
-        
+        # --- Starte SSH Button ---
+        self.myPb_ssh = QPushButton(self)
+        self.myPb_ssh.setText('SSH - Start')
+        self.myPb_ssh.clicked.connect(self.slot_ssh)
+                
         vbox = QVBoxLayout()
-        
+
         hbox = QHBoxLayout()
         hbox.addWidget(self.myPb_roscore)
+        hbox.addWidget(self.myPb_ssh)
+        hbox.addWidget(self.Line_Edit_IP)
+        
         vbox.addLayout(hbox)
 
         hbox2 = QHBoxLayout()
@@ -207,14 +211,16 @@ class MainWindow(QTabWidget):
                   exec bash"')
 
     def slot_ssh(self):
+        # https://manpages.ubuntu.com/manpages/jammy/man1/gnome-terminal.1.html
+        # https://wiki.gnome.org/Apps/Terminal
         # gnome String lässt sich nicht zusammenbauen, oder doch?
-        # ssh_str = "ssh ubuntu@192.168.1.81;"
-        # os.system(ssh_str)
-        # os.system('gnome-terminal --tab -- /bin/bash -c' + ssh_str+'exec bash')
+        # os.system('gnome-terminal --tab -- /bin/bash -c\
         #          "ssh ubuntu@192.168.1.81; exec bash "')
-        self.Line_Edit_IP.text = "192.168.1.81"
-        os.system('gnome-terminal --tab -- /bin/bash -c\
-                  "ssh ubuntu@192.168.1.81; exec bash "')
+        ip_str = self.Line_Edit_IP.text()
+        terminal_str = "gnome-terminal --tab -- /bin/bash -c \"ssh ubuntu@"\
+                       + ip_str + "; exec bash \""
+        print(terminal_str)
+        os.system(terminal_str)
 
     # absoluter Pfad notwendig "~"" does not work, evtl $HOME ?
     def slot_save_map(self):
@@ -231,15 +237,7 @@ class MainWindow(QTabWidget):
                   turtlebot3_navigation.launch\
                   map_file:=$HOME/catkin_ws/src/rtc/rtc_maps/my_map.yaml;\
                   exec bash"')
-
-    def slot_navigate_to_goal2(self):
-        os.system('gnome-terminal --tab -- /bin/bash -c\
-                  "cd ~/catkin_ws/src/rtc/rtc_maps &&\
-                  roslaunch turtlebot3_navigation\
-                  turtlebot3_navigation.launch\
-                  map_file:=dont_want_to_find_map_here\
-                  exec bash"')
-    
+   
     def slot_teleop(self):
         os.system('gnome-terminal -- /bin/bash -c\
                   "rosrun teleop_twist_keyboard teleop_twist_keyboard.py;\
