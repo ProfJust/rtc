@@ -3,6 +3,8 @@
 # GUI to control all the Launch Files etc. in the RTC22 course
 # edited WHS, OJ , 04.11.2022
 # now with Tabs and more options
+# usage
+# $rosrun rtc start_gui.py 
 
 from PyQt5.QtWidgets import (QWidget,
                              QApplication,
@@ -94,7 +96,7 @@ class MainWindow(QTabWidget):
         self.tab1.setLayout(layout)
 
     def tab2UI(self):  # --- real TB3 ----
-        self.Line_Edit_IP = QLineEdit("192.168.1.162")
+        self.Line_Edit_IP = QLineEdit("192.168.1.81")
         # --- Starte SSH Button ---
         self.myPb_ssh = QPushButton(self)
         self.myPb_ssh.setText('SSH - Start')
@@ -142,17 +144,25 @@ class MainWindow(QTabWidget):
         self.setTabText(2, "real TurtleBot3 - SSH")
         self.tab2.setLayout(vbox)
 
-    def tab3UI(self):
+    def tab3UI(self):  # --- Logo --
         self.label = QLabel(" Label ")
         # self.label2 = QLabel("Pixmap?")
         self.pixmap = QPixmap("/home/oj/catkin_ws/src/rtc/nodes/gui/rtc_logo.png")
-        self.label.setPixmap(self.pixmap)  # Funkt nicht
-
+        self.label.setPixmap(self.pixmap)  # Funkt bei korrektem Pfad
+        # --- roscore ---
+        self.myPb_roscore = QPushButton(self)
+        self.myPb_roscore.setText(' starte ROS-Master ')
+        self.myPb_roscore.clicked.connect(self.slot_roscore)
+        
         vbox = QVBoxLayout()
+        
         hbox = QHBoxLayout()
-        # hbox.addWidget(self.label2)
-        hbox.addWidget(self.label)
+        hbox.addWidget(self.myPb_roscore)
         vbox.addLayout(hbox)
+
+        hbox2 = QHBoxLayout()
+        hbox2.addWidget(self.label)
+        vbox.addLayout(hbox2)
 
         self.setTabText(0, "Logo")
         self.tab3.setLayout(vbox)
@@ -197,8 +207,14 @@ class MainWindow(QTabWidget):
                   exec bash"')
 
     def slot_ssh(self):
+        # gnome String lässt sich nicht zusammenbauen, oder doch?
+        # ssh_str = "ssh ubuntu@192.168.1.81;"
+        # os.system(ssh_str)
+        # os.system('gnome-terminal --tab -- /bin/bash -c' + ssh_str+'exec bash')
+        #          "ssh ubuntu@192.168.1.81; exec bash "')
+        self.Line_Edit_IP.text = "192.168.1.81"
         os.system('gnome-terminal --tab -- /bin/bash -c\
-                  "ssh ubuntu@192.168.1.162; exec bash "')
+                  "ssh ubuntu@192.168.1.81; exec bash "')
 
     # absoluter Pfad notwendig "~"" does not work, evtl $HOME ?
     def slot_save_map(self):
