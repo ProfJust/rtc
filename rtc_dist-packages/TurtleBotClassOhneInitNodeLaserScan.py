@@ -161,11 +161,18 @@ class TurtleBotClass:
         scan = rospy.wait_for_message('scan', LaserScan)
         # Mittelwert aus den beiden  Werten gerade voraus
         # print(len(scan.ranges))
-        max_index_scan_ranges = len(scan.ranges)-1
+        max_index_scan_ranges = len(scan.ranges)-1  # Anzahl der scan-Ranges
         # bei inf wird ranges 0.0
-        # self.detectedDistance += (scan.ranges[0] + scan.ranges[max_index_scan_ranges]) / 2
-        ListOfRanges = [scan.ranges[0], scan.ranges[1],scan.ranges[max_index_scan_ranges]] 
-        self.detectedDistance = np.median(ListOfRanges) 
+        # Mittelwert aus zwei Werten
+        # self.detectedDistance += (scan.ranges[0]
+        #                          + scan.ranges[max_index_scan_ranges]) / 2
+
+        ListOfRanges = [scan.ranges[0:2] +
+                        scan.ranges[max_index_scan_ranges-3:
+                                    max_index_scan_ranges]]
+
+        self.detectedDistance = np.median(ListOfRanges)
+
         if debug_info is True:
             rospy.loginfo("Distance to detected Obstacle is %s",
                           round(self.detectedDistance, 2))

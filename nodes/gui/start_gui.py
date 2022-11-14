@@ -38,7 +38,7 @@ class MainWindow(QTabWidget):
         self.tab2UI()
 
         # --- Window konfigurieren und starten
-        self.setGeometry(100, 100, 600, 300)
+        self.setGeometry(100, 100, 400, 250)
         self.setWindowTitle('RTC22 - Starthilfe ')
         # self.show()
 
@@ -145,7 +145,7 @@ class MainWindow(QTabWidget):
 
         myFilePath = os.path.dirname(os.path.abspath(__file__))
         print(myFilePath)
-        pixPath = os.path.join(myFilePath, "rtc_logo.png")
+        pixPath = os.path.join(myFilePath, "rtc_logo_600px.png")
         print(pixPath)
 
         self.pixmap = QPixmap(pixPath)
@@ -162,14 +162,14 @@ class MainWindow(QTabWidget):
         self.myPb_ssh = QPushButton(self)
         self.myPb_ssh.setText('SSH - Start')
         self.myPb_ssh.clicked.connect(self.slot_ssh)
-                
+
         vbox = QVBoxLayout()
 
         hbox = QHBoxLayout()
         hbox.addWidget(self.myPb_roscore)
         hbox.addWidget(self.myPb_ssh)
         hbox.addWidget(self.Line_Edit_IP)
-        
+
         vbox.addLayout(hbox)
 
         hbox2 = QHBoxLayout()
