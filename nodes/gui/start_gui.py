@@ -141,11 +141,19 @@ class MainWindow(QTabWidget):
     def tab3UI(self):  # --- Logo --
         self.label = QLabel(" Label ")
         # self.label2 = QLabel("Pixmap?")
-        self.pixmap = QPixmap("/home/oj/catkin_ws/src/rtc/nodes/gui/rtc_logo.png")
+        # self.pixmap = QPixmap("/home/oj/catkin_ws/src/rtc/nodes/gui/rtc_logo.png")
+
+        myFilePath = os.path.dirname(os.path.abspath(__file__))
+        print(myFilePath)
+        pixPath = os.path.join(myFilePath, "rtc_logo.png")
+        print(pixPath)
+
+        self.pixmap = QPixmap(pixPath)
         self.label.setPixmap(self.pixmap)  # Funkt bei korrektem Pfad
+
         self.Line_Edit_IP = QLineEdit("192.168.1.81")
         self.Line_Edit_IP.setFixedSize(100, 26)
-        
+
         # --- roscore ---
         self.myPb_roscore = QPushButton(self)
         self.myPb_roscore.setText(' starte ROS-Master ')
