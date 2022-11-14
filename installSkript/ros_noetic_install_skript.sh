@@ -23,10 +23,10 @@ echo -e "\033[34m ---------- Konfiguriere .bashrc ------------ \033[0m "
 
 echo "export LC_NUMERIC="en_US.UTF-8"" >> ~/.bashrc
 echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
-echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
 echo "export ROS_PACKAGE_PATH=~/catkin_ws/src:/opt/ros/noetic/share" >> ~/.bashrc
 echo "export ROS_MASTER_URI=http://localhost:11311" >> ~/.bashrc
 echo "export ROS_HOSTNAME=127.0.0.1" >> ~/.bashrc
+echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
 source ~/.bashrc
 
 echo -e "\033[34m ---------- Dependencies for building packages ------------ \033[0m "
