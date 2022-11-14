@@ -18,7 +18,7 @@ from nav_msgs.msg import Odometry
 # -- Obstacle Detection with Lidar --
 from sensor_msgs.msg import LaserScan
 from math import pow, atan2, sqrt, pi
-
+import numpy as np
 
 class TurtleBotClass:
     # globale Variablen
@@ -162,7 +162,10 @@ class TurtleBotClass:
         # Mittelwert aus den beiden  Werten gerade voraus
         # print(len(scan.ranges))
         max_index_scan_ranges = len(scan.ranges)-1
-        self.detectedDistance = (scan.ranges[0] + scan.ranges[max_index_scan_ranges]) / 2
+        # bei inf wird ranges 0.0
+        # self.detectedDistance += (scan.ranges[0] + scan.ranges[max_index_scan_ranges]) / 2
+        ListOfRanges = [scan.ranges[0], scan.ranges[1],scan.ranges[max_index_scan_ranges]] 
+        self.detectedDistance = np.median(ListOfRanges) 
         if debug_info is True:
             rospy.loginfo("Distance to detected Obstacle is %s",
                           round(self.detectedDistance, 2))
