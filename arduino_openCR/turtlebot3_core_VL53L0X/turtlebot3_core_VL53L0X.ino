@@ -36,6 +36,8 @@ void setup()
 
   //---- RTC22 by OJ ----
   nh.advertise(laser_left_pub);
+  nh.advertise(laser_right_pub);
+  //---- RTC22 by OJ ----
 
   nh.advertise(sensor_state_pub);  
   nh.advertise(version_info_pub);
@@ -65,8 +67,9 @@ void setup()
 
   initJointStates();
 
-  //---- RTC by OJ WS22 ----
+  //---- RTC22 by OJ ----
   VL53L0x_setID();
+  //---- RTC22 by OJ ----
 
   prev_update_time = millis();
 
@@ -150,15 +153,19 @@ void loop()
   // TODO
   // Update sonar data
   // sensors.updateSonar(t);
+
   
   //---- RTC22 by OJ ----
   VL53L0x_read_dual_sensors();
+  
   dist1_msg.data = measure1.RangeMilliMeter;
   laser_left_pub.publish(&dist1_msg);
 
   dist2_msg.data = measure2.RangeMilliMeter;
   laser_right_pub.publish(&dist2_msg);
+ //---- RTC22 by OJ ----
 
+ 
   // Start Gyro Calibration after ROS connection
   updateGyroCali(nh.connected());
 
