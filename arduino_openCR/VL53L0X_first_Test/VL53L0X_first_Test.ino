@@ -2,7 +2,7 @@
 // an einem Arduino Mega 
 // E-Block EB22
 // Anschluss (D8-D15 - D-Sub-Pin 7 und 8)
-// D21 SCl Gelb
+// D21 SCL Gelb
 // D20 SDA Grün
 // OJ 4.11.22
 //---------------------------------------------------

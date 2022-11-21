@@ -35,8 +35,8 @@ void setup()
   nh.subscribe(reset_sub);
 
   //---- RTC22 by OJ ----
-  nh.advertise(laser_left_pub);
-  nh.advertise(laser_right_pub);
+  nh.advertise(VL53_left_pub);
+  nh.advertise(VL53_right_pub);
   //---- RTC22 by OJ ----
 
   nh.advertise(sensor_state_pub);  
@@ -159,10 +159,10 @@ void loop()
   VL53L0x_read_dual_sensors();
   
   dist1_msg.data = measure1.RangeMilliMeter;
-  laser_left_pub.publish(&dist1_msg);
+  VL53_left_pub.publish(&dist1_msg);
 
   dist2_msg.data = measure2.RangeMilliMeter;
-  laser_right_pub.publish(&dist2_msg);
+  VL53_right_pub.publish(&dist2_msg);
  //---- RTC22 by OJ ----
 
  
