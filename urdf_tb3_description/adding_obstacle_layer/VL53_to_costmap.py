@@ -39,20 +39,20 @@ from sensor_msgs.msg import Range
 from sensor_msgs.msg import PointCloud  # Message für die Sonar-Hindernisse
 
 
-class Sonar_to_Point_Cloud():
+class VL53_to_Point_Cloud():
     def __init__(self):
         rospy.loginfo("Publishing PointCloud")
 
-        self.cloud_pub = rospy.Publisher('sonar/point_cloud',
+        self.cloud_pub = rospy.Publisher('VL53/point_cloud',
                                          PointCloud,
                                          queue_size=10)
 
         # receiving sonar_left and sonar_right
-        self.sonar_sub_left = rospy.Subscriber('sonar_left',
+        self.sonar_sub_left = rospy.Subscriber('VL53_left',
                                                Range,
                                                self.get_sonar_left,
                                                queue_size=10)
-        self.sonar_sub_right = rospy.Subscriber('sonar_right',
+        self.sonar_sub_right = rospy.Subscriber('VL53_right',
                                                 Range,
                                                 self.get_sonar_right,
                                                 queue_size=10)
@@ -75,7 +75,7 @@ class Sonar_to_Point_Cloud():
     def cloud_build(self):
         # add sonar readings (robot-local coordinate frame) to cloud
         pl = Point32()  # Punkt von Sonar Left
-        pm = Point32()  # Mittelpunkt
+        # pm = Point32()  # Mittelpunkt
         pr = Point32()  # Sonar Right
         # Instanziiere leere PointCloud
         cloud = PointCloud()
@@ -86,24 +86,24 @@ class Sonar_to_Point_Cloud():
         cloud.header = header
 
         # Linke Seite
-        if(self.dist_left < 0.75 and self.dist_left > 0.05):
-            pl.x = self.dist_left + 0.04
-            # difference frames: base_link to base_sonar_front_left
-            pl.y = 0.06
-            pl.z = 0.0
+        if(self.dist_left < 0.7 and self.dist_left > 0.05):
+            # difference frames: base_link to base_sonar_front_right
+            pl.x = self.dist_left * 0.866 + 0.05  # Offset Sensor Montagepunkt
+            pl.y = self.dist_left * 0.5 - 0.03  # Offset Sensor Montagepunkt
+            pl.z = 0.06
             cloud.points.append(pl)
 
-            pm.x = (self.dist_left + self.dist_right)/2 + 0.05
-            pm.y = 0.0
-            pm.z = 0.0
-            cloud.points.append(pm)
-
         # Rechte Seite  punkt einfügen  (x,y,z)
-        if(self.dist_right < 0.75 and self.dist_right > 0.05):
+        # Gegenkathete = sin(phi) * Hypothenuse
+        # phi = 60° = 1.042  sin(60°) = 0.866
+        # Hyphotenuse = dist
+        # Ankathete = cos(60°) * dist
+        # cos(60°) = 0.5
+        if(self.dist_right < 0.7 and self.dist_right > 0.05):
             # difference frames: base_link to base_sonar_front_right
-            pr.x = self.dist_right + 0.04
-            pr.y = -0.06
-            pr.z = 0.0
+            pr.x = self.dist_right * 0.866 + 0.05  # Offset Sensor Montagepunkt
+            pr.y = -(self.dist_right * 0.5) + 0.03  # Offset Sensor Montagepunkt
+            pr.z = 0.06
             cloud.points.append(pr)
 
         # Senden
@@ -111,8 +111,8 @@ class Sonar_to_Point_Cloud():
 
 
 if __name__ == '__main__':
-    rospy.init_node('sonar_controller', anonymous=True)
+    rospy.init_node('VL53_controller', anonymous=True)
     try:
-        sonar = Sonar_to_Point_Cloud()
+        vl53 = VL53_to_Point_Cloud()
     except rospy.ROSInterruptException:
         pass
