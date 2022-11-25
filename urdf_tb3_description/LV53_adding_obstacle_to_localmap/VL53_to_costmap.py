@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 # sonar_to_costmap.py
 # ################################################################################
-# edited WHS, OJ , 23.12.2020 #
+# edited WHS, OJ , 25.11.2022 #
 #
-# brings Sonar detected Obstacles into move_base local costmap
+# brings VL53L0x detected Obstacles into move_base local costmap
 # using point_cloud - message
 #
 # edit
