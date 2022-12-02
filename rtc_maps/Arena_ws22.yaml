@@ -1,4 +1,4 @@
-image: /home/lennart/catkin_ws/src/rtc_project/maps/Arena_ws22.pgm
+image: /home/oj/catkin_ws/src/rtc_project/maps/Arena_ws22.pgm
 resolution: 0.020000
 origin: [-10.000000, -10.000000, 0.000000]
 negate: 0
