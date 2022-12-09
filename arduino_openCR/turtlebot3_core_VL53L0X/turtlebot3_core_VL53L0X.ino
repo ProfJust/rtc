@@ -163,12 +163,14 @@ void loop()
   dist1_msg.min_range = 0.03; // 3cm 
   dist1_msg.max_range = 1.00; // 1m 
   dist1_msg.field_of_view = 0.087255; //5° the size of the arc that the distance reading is valid for [rad]
+  dist1_msg.radiation_type = 1; //INFRARED
   VL53_left_pub.publish(&dist1_msg);
 
   dist2_msg.range = measure2.RangeMilliMeter;
   dist2_msg.min_range = 0.03; // 3cm 
   dist2_msg.max_range = 1.00; // 1m 
   dist2_msg.field_of_view = 0.087255; //5° the size of the arc that the distance reading is valid for [rad]
+  dist2_msg.radiation_type = 1; //INFRARED
   VL53_right_pub.publish(&dist2_msg);
  //---- RTC22 by OJ ----
 
