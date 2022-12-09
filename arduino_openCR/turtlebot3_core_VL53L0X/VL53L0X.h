@@ -1,12 +1,17 @@
 //===== RTC22 by OJ =======
+// rosrun rosserial_python serial_node.py _port:=/dev/ttyACM0 _baud:=115200
+
 #include "Adafruit_VL53L0X.h"
 #include <std_msgs/Float32.h>
+#include <sensor_msgs/Range.h>
 
 
-std_msgs::Float32 dist1_msg;
+//std_msgs::Float32 dist1_msg;
+sensor_msgs::Range  dist1_msg;
 ros::Publisher VL53_left_pub("VL53_left", &dist1_msg);
 
-std_msgs::Float32 dist2_msg;
+//std_msgs::Float32 dist2_msg;
+sensor_msgs::Range  dist2_msg;
 ros::Publisher VL53_right_pub("VL53_right", &dist2_msg);
 
 // address we will assign if dual sensor is present
