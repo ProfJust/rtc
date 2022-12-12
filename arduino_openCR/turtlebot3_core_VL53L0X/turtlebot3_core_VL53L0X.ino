@@ -159,16 +159,23 @@ void loop()
   VL53L0x_read_dual_sensors();
   
   // float => dist1_msg.data = measure1.RangeMilliMeter;
-  dist1_msg.range = measure1.RangeMilliMeter;
-  dist1_msg.min_range = 0.03; // 3cm 
-  dist1_msg.max_range = 1.00; // 1m 
+  // ROS misst in Metern
+  dist1_msg.range = (float) measure1.RangeMilliMeter/1000.0;  // RangeMilliMeter ist ein Integer 
+  dist1_msg.header.stamp    = rosNow();
+  sprintf(VL53_frame_id, "base_VL53_front_left");
+  dist1_msg.header.frame_id = VL53_frame_id;
+  dist1_msg.min_range = 0.03; // 3cm in mm => 30
+  dist1_msg.max_range = 1.00; // 1m in mm
   dist1_msg.field_of_view = 0.087255; //5° the size of the arc that the distance reading is valid for [rad]
   dist1_msg.radiation_type = 1; //INFRARED
   VL53_left_pub.publish(&dist1_msg);
 
-  dist2_msg.range = measure2.RangeMilliMeter;
+  dist2_msg.range = (float) measure2.RangeMilliMeter/1000.0;  // => Meter
+  dist2_msg.header.stamp    = rosNow();
+  sprintf(VL53_frame_id, "base_VL53_front_right");
+  dist2_msg.header.frame_id = VL53_frame_id;
   dist2_msg.min_range = 0.03; // 3cm 
-  dist2_msg.max_range = 1.00; // 1m 
+  dist2_msg.max_range = 1.00; // 1m in mm
   dist2_msg.field_of_view = 0.087255; //5° the size of the arc that the distance reading is valid for [rad]
   dist2_msg.radiation_type = 1; //INFRARED
   VL53_right_pub.publish(&dist2_msg);

@@ -126,6 +126,7 @@ char odom_child_frame_id[30];
 
 char imu_frame_id[30];
 char mag_frame_id[30];
+char VL53_frame_id[30];
 
 char joint_state_header_frame_id[30];
 
