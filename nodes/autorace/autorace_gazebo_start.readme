@@ -1,0 +1,17 @@
+Open a new terminal and launch Autorace Gazebo simulation. 
+The roscore will be automatically launched with the roslaunch command. 
+$1 roslaunch turtlebot3_gazebo turtlebot3_autorace_2020.launch
+
+$2 roslaunch turtlebot3_autorace_camera intrinsic_camera_calibration.launch     
+?? auch bei Gazebo, Ja !!
+
+$3 roslaunch turtlebot3_autorace_camera extrinsic_camera_calibration.launch 
+?? auch bei Gazebo, Ja !!
+
+$4 rqt_image_view
+
+Open a new terminal and launch the lane detect node without the calibration option. 
+$5 roslaunch turtlebot3_autorace_detect detect_lane.launch
+
+Open a new terminal and launch the node below to start the lane following operation. 
+$6 roslaunch turtlebot3_autorace_driving turtlebot3_autorace_control_lane.launch
