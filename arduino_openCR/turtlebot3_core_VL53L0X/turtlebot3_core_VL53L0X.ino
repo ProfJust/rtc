@@ -164,8 +164,8 @@ void loop()
   dist1_msg.header.stamp    = rosNow();
   sprintf(VL53_frame_id, "base_VL53_front_left");
   dist1_msg.header.frame_id = VL53_frame_id;
-  dist1_msg.min_range = 0.03; // 3cm in mm => 30
-  dist1_msg.max_range = 1.00; // 1m in mm
+  dist1_msg.min_range = 0.03; // 3cm 
+  dist1_msg.max_range = 1.00; // 1m 
   dist1_msg.field_of_view = 0.087255; //5° the size of the arc that the distance reading is valid for [rad]
   dist1_msg.radiation_type = 1; //INFRARED
   VL53_left_pub.publish(&dist1_msg);
