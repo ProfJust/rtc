@@ -1,2 +1,82 @@
 rosrun camera_calibration cameracalibrator.py --size 21x16 --square 0.073 image:=/raspicam_node/image camera:=/raspicam_node
 Waiting for service /raspicam_node/set_camera_info ...
+
+
+1.) Anzahl der Knoten, nicht Anzahl der Quadrate  => ost.yaml
+
+2.) ost.yaml per SCP auf den Turtlebot ubunut@ubuntu:$ scp ....
+ubuntu@ubuntu:~/.ros/camera_info$ sudo scp oj@192.168.1.77:/home/oj/Bilder/ost.yaml /home/ubuntu/ost.yaml
+
+Dazu ssh-server auf dem Remote PC installieren und port22 freischalten
+
+sudo ufw allow 22
+
+
+3.) ost.yaml umbenenen <camerav2_1280x960.yaml>  und in den richtigen Ordner legen
+~/catkin_ws/src/raspicam_node/camera_info/
+
+camera umbenennen (sieh launch File)
+sudo nano camerav2_1280x960.yaml 
+
+
+image_height: 960
+camera_name: camerav2_1280x960
+camera_matrix:
+  rows: 3
+  cols: 3
+  data: [976.72808,   0.     , 652.45062,
+           0.     , 975.39663, 512.49767,
+           0.     ,   0.     ,   1.     ]
+distortion_model: plumb_bob
+distortion_coefficients:
+  rows: 1
+  cols: 5
+  data: [0.142562, -0.215146, -0.000786, 0.001305, 0.000000]
+rectification_matrix:
+  rows: 3
+  cols: 3
+  data: [1., 0., 0.,
+         0., 1., 0.,
+         0., 0., 1.]
+projection_matrix:
+  rows: 3
+  cols: 4
+  data: [997.49048,   0.     , 653.916  ,   0.     ,
+           0.     , 998.12341, 511.33174,   0.     ,
+           0.     ,   0.     ,   1.     ,   0.     ]
+
+
+
+cp ost.yaml ~/catkin_ws/src/raspicam_node/camera_info/
+ 1593  cd catkin_ws/
+ 1594  cd src/
+ 1595  ls
+ 1596  cd raspicam_node/
+ 1597  cd camera_info/
+ 1598  ls
+ 1599  mv camerav2_1280x960.yaml camerav2_1280x960_old.yaml
+ 1600  ls
+ 1601  mv ost.yaml camerav2_1280x960.yaml 
+ 1602  ls
+ 1603  cd ~
+ 1604  roslaunch raspicam_node camerav2_1280x960_10fps.launch enable_raw:=true 
+ 1605  ls
+ 1606  sudo nano ost.yaml
+ 1607  roslaunch raspicam_node camerav2_1280x960_10fps.launch enable_raw:=true 
+ 1608  sudo nano ost.yaml
+ 1609  cp ost.yaml ~/catkin_ws/src/raspicam_node/camera_info/
+ 1610  cd catkin_ws/src/raspicam_node/camera_info/
+ 1611  ls
+ 1612  mv ost.yaml camerav2_1280x960.yaml 
+ 1613  ls
+ 1614  roslaunch raspicam_node camerav2_1280x960_10fps.launch enable_raw:=true 
+ 1615  ls
+ 1616  sudo nano camerav2_1280x960.yaml 
+ 1617  roslaunch raspicam_node camerav2_1280x960_10fps.launch enable_raw:=true 
+ 1618  ls
+ 1619  cd ~
+ 1620  cd ./.ros/camera_info/
+ 1621  ls
+ 1622  sudo nano camerav2_1280x960.yaml 
+ 1623  roslaunch raspicam_node camerav2_1280x960_10fps.launch enable_raw:=true
+
