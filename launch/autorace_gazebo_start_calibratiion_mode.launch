@@ -1,0 +1,31 @@
+<!-- Launches Autorace with Gazebo and Lane Detection, im Calibration Mode starten-->
+<launch>
+  <!-- The roscore will be automatically launched with the roslaunch command. 
+       $1 roslaunch turtlebot3_gazebo turtlebot3_autorace_2020.launch -->
+  <include file="$(find turtlebot3_gazebo)/launch/turtlebot3_autorace_2020.launch">    
+  </include>
+  
+  <!-- $2 roslaunch turtlebot3_autorace_camera intrinsic_camera_calibration.launch     
+       ?? auch bei Gazebo, Ja !! -->
+  <include file="$(find turtlebot3_autorace_camera)/launch/intrinsic_camera_calibration.launch">
+  </include>
+
+  <!-- $3 roslaunch turtlebot3_autorace_camera extrinsic_camera_calibration.launch 
+       ?? auch bei Gazebo, Ja !! -->
+       <!-- extrinsic_camera_calibration.launch mode:=calibration-->
+  <include file="$(find turtlebot3_autorace_camera)/launch/extrinsic_camera_calibration.launch">
+  <arg name="mode"  value="calibration" />
+  </include>
+
+  <!-- Open a new terminal and launch the lane detect node without the calibration option. 
+       $5 roslaunch turtlebot3_autorace_detect detect_lane.launch -->
+  <include file="$(find turtlebot3_autorace_detect)/launch/detect_lane.launch">
+  <arg name="mode"  value="calibration" />
+  </include>
+
+  <!-- open a new terminal and launch the node below to start the lane following operation. 
+       $6 roslaunch turtlebot3_autorace_driving turtlebot3_autorace_control_lane.launch -->
+  <include file="$(find turtlebot3_autorace_driving)/launch/turtlebot3_autorace_control_lane.launch">
+  </include>
+
+</launch>
