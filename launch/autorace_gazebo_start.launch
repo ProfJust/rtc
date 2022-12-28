@@ -12,6 +12,7 @@
 
   <!-- $3 roslaunch turtlebot3_autorace_camera extrinsic_camera_calibration.launch 
        ?? auch bei Gazebo, Ja !! -->
+       <!-- extrinsic_camera_calibration.launch mode:=calibration-->
   <include file="$(find turtlebot3_autorace_camera)/launch/extrinsic_camera_calibration.launch">
   </include>
 
