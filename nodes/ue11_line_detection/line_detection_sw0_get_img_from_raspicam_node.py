@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # =================================================
-# edited WHS, OJ , 14.1.2022 #
+# edited WHS, OJ , 13.1.2023 #
 #
 # Ein Bild der raspicam vom ROS raspicam_node holen
 # -------------------------------------------------------
@@ -38,4 +38,4 @@ class PiCam:
 
 rospy.init_node('follower')
 follower = PiCam()
-rospy.spin()
+rospy.spin()  # keeps this node from exiting until the node has been shutdown
