@@ -16,3 +16,10 @@ rosrun rtc lane_detect_sw1_line_detect_with_mask.py
 
 # PD-Regler für das folgen der /lane
 rosrun rtc lane_detect_sw2_control_cmd_vel.py
+
+
+Problem 16.1.23. Lenkt zu früh ein => Kamerausschnit mölichst tief
+Gegenproblem: Wenn Kameraausschnitt zu tief, 
+gibt es rechts und links kaum Toleranz, bis die Kontur aus dem Bild verschwindet
+
+?Lösung Streifen in der Mitte?
