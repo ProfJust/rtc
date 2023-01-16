@@ -23,3 +23,9 @@ Gegenproblem: Wenn Kameraausschnitt zu tief,
 gibt es rechts und links kaum Toleranz, bis die Kontur aus dem Bild verschwindet
 
 ?Lösung Streifen in der Mitte?
+
+Lösung Kamera tiefer montieren und steiler => uoside Down Bild
+# Bild umdrehen, da Camera am TB3 upside down montiert
+cv_image = cv2.rotate(cv_image2 , cv2.ROTATE_180)
+
+Besser lenkt zu früh ein, Bild mit kleinerer Brennweite??
