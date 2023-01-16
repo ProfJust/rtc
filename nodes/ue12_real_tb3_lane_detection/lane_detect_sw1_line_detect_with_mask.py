@@ -41,7 +41,7 @@ class ImageConverter:
 
         # ROI  waehle eine Region of Interest an Punkt:
         # 1280 x 960 Pixel
-        roi = cv_image[900:959, 100:1179]  # [y...] [x..]
+        roi = cv_image[720:800, 0:1279]  # [y...] [x..]
         # roi_width = 1179-100
         # zeige Region of Interest an
         # cv2.imshow("Image Window", roi)
@@ -54,43 +54,46 @@ class ImageConverter:
 
         # Threshold the gray image to get only colors in configured Range
         mask = cv2.inRange(roi_gray, 230, 255)
-        cv2.imshow("Mask roi", mask)
-        cv2.waitKey(3)
+        # cv2.imshow("Mask roi", mask)
+        # cv2.waitKey(3)
 
         # Erodieren
         mask = cv2.erode(mask, None, iterations=2)
-        cv2.imshow("Mask erode", mask)
-        cv2.waitKey(3)
+        # cv2.imshow("Mask erode", mask)
+        # cv2.waitKey(3)
 
         # Dilatation
         mask = cv2.dilate(mask, None, iterations=2)
-        cv2.imshow("Mask dilate", mask)
-        cv2.waitKey(3)
+        # cv2.imshow("Mask dilate", mask)
+        # cv2.waitKey(3)
 
         # Konturen finden
         contours = cv2.findContours(mask.copy(),
                                     cv2.RETR_EXTERNAL,
                                     cv2.CHAIN_APPROX_SIMPLE)[-2]
-        print(len(contours))  # Anzahl der Konturen
+        # print(len(contours))  # Anzahl der Konturen
+        self.lane = 0  
         if len(contours) > 1:
             c = max(contours, key=cv2.contourArea)
             (x, y, w, h) = cv2.boundingRect(c)
             # umgebendes Rechteck zeichnen
             cv2.rectangle(roi_gray, (x, y), (x+w, y+h), (0, 255, 0), 2)
-            pos1 = (x+w)/2
-            print("Linie erkannt an Position " + str(pos1))
-
+            posleft = (x + w)  # linke Contour rechte Ecke
+         
             c2 = min(contours, key=cv2.contourArea)
             (x, y, w, h) = cv2.boundingRect(c2)
             # umgebendes Rechteck zeichnen
-            cv2.rectangle(roi_gray, (x, y), (x+w, y+h), (0, 255, 0), 2)
-            pos2 = (x+w)/2
-            print("Linie erkannt an Position " + str(pos2))
+            cv2.rectangle(roi_gray, (x, y), (x+w, y+h), (0, 255, 0), 4)
+            posright = x  # rechte Contour , linke Ecke
+            print("Linien erkannt an Positionen "
+                  + str(posleft) + " & " + str(posright))
 
-            self.lane = int((pos1 + pos2) / 2)
-            print("lane " + str(self.lane))
+            self.lane = int((posright - posleft) / 2 + posleft)
 
-        cv2.imshow("Contours", roi_gray)
+        print("lane " + str(self.lane))
+        cv2.rectangle(roi_gray, (self.lane, 2), (self.lane + 10, 20),
+                      (255, 255, 255), 5)  # GrauBild
+        cv2.imshow("Contours & Lane", roi_gray)
         cv2.waitKey(3)
         
         try:

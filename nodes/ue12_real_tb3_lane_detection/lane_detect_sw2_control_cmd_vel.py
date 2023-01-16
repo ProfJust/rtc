@@ -23,22 +23,49 @@ class ControlLane():
         rospy.on_shutdown(self.fnShutDown)
 
     def cbFollowLane(self, lane):
-        error = int(lane.data) - 300
+        # Stop when no lane detected
+        # if lane <= 1:
+        #    self.fnShutDown()
+        # else:
+        lane_geradeaus = 570 
+        # unterschiedlich bei jedem TB3 wegen Camera Position 
+        error = int(lane.data) - lane_geradeaus
 
-        Kp = 0.0025
-        Kd = 0.007
+        Kp = 0.0015 # was 0.0025
+        Kd = 0.001
 
         angular_z = Kp * error + Kd * (error - self.lastError)
         self.lastError = error
 
         twist = Twist()
-        # twist.linear.x = 0.05        
-        twist.linear.x = min(self.MAX_VEL * ((1 - abs(error) / 500) ** 2.2), 0.05)
-        twist.linear.y = 0
-        twist.linear.z = 0
-        twist.angular.x = 0
-        twist.angular.y = 0
-        twist.angular.z = -max(angular_z, -2.0) if angular_z < 0 else -min(angular_z, 2.0)
+        if lane.data > 0:
+            twist.linear.x = 0.02
+            # twist.linear.x = min(self.MAX_VEL * ((1 - abs(error) / 500) ** 2.2), 0.05)
+            twist.linear.y = 0
+            twist.linear.z = 0
+            twist.angular.x = 0
+            twist.angular.y = 0
+            # Begrenzung auf [-2...2]
+            # twist.angular.z = -max(angular_z, -2.0) if angular_z < 0 else -min(angular_z, 2.0)
+            ang_max = 0.4
+
+            if angular_z > ang_max:
+                angular_z = ang_max
+            else:
+                if angular_z < -ang_max:
+                    angular_z = -ang_max
+
+            twist.angular.z = -angular_z
+            rospy.loginfo(-angular_z)
+            # rospy.loginfo(-max(angular_z, -2.0) if angular_z < 0 else -min(angular_z, 2.0))
+        else:
+            twist.linear.x = 0
+            twist.linear.y = 0
+            twist.linear.z = 0
+            twist.angular.x = 0
+            twist.angular.y = 0
+            twist.angular.z = 0
+        
         self.pub_cmd_vel.publish(twist)
 
     def fnShutDown(self):

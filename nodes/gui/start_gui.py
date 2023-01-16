@@ -226,9 +226,10 @@ class MainWindow(QTabWidget):
         #          "ssh ubuntu@192.168.1.81; exec bash "')
         ip_str = self.Line_Edit_IP.text()
         terminal_str = "gnome-terminal --tab -- /bin/bash -c \"ssh ubuntu@"\
-                       + ip_str + "; exec bash \""
+                       + ip_str + ";  exec bash \""
         print(terminal_str)
         os.system(terminal_str)
+        # os.system("turtlebot")  # password
 
     # absoluter Pfad notwendig "~"" does not work, evtl $HOME ?
     def slot_save_map(self):
